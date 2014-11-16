@@ -22,7 +22,7 @@ import donnees.RobotDrone;
 import donnees.RobotPattes;
 import donnees.RobotRoues;
 import donnees.WorldElement;
-import evenement.ManagerScenario;
+import evenement.ManagerScenario1;
 
 public class SimulationWindow {
 	private SimulationModel data;
@@ -40,7 +40,7 @@ public class SimulationWindow {
 
 	private void initDisplay() {
 		initTiles();
-		controller = new SimulationController(data, this, ManagerScenario.class);
+		controller = new SimulationController(data, this, ManagerScenario1.class);
 		ihm = new IGSimulateur(data.getData().getCarte().getNbLignes(), data.getData().getCarte().getNbColonnes(), controller);
 		controller.restart();
 	}

@@ -28,7 +28,7 @@ public class SimulationController implements Simulable {
 	
 	@Override
 	public void next() {
-		Set<WorldElement> s = simulateur.step(100L);
+		Set<WorldElement> s = simulateur.step();
 		for (WorldElement c : s) {
 			System.out.println("case to update ("+ c.getCase().getLigne()+ ", " + c.getCase().getColonne()+ ")");
 			window.update(c);

@@ -9,11 +9,13 @@ public abstract class Evenement implements Comparable<Evenement>{
 	private Date date;
 	protected DonneesSimulation data;
 	
-	public Evenement(Date date, DonneesSimulation donneesProvider) {
+	public Evenement(Date date) {
 		this.date = date;
-		this.data = donneesProvider;
 	}
 	
+	public void setData(DonneesSimulation donneesProvider) {
+		this.data = donneesProvider;
+	}
 	public Date getDate() {
 		return date;
 	}

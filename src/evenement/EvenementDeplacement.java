@@ -3,7 +3,6 @@ package evenement;
 import java.util.Set;
 
 import donnees.Direction;
-import donnees.DonneesSimulation;
 import donnees.InvalidCaseException;
 import donnees.Robot;
 import donnees.WorldElement;
@@ -12,8 +11,8 @@ public class EvenementDeplacement extends Evenement {
 	private Robot robot;
 	private Direction direction;
 	
-	public EvenementDeplacement(Date date, DonneesSimulation donneesProvider, Robot r, Direction d) {
-		super(date, donneesProvider);
+	public EvenementDeplacement(Date date, Robot r, Direction d) {
+		super(date);
 		robot = r;
 		direction = d;
 	}

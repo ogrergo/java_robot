@@ -2,12 +2,15 @@ package donnees;
 
 public abstract class Robot implements WorldElement {
 	private Case position;
+	private Reservoir reservoir;
+	private ComportementDeplacement deplacement;
+	
 	
 	public Case getCase() {
 		return position;
 	}
 	
-	public void setPosition(Case c) {
+	private void setPosition(Case c) {
 		position = c;
 	}
 	
@@ -15,10 +18,18 @@ public abstract class Robot implements WorldElement {
 		setPosition(carte.getCase(position, d));
 	}
 	
-	abstract double getVitesse(NatureTerrain t);
+	public double getVitesse(NatureTerrain t) {
+		deplacement.getVitesse(t);
+	}
+	
 	abstract void setVitesse(double v);
 	
-	abstract void deverserEau(int volume);
-	abstract void remplirReservoir();
+	public void intervenir(int volume) {
+		reservoir.intervenir(volume);
+	}
+	
+	public void remplirReservoir() {
+		reservoir.remplirReservoir();
+	}
 	
 }
