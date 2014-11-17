@@ -3,7 +3,7 @@ package donnees;
 public class Incendie implements WorldElement {
 	private Case position;
 	private int litreEau;
-	
+
 	public Incendie(Case pos, int litre) {
 		this.position = pos;
 		this.litreEau = litre;
@@ -11,6 +11,10 @@ public class Incendie implements WorldElement {
 		
 	public int getLitreEau() {
 		return litreEau;
+	}
+
+	public void setLitreEau(int litreEau) {
+		this.litreEau = litreEau;
 	}
 
 	@Override

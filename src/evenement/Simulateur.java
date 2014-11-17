@@ -10,7 +10,7 @@ import donnees.WorldElement;
 
 public class Simulateur {
 
-	private int step_duration;
+	private long step_duration;
 	private Date date = new Date(0l);
 	private Queue<Evenement> l = new PriorityQueue<Evenement>();
 	private DonneesSimulation data;
@@ -27,16 +27,16 @@ public class Simulateur {
 		return data;
 	}
 	
-	public void setSimulationStepDuration(int stepduration) {
+	public void setSimulationStepDuration(long stepduration) {
 		this.step_duration = stepduration;
 	}
 
-	public void setManager(Manager manager) {
+	public void setManager(Manager manager) throws ExecutionException {
 		this.manager = manager;
 		this.manager.manage();
 	}
 
-	public void addEvenement(Evenement e) {
+	public void addEvenement(Evenement e) throws ExecutionException {
 		e.setData(data);
 		l.add(e);
 	}
@@ -52,16 +52,18 @@ public class Simulateur {
 	public Set<WorldElement> step() {
 		date.increment(step_duration);
 		hash.clear();
+		System.out.println("Date " + (int)date.getDate());
 		while(true) {
 			Evenement e = l.peek();
-			if(e != null && e.getDate().getDate() < date.getDate()) {
-				e = l.poll();
-				try {
+			try {
+				if(e != null && e.getDate().getDate() < date.getDate()) {
+					e = l.poll();
 					hash = e.execute(hash);
-				} catch (ExecutionException e1) {
-					e1.printStackTrace();
+				} else {
+					break;
 				}
-			} else {
+			} catch (ExecutionException e1) {
+				System.out.println("Evenement non réalisable " + e.getDate());
 				break;
 			}
 		}

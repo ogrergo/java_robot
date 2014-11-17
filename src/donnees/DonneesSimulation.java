@@ -16,6 +16,10 @@ public class DonneesSimulation {
 		incendies.add(e);
 	}
 	
+	public boolean removeIncendie(Incendie e) {
+		return incendies.remove(e);
+	}
+	
 	public void addRobot(Robot r) {
 		robots.add(r);
 	}
@@ -34,5 +38,9 @@ public class DonneesSimulation {
 	
 	public Robot getRobotbyId(int id) {
 		return robots.get(id);
+	}
+	
+	public Incendie getIncendiebyId(int id) {
+		return incendies.get(id);
 	}
 }

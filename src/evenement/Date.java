@@ -18,8 +18,5 @@ public class Date implements Comparable<Date>{
 	public void increment(long inc) {
 		date += inc;
 	}
-	
-	public int getTimeElapsed(Date d) {
-		
-	}
+
 }

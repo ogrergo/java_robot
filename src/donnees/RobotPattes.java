@@ -2,29 +2,35 @@ package donnees;
 
 public class RobotPattes extends Robot {
 
-
-	@Override
-	double getVitesse(NatureTerrain t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	private static final int eau_max = -1;
+	private static final double temps_remplissage = 0; //En seconde
+	private static final double temps_vidage = 0.1;	//En seconde par litre
+	private static double[] tab_vitesse_milieu = {0,30,10,30,30};
+	
 	@Override
 	void setVitesse(double v) {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	void deverserEau(int volume) {
-		// TODO Auto-generated method stub
+	public int getEauMax() {
+		return RobotPattes.eau_max;
+	}
 
+	//GENERER UNE ERREUR ICI CAR ON NE PEUT PAS APPELER CETTE FONCTION SUR CE TYPE DE ROBOT
+	@Override
+	public double getEauTempsRemplissage() {
+		return RobotPattes.temps_remplissage;
 	}
 
 	@Override
-	void remplirReservoir() {
-		// TODO Auto-generated method stub
+	public double getEauTempsVidage() {
+		return RobotPattes.temps_vidage;
+	}
 
+	@Override
+	public double[] getTabVitesseMilieu() {
+		return RobotPattes.tab_vitesse_milieu;
 	}
 
 }

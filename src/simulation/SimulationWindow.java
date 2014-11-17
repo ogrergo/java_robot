@@ -22,6 +22,7 @@ import donnees.RobotDrone;
 import donnees.RobotPattes;
 import donnees.RobotRoues;
 import donnees.WorldElement;
+import evenement.ManagerScenario0;
 import evenement.ManagerScenario1;
 
 public class SimulationWindow {
@@ -107,7 +108,7 @@ public class SimulationWindow {
 	private static class Tile implements GraphicalElement {
 
 		private static Image[] background = new Image[5];
-		private static Image[] incendie_img = new Image[2];
+		private static Image incendie_img;
 		private static Image[] robots_img = new Image[4];
 		static {
 			try {
@@ -117,8 +118,8 @@ public class SimulationWindow {
 				background[3] = ImageIO.read(new File("data/vide.png"));
 				background[4] = ImageIO.read(new File("data/house.png"));
 				
-				incendie_img[0] = ImageIO.read(new File("data/fire1.png"));
-				incendie_img[1] = ImageIO.read(new File("data/fire1.png"));
+				incendie_img = ImageIO.read(new File("data/fire1.png"));
+				//incendie_img[1] = ImageIO.read(new File("data/fire1.png"));
 
 				robots_img[0] = ImageIO.read(new File("data/drone.png"));
 				robots_img[1] = ImageIO.read(new File("data/drone.png"));//"data/chenille.png"));
@@ -133,8 +134,6 @@ public class SimulationWindow {
 		int index_background;
 		
 		HashSet<WorldElement> elem = new HashSet<WorldElement>();
-		
-		private int index_incendie = 0;
 
 		public Tile(int i, int j,NatureTerrain terrainLibre) {
 			setBackground(terrainLibre);
@@ -184,10 +183,9 @@ public class SimulationWindow {
 					Image img = getRobotImage((Robot) e);
 					arg4.drawImage(img, arg0, arg1, null);
 				} else {
-					index_incendie  = (++index_incendie) %2;
-					arg4.drawImage(incendie_img[index_incendie], 
-							arg0 + arg2/2 - incendie_img[index_incendie].getWidth(null), 
-							arg1 + arg3/2 - incendie_img[index_incendie].getHeight(null), null);
+					for(int i = 0; i < arg2; i += back.getHeight(null))
+						for(int j = 0; j < arg3; j+=back.getWidth(null))
+							arg4.drawImage(incendie_img, arg0 + i, arg1 + j, null);
 				}
 			}
 		}

@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import simulation.SimulationModel;
 import simulation.SimulationWindow;
 import donnees.ExceptionFormatDonnees;
+import evenement.ManagerScenario0;
+import evenement.Simulateur;
 
 
 public class Main {

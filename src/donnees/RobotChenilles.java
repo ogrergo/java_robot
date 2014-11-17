@@ -2,28 +2,36 @@ package donnees;
 
 public class RobotChenilles extends Robot {
 
-	@Override
-	double getVitesse(NatureTerrain t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	private static final int eau_max = 2000;
+	private static final double temps_remplissage = 0.15; //En seconde par litre
+	private static final double temps_vidage = 0.08;	//En seconde par litre
+	private static double[] tab_vitesse_milieu = {0,30,0,60,60};
+	
 	@Override
 	void setVitesse(double v) {
-		// TODO Auto-generated method stub
-
+		RobotChenilles.tab_vitesse_milieu[3] = v;
+		RobotChenilles.tab_vitesse_milieu[4] = v;
+		RobotChenilles.tab_vitesse_milieu[1] = v/2;
 	}
 
 	@Override
-	void deverserEau(int volume) {
-		// TODO Auto-generated method stub
-
+	public int getEauMax() {
+		return RobotChenilles.eau_max;
 	}
 
 	@Override
-	void remplirReservoir() {
-		// TODO Auto-generated method stub
+	public double getEauTempsRemplissage() {
+		return RobotChenilles.temps_remplissage;
+	}
 
+	@Override
+	public double getEauTempsVidage() {
+		return RobotChenilles.temps_vidage;
+	}
+
+	@Override
+	public double[] getTabVitesseMilieu() {
+		return RobotChenilles.tab_vitesse_milieu;
 	}
 
 }

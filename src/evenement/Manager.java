@@ -7,5 +7,5 @@ public abstract class Manager {
 		simulateur = s;
 	}
 	
-	public abstract void manage();
+	public abstract void manage() throws ExecutionException;
 }
