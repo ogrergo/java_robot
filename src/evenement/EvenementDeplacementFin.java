@@ -30,7 +30,7 @@ public class EvenementDeplacementFin extends Evenement {
 	public Set<WorldElement> execute(Set<WorldElement> s) throws ExecutionException {
 		try {
 			System.out.println("deplacement fin");
-			robot.move(direction, data.getCarte());
+			robot.move(direction);
 			s.add(robot);
 		} catch (InvalidCaseException e) {
 			throw new ExecutionException(this, e.getMessage());

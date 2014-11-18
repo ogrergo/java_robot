@@ -5,11 +5,10 @@ public class RobotPattes extends Robot {
 	private static final int eau_max = -1;
 	private static final double temps_remplissage = 0; //En seconde
 	private static final double temps_vidage = 0.1;	//En seconde par litre
-	private static double[] tab_vitesse_milieu = {0,30,10,30,30};
 	
-	@Override
-	void setVitesse(double v) {
-		
+	public RobotPattes(Carte c) {
+		super(c);
+		this.vitesse_defaut = 30;
 	}
 
 	@Override
@@ -28,9 +27,14 @@ public class RobotPattes extends Robot {
 		return RobotPattes.temps_vidage;
 	}
 
-	@Override
-	public double[] getTabVitesseMilieu() {
-		return RobotPattes.tab_vitesse_milieu;
+	public double getVitesseMilieu(NatureTerrain t) {
+		switch(t) {
+		case EAU:
+			return 0;
+		case ROCHE:
+			return (carte.getTailleCases()/1000) / 10 * 3600;
+		default:
+			return (carte.getTailleCases()/1000) / this.vitesse_defaut * 3600;
+		}
 	}
-
 }

@@ -3,10 +3,20 @@ package donnees;
 import evenement.Date;
 
 public abstract class Robot implements WorldElement {
-	private Case position;
-	
+	protected Case position;
+	protected static Carte carte;
+	protected double vitesse_defaut;
 	private int eau_dispo;
 	private Date dernierEvent = new Date(0);
+	
+	public Robot(Carte c) {
+		super();
+		Robot.carte = c;
+	}
+	
+	void setVitesse(double v) {
+		this.vitesse_defaut = v;
+	}
 	
 	public Date getDernierEvent() {
 		return dernierEvent;
@@ -26,7 +36,7 @@ public abstract class Robot implements WorldElement {
 	
 	public abstract double getEauTempsVidage();
 	
-	public abstract double[] getTabVitesseMilieu();
+	public abstract double getVitesseMilieu(NatureTerrain t);
 	
 	public Case getCase() {
 		return position;
@@ -36,22 +46,16 @@ public abstract class Robot implements WorldElement {
 		position = c;
 	}
 	
-	public void move(Direction d, Carte carte) throws InvalidCaseException {
-		if (this.getTabVitesseMilieu()[carte.getCase(position, d).getNature().ordinal()] != 0)
+	public void move(Direction d) throws InvalidCaseException {
+		if (this.getVitesseMilieu(carte.getCase(position, d).getNature())!= 0)
 			setPosition(carte.getCase(position, d));
 		else
 			throw new InvalidCaseException("Ce robot ne peut pas se rendre sur cette surface");
 	}
 	
-	public double getVitesse(NatureTerrain t) {
-		return this.getTabVitesseMilieu()[t.ordinal()];
-	}
-	
 	public int getEauDispo() {
 		return this.eau_dispo;
 	}
-	
-	abstract void setVitesse(double v);
 	
 	//A VERIFIER AVEC SIMULATION 1
 	public void deverserEau(int volume) {
@@ -67,10 +71,10 @@ public abstract class Robot implements WorldElement {
 		this.eau_dispo = this.getEauMax();
 	}
 	
-	public double getTempsDeplacement(Direction d, Carte c) throws InvalidCaseException {
+	public double getTempsDeplacement(Direction d) throws InvalidCaseException {
 		try {
 				System.out.println("dernier event : " + this.dernierEvent.getDate());
-				return ((c.getTailleCases()/1000) / this.getVitesse(c.getCase(position, d).getNature())) * 3600;
+				return this.getVitesseMilieu(carte.getCase(position, d).getNature());
 		} catch(InvalidCaseException e) {
 			throw new InvalidCaseException("Ce robot ne peut pas se rendre sur cette surface");
 		}
@@ -85,7 +89,7 @@ public abstract class Robot implements WorldElement {
 	
 	public double getTempsremplir() {
 		return this.getEauTempsRemplissage() * this.getEauMax();
-	}
+	}	
 	
 	public boolean isAlive() {
 		return true;

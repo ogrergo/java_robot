@@ -1,5 +1,11 @@
 package donnees;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Set;
+
 public class Carte {
 	
 	private Case[][] cases;
@@ -9,6 +15,8 @@ public class Carte {
 		cases = new Case[ligne][colonne];
 		this.tailleCases = taillecase;
 	}
+	
+	
 	
 	public void setCase(int ligne, int colonne, Case c) {
 		cases[ligne][colonne] = c;
@@ -30,7 +38,7 @@ public class Carte {
 		if(ligne >= 0 && ligne < getNbLignes() && colonne >= 0 && colonne < getNbColonnes())
 			return cases[ligne][colonne];
 		else
-			throw new InvalidCaseException("La coordonnée (" + ligne + ", " + colonne + ") n'est pas une coordonnée de case valide");
+			throw new InvalidCaseException("La coordonnï¿½e (" + ligne + ", " + colonne + ") n'est pas une coordonnï¿½e de case valide");
 	}
 
 	public Case getCase(Case c, Direction d) throws InvalidCaseException {

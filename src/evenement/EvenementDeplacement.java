@@ -29,7 +29,7 @@ public class EvenementDeplacement extends Evenement {
 
 	public void updateDate() throws ExecutionException {
 		try {
-			double tps_deplacement = robot.getTempsDeplacement(direction, data.getCarte());
+			double tps_deplacement = robot.getTempsDeplacement(direction);
 			System.out.println("deplacement " + tps_deplacement + "direction" + direction);
 			//date.increment((long)tps_deplacement+1);
 			robot.setDernierEvent((long)tps_deplacement + 1);

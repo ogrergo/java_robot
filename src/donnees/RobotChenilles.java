@@ -5,13 +5,10 @@ public class RobotChenilles extends Robot {
 	private static final int eau_max = 2000;
 	private static final double temps_remplissage = 0.15; //En seconde par litre
 	private static final double temps_vidage = 0.08;	//En seconde par litre
-	private static double[] tab_vitesse_milieu = {0,30,0,60,60};
 	
-	@Override
-	void setVitesse(double v) {
-		RobotChenilles.tab_vitesse_milieu[3] = v;
-		RobotChenilles.tab_vitesse_milieu[4] = v;
-		RobotChenilles.tab_vitesse_milieu[1] = v/2;
+	public RobotChenilles(Carte c) {
+		super(c);
+		this.vitesse_defaut = 60;
 	}
 
 	@Override
@@ -29,9 +26,15 @@ public class RobotChenilles extends Robot {
 		return RobotChenilles.temps_vidage;
 	}
 
-	@Override
-	public double[] getTabVitesseMilieu() {
-		return RobotChenilles.tab_vitesse_milieu;
+	public double getVitesseMilieu(NatureTerrain t) {
+		switch(t) {
+		case EAU:
+		case ROCHE:
+			return 0;
+		case FORET:
+			return (carte.getTailleCases()/1000) / (this.vitesse_defaut/2) * 3600;
+		default:
+			return (carte.getTailleCases()/1000) / this.vitesse_defaut * 3600;
+		}
 	}
-
 }
