@@ -86,4 +86,8 @@ public abstract class Robot implements WorldElement {
 	public double getTempsremplir() {
 		return this.getEauTempsRemplissage() * this.getEauMax();
 	}
+	
+	public boolean isAlive() {
+		return true;
+	}
 }

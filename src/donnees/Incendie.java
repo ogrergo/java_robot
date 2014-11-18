@@ -21,4 +21,9 @@ public class Incendie implements WorldElement {
 	public Case getCase() {
 		return position;
 	}
+
+	@Override
+	public boolean isAlive() {
+		return litreEau != 0;
+	}
 }

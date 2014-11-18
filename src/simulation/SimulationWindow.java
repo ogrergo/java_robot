@@ -22,7 +22,6 @@ import donnees.RobotDrone;
 import donnees.RobotPattes;
 import donnees.RobotRoues;
 import donnees.WorldElement;
-import evenement.ManagerScenario0;
 import evenement.ManagerScenario1;
 
 public class SimulationWindow {
@@ -36,7 +35,6 @@ public class SimulationWindow {
 	public SimulationWindow(SimulationModel model) {
 		data = model;
 		initDisplay();
-		updateAll();
 	}
 
 	private void initDisplay() {
@@ -179,6 +177,11 @@ public class SimulationWindow {
 					arg4.drawImage(back, arg0 + i, arg1 + j, null);
 			
 			for(WorldElement e : elem) {
+				if(!e.isAlive()) {
+					removeElem(e);
+					continue;
+				}
+				
 				if(e instanceof Robot) {
 					Image img = getRobotImage((Robot) e);
 					arg4.drawImage(img, arg0, arg1, null);
