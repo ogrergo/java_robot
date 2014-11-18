@@ -1,5 +1,6 @@
 package donnees;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -55,5 +56,17 @@ public class Carte {
 		return null;
 	}
 	
+	public double DistanceVolOiseau(Case depart, Case arrive) {
+		return (Math.round((depart.getColonne() - arrive.getColonne())) 
+				+ Math.round((depart.getLigne() - arrive.getLigne())));
+	}
+	
+	public Collection<Case> caseVoisine(Robot r, Case c) {
+		return null;
+	}
+	
+	public double tempsDeplacement(Robot r, Case arrive) {
+		return 0;
+	}
 	
 }
