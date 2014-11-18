@@ -11,6 +11,7 @@ public abstract class Robot implements WorldElement {
 	
 	public Robot(Carte c) {
 		super();
+		this.eau_dispo = this.getEauMax();
 		Robot.carte = c;
 	}
 	
@@ -24,10 +25,6 @@ public abstract class Robot implements WorldElement {
 
 	public void setDernierEvent(long dernier) {
 		this.dernierEvent.increment(dernier);
-	}
-
-	public Robot() {
-		this.eau_dispo = this.getEauMax();
 	}
 	
 	public abstract int getEauMax();
