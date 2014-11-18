@@ -1,5 +1,6 @@
 package donnees;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -57,16 +58,31 @@ public class Carte {
 	}
 	
 	public double DistanceVolOiseau(Case depart, Case arrive) {
-		return (Math.round((depart.getColonne() - arrive.getColonne())) 
-				+ Math.round((depart.getLigne() - arrive.getLigne())));
+		return Math.sqrt((Math.round((depart.getColonne() - arrive.getColonne())) 
+				+ Math.round((depart.getLigne() - arrive.getLigne())))) * this.tailleCases;
+	}
+	
+	public boolean estCaseAccessible(Robot r, Case arrive) {
+		//Une case est accessible par un robot si sa vitesse n'est pas = 0
+		return (r.getVitesseMilieu(arrive.getNature()) != 0);
 	}
 	
 	public Collection<Case> caseVoisine(Robot r, Case c) {
-		return null;
+		ArrayList<Case> voisins = new ArrayList<Case>();
+		for (Direction d : Direction.values()) {
+			try {
+				Case unVoisin = this.getCase(c, d);
+				if (this.estCaseAccessible(r, unVoisin))
+					voisins.add(unVoisin);
+				//Si le voisin ne fait pas partie de la carte, on ignore l'erreur
+			} catch (InvalidCaseException e) {} 
+		}
+		return voisins;
 	}
 	
-	public double tempsDeplacement(Robot r, Case arrive) {
-		return 0;
+	public double tempsDeplacement(Robot r, Case depart, Case arrive) {
+		return (r.getVitesseMilieu(depart.getNature()) +
+				r.getVitesseMilieu(arrive.getNature())) / 2;
 	}
 	
 }
