@@ -48,7 +48,7 @@ public class Astar {
 						if(closed_set.contains(voisin))
 							continue;
 					}
-					double new_g_score = current.g_score + carte.tempsDeplacement(r, v);
+					double new_g_score = current.g_score + carte.tempsDeplacement(r, current.cell, v);
 					
 					if(!open_set.contains(voisin) || new_g_score < voisin.g_score) {
 						voisin.previous = voisin;
