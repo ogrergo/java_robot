@@ -205,7 +205,7 @@ public class LecteurDonnees {
 			
 			System.out.print("\t type = " + type);
 
-			Robot r = RobotFactory.createRobot(RobotType.valueOf(type), d.getCarte().getCase(lig, col));
+			Robot r = RobotFactory.createRobot(RobotType.valueOf(type), d.getCarte().getCase(lig, col), d.getCarte());
 			
 			// lecture eventuelle d'une vitesse du robot (entier)
 			System.out.print("; \t vitesse = ");

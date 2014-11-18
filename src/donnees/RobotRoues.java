@@ -5,12 +5,10 @@ public class RobotRoues extends Robot {
 	private static final int eau_max = 5000;
 	private static final double temps_remplissage = 0.12; //En seconde par litre
 	private static final double temps_vidage = 0.05;	//En seconde par litre
-	private static double[] tab_vitesse_milieu = {0,0,0,80,80}; //En km/h
-	
-	@Override
-	void setVitesse(double v) {
-		RobotRoues.tab_vitesse_milieu[3] = v;
-		RobotRoues.tab_vitesse_milieu[4] = v;
+		
+	public RobotRoues(Carte c) {
+		super(c);
+		this.vitesse_defaut = 80;
 	}
 
 	@Override
@@ -28,9 +26,14 @@ public class RobotRoues extends Robot {
 		return RobotRoues.temps_vidage;
 	}
 
-	@Override
-	public double[] getTabVitesseMilieu() {
-		return RobotRoues.tab_vitesse_milieu;
+	public double getVitesseMilieu(NatureTerrain t) {
+		switch(t) {
+		case TERRAIN_LIBRE:
+		case HABITAT:
+			return (carte.getTailleCases()/1000) / this.vitesse_defaut * 3600;
+		default:
+			return 0;
+		}
 	}
 
 }
