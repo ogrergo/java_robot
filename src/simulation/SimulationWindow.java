@@ -119,10 +119,10 @@ public class SimulationWindow {
 				incendie_img = ImageIO.read(new File("data/fire1.png"));
 				//incendie_img[1] = ImageIO.read(new File("data/fire1.png"));
 
-				robots_img[0] = ImageIO.read(new File("data/drone.png"));
-				robots_img[1] = ImageIO.read(new File("data/drone.png"));//"data/chenille.png"));
-				robots_img[2] = ImageIO.read(new File("data/drone.png"));//"data/patte.png"));
-				robots_img[3] = ImageIO.read(new File("data/drone.png"));//"data/roue.png"));
+				robots_img[0] = ImageIO.read(new File("data/Lugia-drone.png"));
+				robots_img[1] = ImageIO.read(new File("data/wall_e-chenille.png"));//"data/chenille.png"));
+				robots_img[2] = ImageIO.read(new File("data/AT-AT_pattes.png"));	//"data/patte.png"));
+				robots_img[3] = ImageIO.read(new File("data/Batmobile-roues.png"));//"data/roue.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
