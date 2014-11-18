@@ -35,6 +35,20 @@ public class Carte {
 		return tailleCases;
 	}
 	
+	public Direction getDirection(Case c1, Case c2) {
+		if(c1.getColonne() == c2.getColonne()) {
+			if(c1.getLigne() > c2.getLigne())
+				return Direction.NORD;
+			else
+				return Direction.SUD;
+		} else {
+			if(c1.getColonne() > c2.getColonne())
+				return Direction.OUEST;
+			else
+				return Direction.EST;
+		}
+	}
+	
 	public Case getCase(int ligne, int colonne) throws InvalidCaseException {
 		if(ligne >= 0 && ligne < getNbLignes() && colonne >= 0 && colonne < getNbColonnes())
 			return cases[ligne][colonne];
