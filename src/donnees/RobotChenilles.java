@@ -6,7 +6,7 @@ public class RobotChenilles extends Robot {
 	private static final double temps_remplissage = 0.15; //En seconde par litre
 	private static final double temps_vidage = 0.08;	//En seconde par litre
 	
-	public RobotChenilles(Carte c) {
+	public RobotChenilles(Case c) {
 		super(c);
 		this.vitesse_defaut = 60;
 	}

@@ -6,7 +6,7 @@ public class RobotPattes extends Robot {
 	private static final double temps_remplissage = 0; //En seconde
 	private static final double temps_vidage = 0.1;	//En seconde par litre
 	
-	public RobotPattes(Carte c) {
+	public RobotPattes(Case c) {
 		super(c);
 		this.vitesse_defaut = 30;
 	}

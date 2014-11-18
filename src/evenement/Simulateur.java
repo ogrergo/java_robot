@@ -36,7 +36,7 @@ public class Simulateur {
 		this.manager.manage();
 	}
 
-	public void addEvenement(Evenement e) throws ExecutionException {
+	public void addEvenement(Evenement e){
 		e.setData(data);
 		l.add(e);
 	}

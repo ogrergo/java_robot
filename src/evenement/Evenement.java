@@ -6,7 +6,7 @@ import donnees.DonneesSimulation;
 import donnees.WorldElement;
 
 public abstract class Evenement implements Comparable<Evenement>{
-	protected Date date;
+	private Date date;
 	protected DonneesSimulation data;
 	protected Simulateur simulateur;
 	
@@ -15,11 +15,10 @@ public abstract class Evenement implements Comparable<Evenement>{
 		this.simulateur = s;
 	}
 	
-	public void setData(DonneesSimulation donneesProvider) throws ExecutionException {
+	public void setData(DonneesSimulation donneesProvider){
 		this.data = donneesProvider;
-		//Mise à jour de la date en fonction du temps que va prendre la prochaine action
-		updateDate();
 	}
+	
 	public Date getDate() {
 		return date;
 	}
@@ -29,6 +28,4 @@ public abstract class Evenement implements Comparable<Evenement>{
 	}
 
 	public abstract Set<WorldElement> execute(Set<WorldElement> s) throws ExecutionException;
-	
-	public abstract void updateDate() throws ExecutionException;
 }

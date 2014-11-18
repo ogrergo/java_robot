@@ -6,7 +6,7 @@ public class RobotDrone extends Robot {
 	private static final double temps_remplissage = 0.18; //En seconde par litre
 	private static final double temps_vidage = 0.003;	//En seconde par litre
 	
-	public RobotDrone(Carte c) {
+	public RobotDrone(Case c) {
 		super(c);
 		this.vitesse_defaut = 100;
 	}

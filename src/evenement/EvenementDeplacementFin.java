@@ -37,10 +37,4 @@ public class EvenementDeplacementFin extends Evenement {
 		}
 		return s;
 	}
-
-	@Override
-	public void updateDate() throws ExecutionException {
-		// Rien a faire ici
-		
-	}
 }

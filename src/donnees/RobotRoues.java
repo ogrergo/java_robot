@@ -6,7 +6,7 @@ public class RobotRoues extends Robot {
 	private static final double temps_remplissage = 0.12; //En seconde par litre
 	private static final double temps_vidage = 0.05;	//En seconde par litre
 		
-	public RobotRoues(Carte c) {
+	public RobotRoues(Case c) {
 		super(c);
 		this.vitesse_defaut = 80;
 	}

@@ -1,18 +1,31 @@
 package donnees;
 
+import java.util.List;
+
 import evenement.Date;
+import evenement.EvenementDeplacement;
+import evenement.EvenementDeplacementFin;
+import evenement.EvenementEteindreFeu;
+import evenement.EvenementEteindreFeuFin;
+import evenement.Simulateur;
 
 public abstract class Robot implements WorldElement {
 	protected Case position;
 	protected static Carte carte;
 	protected double vitesse_defaut;
 	private int eau_dispo;
+	
+	private Case dernierPosition = null;
 	private Date dernierEvent = new Date(0);
 	
-	public Robot(Carte c) {
-		super();
+	public Robot(Case position) {
 		this.eau_dispo = this.getEauMax();
-		Robot.carte = c;
+		this.position = position;
+		dernierPosition = position;
+	}
+	
+	public static void setCarte(Carte c) {
+		carte = c;
 	}
 	
 	void setVitesse(double v) {
@@ -27,19 +40,74 @@ public abstract class Robot implements WorldElement {
 		this.dernierEvent.increment(dernier);
 	}
 	
-	public abstract int getEauMax();
+	protected abstract int getEauMax();
 	
-	public abstract double getEauTempsRemplissage();
+	protected abstract double getEauTempsRemplissage();
 	
-	public abstract double getEauTempsVidage();
+	protected abstract double getEauTempsVidage();
+
+	protected abstract double getEauLitreVidage();
 	
-	public abstract double getVitesseMilieu(NatureTerrain t);
+	protected abstract double getVitesseMilieu(NatureTerrain t);
 	
 	public Case getCase() {
 		return position;
 	}
 	
-	public void setPosition(Case c) {
+	public void moveto(Case c, Simulateur simu) throws InvalidCaseException {
+		List<Direction> direction = Astar.getShortestPath(dernierPosition, c, carte, this);
+		for(int i = 0; i < direction.size(); i++) {
+			addRobotMoveEvent(direction.get(i), simu);
+		}
+	}
+	
+	public void addRobotMoveEvent(Direction d, Simulateur s) throws InvalidCaseException {
+		s.addEvenement(
+				new EvenementDeplacement(
+						dernierEvent,
+						this, 
+						s));
+		
+		dernierEvent.increment(
+				(long) carte.tempsDeplacement(
+						this, 
+						dernierPosition,
+						carte.getCase(dernierPosition, d)));
+		
+		s.addEvenement(
+				new EvenementDeplacementFin(
+						dernierEvent, 
+						this,
+						d,
+						s));
+		
+		dernierPosition = carte.getCase(dernierPosition, d);
+		dernierEvent.increment(1);
+	}
+	
+	public void addRobotEteindreFeu(int eau, Simulateur s) {
+		Incendie incendie = s.getData().getIncendieAtCase(dernierPosition);
+		s.addEvenement(
+				new EvenementEteindreFeu(
+						dernierEvent,
+						this,
+						s));
+		
+		dernierEvent.increment(
+				(long) getTempsVider(eau));
+		
+		s.addEvenement(
+				new EvenementEteindreFeuFin(
+						dernierEvent, 
+						this,
+						incendie,
+						eau,
+						s));
+		
+		dernierEvent.increment(1);
+	}
+	
+	private void setPosition(Case c) {
 		position = c;
 	}
 	
@@ -55,26 +123,20 @@ public abstract class Robot implements WorldElement {
 	}
 	
 	//A VERIFIER AVEC SIMULATION 1
-	public void deverserEau(int volume) {
+	public void deverserEau(Incendie incendie, int volume, DonneesSimulation data) {
 		if (this.eau_dispo != -1) { //Si le robot n'est pas un robot à pattes
 			if (this.eau_dispo >= volume)
 				this.eau_dispo -= volume;
-			else
+			else {
 				this.eau_dispo = 0;
+			}
 		}
+		
+		incendie.eteindre((int) ((volume/getEauLitreVidage())*getEauLitreVidage() == volume ? volume : (1 + volume/getEauLitreVidage())*getEauLitreVidage()), data);
 	}
 	
 	public void remplirReservoir() {
 		this.eau_dispo = this.getEauMax();
-	}
-	
-	public double getTempsDeplacement(Direction d) throws InvalidCaseException {
-		try {
-				System.out.println("dernier event : " + this.dernierEvent.getDate());
-				return this.getVitesseMilieu(carte.getCase(position, d).getNature());
-		} catch(InvalidCaseException e) {
-			throw new InvalidCaseException("Ce robot ne peut pas se rendre sur cette surface");
-		}
 	}
 	
 	public double getTempsVider(int tailleIncendie) {

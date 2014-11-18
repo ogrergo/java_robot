@@ -4,13 +4,12 @@ public class RobotFactory {
 	public static Robot createRobot(RobotType type, Case c, Carte carte) {
 		Robot robot = null;
 		switch(type) {
-			case DRONE: robot = new RobotDrone(carte); break;
-			case ROUES: robot = new RobotRoues(carte); break;
-			case PATTES:robot = new RobotPattes(carte);break;
-			case CHENILLES:robot = new RobotChenilles(carte);break;
+			case DRONE: robot = new RobotDrone(c); break;
+			case ROUES: robot = new RobotRoues(c); break;
+			case PATTES:robot = new RobotPattes(c);break;
+			case CHENILLES:robot = new RobotChenilles(c);break;
 		}
 		
-		robot.setPosition(c);
 		return robot;
 	}
 }

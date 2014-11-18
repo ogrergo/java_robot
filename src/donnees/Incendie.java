@@ -13,8 +13,13 @@ public class Incendie implements WorldElement {
 		return litreEau;
 	}
 
-	public void setLitreEau(int litreEau) {
-		this.litreEau = litreEau;
+	public void eteindre(int litreEau, DonneesSimulation data) {
+		this.litreEau -= litreEau;
+	
+		if (litreEau <= 0) {
+			litreEau = 0;
+			data.removeIncendie(this);
+		}
 	}
 
 	@Override
@@ -26,4 +31,5 @@ public class Incendie implements WorldElement {
 	public boolean isAlive() {
 		return litreEau != 0;
 	}
+	
 }

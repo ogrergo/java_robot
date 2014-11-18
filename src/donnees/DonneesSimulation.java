@@ -31,6 +31,14 @@ public class DonneesSimulation {
 	public Collection<Incendie> getIncendies() {
 		return incendies;
 	}
+
+	public Incendie getIncendieAtCase(Case c) {
+		for(Incendie inc : incendies) {
+			if(inc.getCase() == c)
+				return inc;
+		}
+		return null;
+	}
 	
 	public Collection<Robot> getRobots() {
 		return robots;
