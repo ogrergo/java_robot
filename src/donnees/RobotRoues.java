@@ -29,7 +29,7 @@ public class RobotRoues extends Robot {
 		switch(t) {
 		case TERRAIN_LIBRE:
 		case HABITAT:
-			return (carte.getTailleCases()/1000) / this.vitesse_defaut * 3600;
+			return (carte.getTailleCases()/1000) / (this.vitesse_defaut / 3600);
 		default:
 			return 0;
 		}

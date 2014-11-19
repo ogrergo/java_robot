@@ -8,7 +8,7 @@ public class ManagerScenario0 extends Manager {
 	public void manage() throws ExecutionException {
 		simulateur.setSimulationStepDuration(60);
 		try {
-			simulateur.getData().getRobotbyId(1).moveto(simulateur.getData().getCarte().getCase(0, 0), simulateur);
+			simulateur.getData().getRobotbyId(0).moveto(simulateur.getData().getCarte().getCase(7,2), simulateur);
 		} catch (InvalidCaseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -53,15 +53,21 @@ public abstract class Robot implements WorldElement {
 	
 	protected abstract double getVitesseMilieu(NatureTerrain t);
 	
+	protected double getVitesse(){
+			return this.vitesse_defaut;
+	}
+	
 	public Case getCase() {
 		return position;
 	}
 	
 	public void moveto(Case c, Simulateur simu) throws InvalidCaseException {
 		List<Direction> direction = Astar.getShortestPath(dernierPosition, c, carte, this);
-		for(int i = 0; i < direction.size(); i++) {
-			System.out.println("D: " +  direction.get(i));
-			addRobotMoveEvent(direction.get(i), simu);
+		if  (direction != null) {
+			for(int i = 0; i < direction.size(); i++) {
+				System.out.println("D: " +  direction.get(i));
+				addRobotMoveEvent(direction.get(i), simu);
+			}
 		}
 	}
 	
