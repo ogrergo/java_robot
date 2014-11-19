@@ -30,7 +30,7 @@ public class RobotChenilles extends Robot {
 		return 100;
 	}
 
-	public double getVitesseMilieu(NatureTerrain t) {
+	public double getVitesseMilieu(NatureTerrain t, Carte carte) {
 		switch(t) {
 		case EAU:
 		case ROCHE:

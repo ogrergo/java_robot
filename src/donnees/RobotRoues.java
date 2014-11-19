@@ -25,7 +25,7 @@ public class RobotRoues extends Robot {
 		return 5;
 	}
 
-	public double getVitesseMilieu(NatureTerrain t) {
+	public double getVitesseMilieu(NatureTerrain t, Carte carte) {
 		switch(t) {
 		case TERRAIN_LIBRE:
 		case HABITAT:

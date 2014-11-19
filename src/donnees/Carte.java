@@ -74,7 +74,7 @@ public class Carte {
 	
 	public boolean estCaseAccessible(Robot r, Case arrive) {
 		//Une case est accessible par un robot si sa vitesse n'est pas = 0
-		return (r.getVitesseMilieu(arrive.getNature()) != 0);
+		return (r.getVitesseMilieu(arrive.getNature(), this) != 0);
 	}
 	
 	public Collection<Case> caseVoisine(Robot r, Case c) {
@@ -91,8 +91,8 @@ public class Carte {
 	}
 	
 	public double tempsDeplacement(Robot r, Case depart, Case arrive) {
-		return (r.getVitesseMilieu(depart.getNature()) +
-				r.getVitesseMilieu(arrive.getNature())) / 2;
+		return (r.getVitesseMilieu(depart.getNature(), this) +
+				r.getVitesseMilieu(arrive.getNature(), this)) / 2;
 	}
 	
 }

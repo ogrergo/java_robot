@@ -26,7 +26,7 @@ public class RobotPattes extends Robot {
 		return 1;
 	}
 
-	public double getVitesseMilieu(NatureTerrain t) {
+	public double getVitesseMilieu(NatureTerrain t, Carte carte) {
 		switch(t) {
 		case EAU:
 			return 0;

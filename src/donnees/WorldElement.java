@@ -1,6 +1,6 @@
 package donnees;
 
 public interface WorldElement {
-	boolean isAlive();
+	public boolean isAlive();
 	Case getCase();
 }
