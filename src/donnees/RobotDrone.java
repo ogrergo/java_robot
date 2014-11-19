@@ -35,7 +35,7 @@ public class RobotDrone extends Robot {
 		return eau_max;
 	}
 
-	public boolean CanFile(Case c) {
-		return false;
+	public boolean canFill(Case c, Carte ca) {
+		return c.getNature() == NatureTerrain.EAU;
 	}
 }

@@ -40,7 +40,11 @@ public class RobotRoues extends Robot {
 		return 100;
 	}
 
-	public boolean CanFile(Case c) {
+	
+	public boolean canFill(Case c, Carte ca) {
+		for(Case v : ca.caseVoisine(this, c))
+			if(v.getNature() == NatureTerrain.EAU)
+				return true;
 		return false;
 	}
 }

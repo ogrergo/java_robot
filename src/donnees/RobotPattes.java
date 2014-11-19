@@ -2,7 +2,7 @@ package donnees;
 
 public class RobotPattes extends Robot {
 
-	private static final int eau_max = -1;
+	private static final int eau_max = Integer.MAX_VALUE;
 	private static final double temps_remplissage = 0; //En seconde
 	
 	public RobotPattes(Case c) {
@@ -42,7 +42,12 @@ public class RobotPattes extends Robot {
 		return 10;
 	}
 	
-	public boolean CanFile(Case c) {
+	
+	public boolean canFill(Case c, Carte ca) {
+		for(Case v : ca.caseVoisine(this, c))
+			if(v.getNature() == NatureTerrain.EAU)
+				return true;
 		return false;
 	}
+
 }

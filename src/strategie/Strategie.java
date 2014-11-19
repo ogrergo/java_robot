@@ -11,7 +11,7 @@ public class Strategie {
 		actions.add(a);
 	}
 	
-	public void addAction(List<Action> a) {
+	public void addAction(List<? extends Action> a) {
 		actions.addAll(a);
 	}
 	

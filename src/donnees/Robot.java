@@ -1,5 +1,7 @@
 package donnees;
 
+import java.util.List;
+
 import strategie.Action;
 import strategie.ActionMove;
 import strategie.ActionRemplissage;
@@ -17,6 +19,9 @@ public abstract class Robot implements WorldElement {
 	private int eau_dispo;
 
 	private Case last_case;
+	private int last_eau;
+
+
 	private Date dernierEvent = new Date(0);
 	private State state;
 
@@ -25,6 +30,7 @@ public abstract class Robot implements WorldElement {
 		this.eau_dispo = this.getEauMax();
 		this.position = position;
 		last_case = position;
+		last_eau = eau_dispo;
 	}
 
 
@@ -50,6 +56,8 @@ public abstract class Robot implements WorldElement {
 
 	protected abstract double getVitesseMilieu(NatureTerrain t, Carte c);
 
+	protected abstract boolean canFill(Case c, Carte ca);
+
 	public Case getCase() {
 		return position;
 	}
@@ -74,24 +82,42 @@ public abstract class Robot implements WorldElement {
 	public Strategie getBestStrategie(Incendie inc, DonneesSimulation data) {
 		Strategie res = new Strategie();
 
-		while(inc.getLitreEau() > 0) {
-			if(eau_dispo > 0) {
-				if(last_case != inc.getCase()) {
-					res.addAction(Astar.getShortestPath(last_case, inc.getCase(), data.getCarte(), this));
-					last_case = inc.getCase();
-				}
-				res.addAction(new ActionVidage((int) getEauTempsVidage(), getEauDispo()));
+		int feu = inc.getLitreEau();
+
+		while(true) {
+			if(last_case != inc.getCase()) {
+				res.addAction(Astar.getShortestPath(last_case, inc.getCase(), data.getCarte(), this));
+				last_case = inc.getCase();
 			}
-			if(!canFill(last_case)) {
+
+			while(last_eau > 0) {
+				res.addAction(new ActionVidage((int) getEauTempsVidage(), 1));
+				last_eau -= getEauLitreVidage();
+				feu -= getEauLitreVidage();
+				if(feu <= 0)
+					return res;
+			}
+
+			if(!canFill(last_case, data.getCarte())) {
 				Case water = data.getCarte().findNearestWater(last_case, this);
-				res.addAction(Astar.getShortestPath(last_case, water, data.getCarte(), this));
-				last_case = water;
+				List<ActionMove> list = Astar.getShortestPath(last_case, water, data.getCarte(), this);
+
+				if(!canFill(water, data.getCarte()))
+					list.remove(list.size() - 1);
+
+				res.addAction(list);
+				try {
+					last_case = ActionMove.getLastCase(list, last_case, data.getCarte());
+				} catch (InvalidCaseException e) {
+					return null;
+				}
 			}
+
 			res.addAction(new ActionRemplissage((int) (getEauTempsRemplissage() * getEauMax())));
+			last_eau += (getEauTempsRemplissage() * getEauMax());
 		}
-		
-		return res;
 	}
+
 
 	private void addActionEvent(Action action, Simulateur s) {
 		dernierEvent.increment((long) action.getCout());
@@ -178,6 +204,4 @@ public abstract class Robot implements WorldElement {
 	public State getState() {
 		return state;
 	}
-	
-	public abstract boolean CanFile(Case c);
 }

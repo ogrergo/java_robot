@@ -16,7 +16,7 @@ import strategie.ActionMove;
 public class Astar {
 
 	
-	public static List<Action> getShortestPath(Case start, Case goal, Carte carte, Robot r) {
+	public static List<ActionMove> getShortestPath(Case start, Case goal, Carte carte, Robot r) {
 			Set<Node> closed_set = new HashSet<Node>();
 			Queue<Node> open_set = new PriorityQueue<Node>();
 			Map<Case, Node> map = new HashMap<Case, Node>();
@@ -35,7 +35,7 @@ public class Astar {
 				current = open_set.remove();
 				assert(current != null);
 				if(current.cell == goal) {
-					ArrayList<Action> list = new ArrayList<Action>();
+					ArrayList<ActionMove> list = new ArrayList<ActionMove>();
 					System.out.println("fin algo");
 
 					while(current != first) {
