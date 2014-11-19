@@ -53,12 +53,12 @@ public class Astar {
 					}
 
 					double new_g_score = current.g_score + carte.tempsDeplacement(r, current.cell, v);
-
+					
 					if(!open_set.contains(voisin) || new_g_score < voisin.g_score) {
 						voisin.previous = current;
 						voisin.g_score = new_g_score;
 						voisin.f_score = voisin.g_score + carte.DistanceVolOiseau(v, goal) * vitRobot;
-
+						
 						if(!open_set.contains(voisin)) {
 							open_set.add(voisin);
 						}
@@ -74,7 +74,7 @@ public class Astar {
 		public Node(Case start) {
 			cell = start;
 		}
-
+		
 		private Case cell;
 		private double g_score;
 		private double f_score;
@@ -85,6 +85,5 @@ public class Astar {
 			return (int) (f_score - o.f_score);
 		}
 	}
-
 
 }

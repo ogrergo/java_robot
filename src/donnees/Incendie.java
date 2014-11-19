@@ -16,8 +16,8 @@ public class Incendie implements WorldElement {
 	public void eteindre(int litreEau, DonneesSimulation data) {
 		this.litreEau -= litreEau;
 	
-		if (litreEau <= 0) {
-			litreEau = 0;
+		if (this.litreEau <= 0) {
+			this.litreEau = 0;
 			data.removeIncendie(this);
 		}
 	}

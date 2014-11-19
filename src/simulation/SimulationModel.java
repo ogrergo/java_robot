@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import donnees.DonneesSimulation;
 import donnees.ExceptionFormatDonnees;
 import donnees.LecteurDonnees;
-import donnees.Robot;
 
 public class SimulationModel {
 	private DonneesSimulation data;
@@ -18,7 +17,6 @@ public class SimulationModel {
 	
 	public void reload() throws FileNotFoundException, ExceptionFormatDonnees {
 		data = LecteurDonnees.lire(path);
-		Robot.setCarte(data.getCarte());
 	}
 	
 	public DonneesSimulation getData() {

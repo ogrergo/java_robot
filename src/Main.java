@@ -8,7 +8,7 @@ import donnees.ExceptionFormatDonnees;
 public class Main {
 	public static void main(String[] args) {
 		if (args.length < 1) {
-			System.out.println("Syntaxe: java TestLecteurDonnees <nomDeFichier>");
+			System.out.println("Syntaxe: java Main <nomDeFichier>");
 			System.exit(1);
 		}
 		SimulationModel model = new SimulationModel();

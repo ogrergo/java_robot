@@ -32,12 +32,12 @@ public class DonneesSimulation {
 		return incendies;
 	}
 
-	public Incendie getIncendieAtCase(Case c) {
+	public Incendie getIncendieAtCase(Case c) throws InvalidCaseException {
 		for(Incendie inc : incendies) {
 			if(inc.getCase() == c)
 				return inc;
 		}
-		return null;
+		throw new InvalidCaseException("Aucun incendie à la case ("+c.getLigne()+", " + c.getColonne() +").");
 	}
 	
 	public Collection<Robot> getRobots() {

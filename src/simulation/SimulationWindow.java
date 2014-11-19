@@ -4,8 +4,11 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 
@@ -22,7 +25,7 @@ import donnees.RobotDrone;
 import donnees.RobotPattes;
 import donnees.RobotRoues;
 import donnees.WorldElement;
-import evenement.ManagerScenario0;
+import evenement.ManagerScenario1;
 
 public class SimulationWindow {
 	private SimulationModel data;
@@ -30,7 +33,7 @@ public class SimulationWindow {
 	private SimulationController controller;
 
 	private Tile[][] tiles;
-	private HashMap<WorldElement,Tile> hash_elem = new HashMap<WorldElement, Tile>();
+	private HashMap<WorldElement,Tile> hash_elem;
 
 	public SimulationWindow(SimulationModel model) {
 		data = model;
@@ -39,12 +42,13 @@ public class SimulationWindow {
 
 	private void initDisplay() {
 		initTiles();
-		controller = new SimulationController(data, this, ManagerScenario0.class);
+		controller = new SimulationController(data, this, ManagerScenario1.class);
 		ihm = new IGSimulateur(data.getData().getCarte().getNbLignes(), data.getData().getCarte().getNbColonnes(), controller);
 		controller.restart();
 	}
 
 	private void initTiles() {
+		hash_elem = new HashMap<WorldElement, Tile>();
 		tiles = new Tile[data.getData().getCarte().getNbLignes()][data.getData().getCarte().getNbColonnes()];
 		for(int i = 0; i < data.getData().getCarte().getNbLignes(); i++)
 			for(int j = 0; j < data.getData().getCarte().getNbColonnes() ; j++)
@@ -131,8 +135,8 @@ public class SimulationWindow {
 		
 		int index_background;
 		
-		HashSet<WorldElement> elem = new HashSet<WorldElement>();
-
+		Set<WorldElement> elem = new HashSet<WorldElement>();
+		Set<WorldElement> toremove =  new HashSet<WorldElement>();
 		public Tile(int i, int j,NatureTerrain terrainLibre) {
 			setBackground(terrainLibre);
 			ligne = i;
@@ -176,9 +180,10 @@ public class SimulationWindow {
 				for(int j = 0; j < arg3; j+=back.getWidth(null))
 					arg4.drawImage(back, arg0 + i, arg1 + j, null);
 			
+			
 			for(WorldElement e : elem) {
 				if(!e.isAlive()) {
-					removeElem(e);
+					toremove.add(e);
 					continue;
 				}
 				
@@ -191,6 +196,10 @@ public class SimulationWindow {
 							arg4.drawImage(incendie_img, arg0 + i, arg1 + j, null);
 				}
 			}
+			for(WorldElement e : toremove)
+				removeElem(e);
+			
+			toremove.clear();
 		}
 
 		private static Image getRobotImage(Robot r) {

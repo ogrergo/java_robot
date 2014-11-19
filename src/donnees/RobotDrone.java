@@ -26,6 +26,7 @@ public class RobotDrone extends Robot {
 	}
 
 	@Override
+
 	public double getVitesseMilieu(NatureTerrain t) {
 		return (carte.getTailleCases()/1000) / (this.vitesse_defaut / 3600);
 	}
@@ -35,4 +36,7 @@ public class RobotDrone extends Robot {
 		return eau_max;
 	}
 
+	public boolean CanFile(Case c) {
+		return false;
+	}
 }

@@ -30,7 +30,7 @@ public class RobotChenilles extends Robot {
 		return 100;
 	}
 
-	public double getVitesseMilieu(NatureTerrain t) {
+	public double getVitesseMilieu(NatureTerrain t, Carte carte) {
 		switch(t) {
 		case EAU:
 		case ROCHE:
@@ -42,4 +42,7 @@ public class RobotChenilles extends Robot {
 		}
 	}
 
+	public boolean CanFile(Case c) {
+		return false;
+	}
 }
