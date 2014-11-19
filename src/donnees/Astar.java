@@ -9,7 +9,6 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
-import strategie.Action;
 import strategie.ActionMove;
 
 
@@ -22,14 +21,12 @@ public class Astar {
 			Map<Case, Node> map = new HashMap<Case, Node>();
 			Node current = new Node(start);
 			Node first = current;
-
+			double vitRobot = r.getVitesse() / 3600;
 			map.put(start, current);
 			
 			open_set.add(current);
 			current.g_score = 0;
-			current.f_score = carte.DistanceVolOiseau(start, goal);
-			
-
+			current.f_score = carte.DistanceVolOiseau(start, goal) * vitRobot;
 			
 			while(!open_set.isEmpty()) {
 				current = open_set.remove();
@@ -41,17 +38,18 @@ public class Astar {
 					while(current != first) {
 						list.add(0,
 								new ActionMove(
-								carte.tempsDeplacement(r, current.previous.cell, current.cell),
-								carte.getDirection(current.previous.cell, current.cell)
-								));
+										carte.tempsDeplacement(r, current.previous.cell, current.cell), 
+										carte.getDirection(current.previous.cell, current.cell))
+						);
 						current = current.previous;
 					}
 					return list;
 				}
-				
+
 				closed_set.add(current);
 				for(Case v : carte.caseVoisine(r, current.cell)) {
 					Node voisin = map.get(v);
+
 					if(voisin == null) {
 						voisin = new Node(v);
 						map.put(v, voisin);
@@ -59,23 +57,25 @@ public class Astar {
 						if(closed_set.contains(voisin))
 							continue;
 					}
+
 					double new_g_score = current.g_score + carte.tempsDeplacement(r, current.cell, v);
 					
 					if(!open_set.contains(voisin) || new_g_score < voisin.g_score) {
 						voisin.previous = current;
 						voisin.g_score = new_g_score;
-						voisin.f_score = voisin.g_score + carte.DistanceVolOiseau(v, goal);
+						voisin.f_score = voisin.g_score + carte.DistanceVolOiseau(v, goal) * vitRobot;
+						
 						if(!open_set.contains(voisin)) {
 							open_set.add(voisin);
 						}
 					}
 				}
 			}
-			
+
 			return null;
-		}
-	
-	
+	}
+
+
 	private static class Node implements Comparable<Node>{
 		public Node(Case start) {
 			cell = start;
@@ -88,9 +88,8 @@ public class Astar {
 
 		@Override
 		public int compareTo(Node o) {
-			return (int) (o.f_score - f_score);
+			return (int) (f_score - o.f_score);
 		}
 	}
 
-	
 }

@@ -68,8 +68,9 @@ public class Carte {
 	}
 	
 	public double DistanceVolOiseau(Case depart, Case arrive) {
-		return Math.sqrt((Math.round((depart.getColonne() - arrive.getColonne())) 
-				+ Math.round((depart.getLigne() - arrive.getLigne())))) * this.tailleCases;
+		
+		return (this.tailleCases * Math.sqrt(((depart.getColonne() - arrive.getColonne()) * (depart.getColonne() - arrive.getColonne())) + ((depart.getLigne() - arrive.getLigne()) * (depart.getLigne() - arrive.getLigne()))));
+	
 	}
 	
 	public boolean estCaseAccessible(Robot r, Case arrive) {

@@ -33,7 +33,6 @@ public abstract class Robot implements WorldElement {
 		last_eau = eau_dispo;
 	}
 
-
 	void setVitesse(double v) {
 		this.vitesse_defaut = v;
 	}
@@ -57,7 +56,11 @@ public abstract class Robot implements WorldElement {
 	protected abstract double getVitesseMilieu(NatureTerrain t, Carte c);
 
 	protected abstract boolean canFill(Case c, Carte ca);
-
+	
+	protected double getVitesse(){
+			return this.vitesse_defaut;
+	}
+	
 	public Case getCase() {
 		return position;
 	}
@@ -72,10 +75,6 @@ public abstract class Robot implements WorldElement {
 			System.out.println("Posting");
 			addActionEvent(strat.getAction(i), s);
 		}
-
-		s.addEvenement(
-				new EvenementStrategieFin(dernierEvent, s, this));
-		dernierEvent.increment(1);
 
 	}
 

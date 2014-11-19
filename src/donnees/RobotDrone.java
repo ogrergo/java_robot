@@ -26,8 +26,9 @@ public class RobotDrone extends Robot {
 	}
 
 	@Override
+
 	public double getVitesseMilieu(NatureTerrain t, Carte carte) {
-		return (carte.getTailleCases()/1000) / (this.vitesse_defaut) * 3600;
+		return (carte.getTailleCases()/1000) / (this.vitesse_defaut / 3600);
 	}
 
 	@Override

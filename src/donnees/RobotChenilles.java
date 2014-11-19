@@ -7,7 +7,7 @@ public class RobotChenilles extends Robot {
 	
 	public RobotChenilles(Case c) {
 		super(c);
-		this.vitesse_defaut = 60;
+		this.vitesse_defaut = 60;	
 	}
 
 	@Override
@@ -36,9 +36,9 @@ public class RobotChenilles extends Robot {
 		case ROCHE:
 			return 0;
 		case FORET:
-			return (carte.getTailleCases()/1000) / (this.vitesse_defaut/2) * 3600;
+			return (carte.getTailleCases()/1000) / (this.vitesse_defaut/(2*3600));
 		default:
-			return (carte.getTailleCases()/1000) / this.vitesse_defaut * 3600;
+			return (carte.getTailleCases()/1000) / (this.vitesse_defaut / 3600);
 		}
 	}
 	

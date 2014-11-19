@@ -31,9 +31,9 @@ public class RobotPattes extends Robot {
 		case EAU:
 			return 0;
 		case ROCHE:
-			return (carte.getTailleCases()/1000) / 10 * 3600;
+			return (carte.getTailleCases()/1000) / (this.vitesse_defaut / (3*3600));
 		default:
-			return (carte.getTailleCases()/1000) / this.vitesse_defaut * 3600;
+			return (carte.getTailleCases()/1000) / (this.vitesse_defaut/ 3600);
 		}
 	}
 
