@@ -95,4 +95,36 @@ public class Carte {
 				r.getVitesseMilieu(arrive.getNature(), this)) / 2;
 	}
 	
+	public int distanceNbCaseVolOiseau(Case dep, Case arr) {
+		return Math.abs(dep.getColonne() - arr.getColonne()) + Math.abs(dep.getLigne() - arr.getLigne()); 
+	}
+
+	/*public ArrayList<Case> getAllWaterInRadius(Case dep, int radius) {
+		ArrayList<Case> l = new ArrayList<Case>();
+		for(Case[] ct : cases) {
+			for(Case c : ct) {
+				if(distanceNbCaseVolOiseau(dep,c) <= radius) {
+					l.add(c);
+				}
+			}
+		}
+		return l;
+	}*/
+
+	public Case findNearestWater(Case last_case, Robot robot) {
+		int min = Integer.MAX_VALUE;
+		Case res = null;
+		for(Case[] ct : cases) {
+			for(Case ca : ct) {
+				if(ca.getNature() == NatureTerrain.EAU && distanceNbCaseVolOiseau(last_case, ca) > min) {
+					int cal = Astar.getShortestPath(last_case, ca, this, robot).size();
+					if(cal < min) {
+						res = ca;
+					}
+				}
+			}
+		}
+		return res;
+	}
+	
 }

@@ -1,20 +1,19 @@
 package simulation;
 
+import ihm.GraphicalElement;
+import ihm.IGSimulateur;
+import ihm.MapIndexOutOfBoundsException;
+
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
 
-import ihm.GraphicalElement;
-import ihm.IGSimulateur;
-import ihm.MapIndexOutOfBoundsException;
 import donnees.Case;
 import donnees.Incendie;
 import donnees.InvalidCaseException;

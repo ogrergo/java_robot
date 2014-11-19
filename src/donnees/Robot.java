@@ -15,21 +15,23 @@ public abstract class Robot implements WorldElement {
 	protected Case position;
 	protected double vitesse_defaut;
 	private int eau_dispo;
-	
+
+	private Case last_case;
 	private Date dernierEvent = new Date(0);
 	private State state;
-	
-	
+
+
 	public Robot(Case position) {
 		this.eau_dispo = this.getEauMax();
 		this.position = position;
+		last_case = position;
 	}
-	
-	
+
+
 	void setVitesse(double v) {
 		this.vitesse_defaut = v;
 	}
-	
+
 	public Date getDernierEvent() {
 		return dernierEvent;
 	}
@@ -37,27 +39,27 @@ public abstract class Robot implements WorldElement {
 	public void setDernierEvent(long dernier) {
 		this.dernierEvent.increment(dernier);
 	}
-	
+
 	protected abstract int getEauMax();
-	
+
 	protected abstract double getEauTempsRemplissage();
-	
+
 	protected abstract double getEauTempsVidage();
 
 	protected abstract double getEauLitreVidage();
-	
+
 	protected abstract double getVitesseMilieu(NatureTerrain t, Carte c);
-	
+
 	public Case getCase() {
 		return position;
 	}
-	
-	
+
+
 	public void doStrategie(Strategie strat, Simulateur s) {
 		s.addEvenement(
 				new EvenementStrategieDebut(dernierEvent, s, this));
 		dernierEvent.increment(1);
-		
+
 		for(int i = 0; i < strat.getNbActions(); i++) {
 			System.out.println("Posting");
 			addActionEvent(strat.getAction(i), s);
@@ -68,7 +70,29 @@ public abstract class Robot implements WorldElement {
 		dernierEvent.increment(1);
 
 	}
-	
+
+	public Strategie getBestStrategie(Incendie inc, DonneesSimulation data) {
+		Strategie res = new Strategie();
+
+		while(inc.getLitreEau() > 0) {
+			if(eau_dispo > 0) {
+				if(last_case != inc.getCase()) {
+					res.addAction(Astar.getShortestPath(last_case, inc.getCase(), data.getCarte(), this));
+					last_case = inc.getCase();
+				}
+				res.addAction(new ActionVidage((int) getEauTempsVidage(), getEauDispo()));
+			}
+			if(!canFill(last_case)) {
+				Case water = data.getCarte().findNearestWater(last_case, this);
+				res.addAction(Astar.getShortestPath(last_case, water, data.getCarte(), this));
+				last_case = water;
+			}
+			res.addAction(new ActionRemplissage((int) (getEauTempsRemplissage() * getEauMax())));
+		}
+		
+		return res;
+	}
+
 	private void addActionEvent(Action action, Simulateur s) {
 		dernierEvent.increment((long) action.getCout());
 		s.addEvenement(
@@ -88,7 +112,7 @@ public abstract class Robot implements WorldElement {
 		} else {
 			doActionVidage(action, s);
 		}
-		
+
 	}
 
 	private void doActionVidage(Action action, Simulateur s) throws InvalidCaseException {
@@ -111,11 +135,11 @@ public abstract class Robot implements WorldElement {
 		else
 			throw new InvalidCaseException("Ce robot ne peut pas se rendre sur cette surface");
 	}
-	
+
 	public int getEauDispo() {
 		return this.eau_dispo;
 	}
-	
+
 	//A VERIFIER AVEC SIMULATION 1
 	public void deverserEau(Incendie incendie, int nbElem, DonneesSimulation data) {
 		if (this.eau_dispo != -1) { //Si le robot n'est pas un robot à pattes
@@ -127,23 +151,23 @@ public abstract class Robot implements WorldElement {
 		}
 		incendie.eteindre((int) (nbElem * getEauLitreVidage()), data);
 	}
-	
+
 	public void remplirReservoir() {
 		this.eau_dispo = this.getEauMax();
 	}
-	
+
 	public double getTempsVider(int tailleIncendie) {
 		if (tailleIncendie > this.getEauDispo())
 			return this.getEauDispo() * this.getEauTempsVidage();
 		else
 			return tailleIncendie * this.getEauTempsVidage();
 	}
-	
+
 	//A modif
 	public double getTempsremplir() {
 		return this.getEauTempsRemplissage() * this.getEauMax();
 	}	
-	
+
 	public boolean isAlive() {
 		return true;
 	}
