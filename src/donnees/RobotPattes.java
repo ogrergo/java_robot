@@ -41,4 +41,8 @@ public class RobotPattes extends Robot {
 	protected double getEauLitreVidage() {
 		return 10;
 	}
+	
+	public boolean CanFile(Case c) {
+		return false;
+	}
 }

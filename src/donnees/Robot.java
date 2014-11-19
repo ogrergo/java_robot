@@ -154,4 +154,6 @@ public abstract class Robot implements WorldElement {
 	public State getState() {
 		return state;
 	}
+	
+	public abstract boolean CanFile(Case c);
 }
