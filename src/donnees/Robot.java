@@ -21,7 +21,8 @@ public abstract class Robot implements WorldElement {
 	private Case last_case;
 	private int last_eau;
 
-
+	protected boolean seRemplitACoteEau;
+	
 	private Date dernierEvent = new Date(0);
 	private State state;
 
@@ -53,7 +54,7 @@ public abstract class Robot implements WorldElement {
 	protected abstract double getEauTempsVidage();
 
 	protected abstract double getEauLitreVidage();
-
+	
 	protected abstract double getVitesseMilieu(NatureTerrain t, Carte c);
 
 	protected abstract boolean canFill(Case c, Carte ca);
@@ -88,7 +89,7 @@ public abstract class Robot implements WorldElement {
 			if(last_case != inc.getCase()) {
 				System.out.println("need to go for fire! from  (" + last_case.getLigne() + "; " + last_case.getColonne() + ") to ("+
 						inc.getCase().getLigne() + "; " + inc.getCase().getColonne() + ")");
-				res.addAction(Astar.getShortestPath(last_case, inc.getCase(), data.getCarte(), this));
+				res.addAction(Astar.getShortestPath(last_case, inc.getCase(), data.getCarte(), this, false));
 				last_case = inc.getCase();
 			}
 
@@ -100,17 +101,17 @@ public abstract class Robot implements WorldElement {
 				if(feu <= 0)
 					return res;
 			}
-
 			if(!canFill(last_case, data.getCarte())) {
-				Case water = data.getCarte().findNearestWater(last_case, this);
+				Case water = data.getCarte().findNearestWater(last_case, this, seRemplitACoteEau);
+				System.out.print("Case water : lig " + water.getLigne() + " col " + water.getColonne());
 				if(water == null)
 					return null;
-				List<ActionMove> list = Astar.getShortestPath(last_case, water, data.getCarte(), this);
-
+				List<ActionMove> list = Astar.getShortestPath(last_case, water, data.getCarte(), this, seRemplitACoteEau);
 				if(!canFill(water, data.getCarte()))
 					list.remove(list.size() - 1);
-
+				if (list == null) System.out.print("rrrrrrrrrrrr");
 				res.addAction(list);
+				System.out.print("OOOOOOOO");
 				try {
 					last_case = ActionMove.getLastCase(list, last_case, data.getCarte());
 					System.out.println("Aller remplir a la case "+ last_case.getLigne() + "; " + last_case.getColonne() + ")");

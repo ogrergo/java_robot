@@ -17,12 +17,13 @@ public class ManagerTestAstar extends Manager {
 			Strategie strat = new Strategie();
 
 			List<ActionMove> l = Astar.getShortestPath(
-					simulateur.getData().getRobotbyId(0).getCase(), 
+					simulateur.getData().getRobotbyId(1).getCase(), 
 					simulateur.getData().getCarte().getCase(0, 0), 
 					simulateur.getData().getCarte(),
-					simulateur.getData().getRobotbyId(0));
+					simulateur.getData().getRobotbyId(1),
+					false);
 			strat.addAction(l);
-			simulateur.getData().getRobotbyId(0).doStrategie(strat, simulateur);
+			simulateur.getData().getRobotbyId(1).doStrategie(strat, simulateur);
 		} catch (InvalidCaseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

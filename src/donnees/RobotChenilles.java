@@ -7,7 +7,8 @@ public class RobotChenilles extends Robot {
 	
 	public RobotChenilles(Case c) {
 		super(c);
-		this.vitesse_defaut = 60;	
+		this.vitesse_defaut = 60;
+		this.seRemplitACoteEau = true;
 	}
 
 	@Override

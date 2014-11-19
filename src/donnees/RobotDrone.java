@@ -8,6 +8,7 @@ public class RobotDrone extends Robot {
 	public RobotDrone(Case c) {
 		super(c);
 		this.vitesse_defaut = 100;
+		this.seRemplitACoteEau = false;
 	}
 	
 	@Override

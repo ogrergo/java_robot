@@ -8,6 +8,7 @@ public class RobotRoues extends Robot {
 	public RobotRoues(Case c) {
 		super(c);
 		this.vitesse_defaut = 80;
+		this.seRemplitACoteEau = true;
 	}
 
 	@Override

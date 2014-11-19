@@ -126,13 +126,13 @@ public class Carte {
 		return l;
 	}*/
 
-	public Case findNearestWater(Case last_case, Robot robot) {
+	public Case findNearestWater(Case last_case, Robot robot, boolean voisinEau) {
 		int min = Integer.MAX_VALUE;
 		Case res = null;
 		for(Case[] ct : cases) {
 			for(Case ca : ct) {
 				if(ca.getNature() == NatureTerrain.EAU && distanceNbCaseVolOiseau(last_case, ca) < min) {
-					int cal = Astar.getShortestPath(last_case, ca, this, robot).size();
+					int cal = Astar.getShortestPath(last_case, ca, this, robot, voisinEau).size();
 					if(cal < min) {
 						res = ca;
 					}
@@ -141,5 +141,6 @@ public class Carte {
 		}
 		return res;
 	}
+	
 	
 }
