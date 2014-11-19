@@ -11,7 +11,7 @@ public abstract class Evenement implements Comparable<Evenement>{
 	protected Simulateur simulateur;
 	
 	public Evenement(Date date, Simulateur s) {
-		this.date = date;
+		this.date = new Date(date);
 		this.simulateur = s;
 	}
 	

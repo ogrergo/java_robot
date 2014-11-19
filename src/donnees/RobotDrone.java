@@ -4,7 +4,6 @@ public class RobotDrone extends Robot {
 
 	private static final int eau_max = 10000;
 	private static final double temps_remplissage = 0.18; //En seconde par litre
-	private static final double temps_vidage = 0.003;	//En seconde par litre
 	
 	public RobotDrone(Case c) {
 		super(c);
@@ -23,11 +22,17 @@ public class RobotDrone extends Robot {
 
 	@Override
 	public double getEauTempsVidage() {
-		return RobotDrone.temps_vidage;
+		return 30;
 	}
 
+	@Override
 	public double getVitesseMilieu(NatureTerrain t) {
 		return (carte.getTailleCases()/1000) / (this.vitesse_defaut) * 3600;
+	}
+
+	@Override
+	protected double getEauLitreVidage() {
+		return eau_max;
 	}
 
 }

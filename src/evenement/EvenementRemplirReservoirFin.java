@@ -20,10 +20,4 @@ public class EvenementRemplirReservoirFin extends Evenement {
 		s.add(robot);
 		return s;
 	}
-	
-	@Override
-	public void updateDate() throws ExecutionException {
-		// Rien a faire ici
-		
-	}
 }

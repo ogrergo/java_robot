@@ -7,6 +7,8 @@ import evenement.EvenementDeplacement;
 import evenement.EvenementDeplacementFin;
 import evenement.EvenementEteindreFeu;
 import evenement.EvenementEteindreFeuFin;
+import evenement.EvenementRemplirReservoir;
+import evenement.EvenementRemplirReservoirFin;
 import evenement.Simulateur;
 
 public abstract class Robot implements WorldElement {
@@ -17,6 +19,7 @@ public abstract class Robot implements WorldElement {
 	
 	private Case dernierPosition = null;
 	private Date dernierEvent = new Date(0);
+	
 	
 	public Robot(Case position) {
 		this.eau_dispo = this.getEauMax();
@@ -57,6 +60,7 @@ public abstract class Robot implements WorldElement {
 	public void moveto(Case c, Simulateur simu) throws InvalidCaseException {
 		List<Direction> direction = Astar.getShortestPath(dernierPosition, c, carte, this);
 		for(int i = 0; i < direction.size(); i++) {
+			System.out.println("D: " +  direction.get(i));
 			addRobotMoveEvent(direction.get(i), simu);
 		}
 	}
@@ -102,6 +106,25 @@ public abstract class Robot implements WorldElement {
 						this,
 						incendie,
 						eau,
+						s));
+		
+		dernierEvent.increment(1);
+	}
+	
+	public void addRobotRemplirReservoir(Simulateur s) {
+		s.addEvenement(
+				new EvenementRemplirReservoir(
+						dernierEvent, 
+						this,
+						s));
+		
+		dernierEvent.increment(
+				(long) getTempsremplir());
+		
+		s.addEvenement(
+				new EvenementRemplirReservoirFin(
+						dernierEvent, 
+						this,
 						s));
 		
 		dernierEvent.increment(1);

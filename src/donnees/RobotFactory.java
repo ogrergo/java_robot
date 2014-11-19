@@ -9,7 +9,6 @@ public class RobotFactory {
 			case PATTES:robot = new RobotPattes(c);break;
 			case CHENILLES:robot = new RobotChenilles(c);break;
 		}
-		
 		return robot;
 	}
 }

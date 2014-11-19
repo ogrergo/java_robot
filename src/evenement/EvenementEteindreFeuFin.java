@@ -21,7 +21,7 @@ public class EvenementEteindreFeuFin extends Evenement {
 	@Override
 	public Set<WorldElement> execute(Set<WorldElement> s) {
 		System.out.println("Debut Eteindre feu necessitant " + incendie.getLitreEau() + "lit eau robot initial" + robot.getEauDispo());
-		robot.deverserEau(incendie, eauDeverse);
+		robot.deverserEau(incendie, eauDeverse, data);
 		s.add(robot);
 		return s;
 	}

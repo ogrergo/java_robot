@@ -6,6 +6,10 @@ public class Date implements Comparable<Date>{
 	public Date(long timestamp) {
 		this.date = timestamp;
 	}
+	
+	public Date(Date d) {
+		date = d.date;
+	}
 
 	public long getDate() {
 		return date;

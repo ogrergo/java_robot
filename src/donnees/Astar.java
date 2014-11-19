@@ -30,14 +30,18 @@ public class Astar {
 			
 			while(!open_set.isEmpty()) {
 				current = open_set.remove();
+				assert(current != null);
 				if(current.cell == goal) {
 					ArrayList<Direction> list = new ArrayList<Direction>();
+					System.out.println("fin algo");
+
 					while(current != first) {
 						list.add(0,carte.getDirection(current.previous.cell, current.cell));
 						current = current.previous;
 					}
 					return list;
 				}
+				
 				closed_set.add(current);
 				for(Case v : carte.caseVoisine(r, current.cell)) {
 					Node voisin = map.get(v);
@@ -51,7 +55,7 @@ public class Astar {
 					double new_g_score = current.g_score + carte.tempsDeplacement(r, current.cell, v);
 					
 					if(!open_set.contains(voisin) || new_g_score < voisin.g_score) {
-						voisin.previous = voisin;
+						voisin.previous = current;
 						voisin.g_score = new_g_score;
 						voisin.f_score = voisin.g_score + carte.DistanceVolOiseau(v, goal);
 						if(!open_set.contains(voisin)) {

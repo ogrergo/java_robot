@@ -4,7 +4,6 @@ public class RobotPattes extends Robot {
 
 	private static final int eau_max = -1;
 	private static final double temps_remplissage = 0; //En seconde
-	private static final double temps_vidage = 0.1;	//En seconde par litre
 	
 	public RobotPattes(Case c) {
 		super(c);
@@ -24,7 +23,7 @@ public class RobotPattes extends Robot {
 
 	@Override
 	public double getEauTempsVidage() {
-		return RobotPattes.temps_vidage;
+		return 1;
 	}
 
 	public double getVitesseMilieu(NatureTerrain t) {
@@ -36,5 +35,10 @@ public class RobotPattes extends Robot {
 		default:
 			return (carte.getTailleCases()/1000) / this.vitesse_defaut * 3600;
 		}
+	}
+
+	@Override
+	protected double getEauLitreVidage() {
+		return 10;
 	}
 }

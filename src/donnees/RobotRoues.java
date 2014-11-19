@@ -4,7 +4,6 @@ public class RobotRoues extends Robot {
 
 	private static final int eau_max = 5000;
 	private static final double temps_remplissage = 0.12; //En seconde par litre
-	private static final double temps_vidage = 0.05;	//En seconde par litre
 		
 	public RobotRoues(Case c) {
 		super(c);
@@ -23,7 +22,7 @@ public class RobotRoues extends Robot {
 
 	@Override
 	public double getEauTempsVidage() {
-		return RobotRoues.temps_vidage;
+		return 5;
 	}
 
 	public double getVitesseMilieu(NatureTerrain t) {
@@ -34,6 +33,11 @@ public class RobotRoues extends Robot {
 		default:
 			return 0;
 		}
+	}
+
+	@Override
+	protected double getEauLitreVidage() {
+		return 100;
 	}
 
 }

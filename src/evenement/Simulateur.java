@@ -52,7 +52,7 @@ public class Simulateur {
 	public Set<WorldElement> step() {
 		date.increment(step_duration);
 		hash.clear();
-		System.out.println("Date " + (int)date.getDate());
+		//System.out.println("Date " + (int)date.getDate());
 		while(true) {
 			Evenement e = l.peek();
 			try {

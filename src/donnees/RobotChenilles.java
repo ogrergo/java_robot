@@ -4,7 +4,6 @@ public class RobotChenilles extends Robot {
 
 	private static final int eau_max = 2000;
 	private static final double temps_remplissage = 0.15; //En seconde par litre
-	private static final double temps_vidage = 0.08;	//En seconde par litre
 	
 	public RobotChenilles(Case c) {
 		super(c);
@@ -23,7 +22,12 @@ public class RobotChenilles extends Robot {
 
 	@Override
 	public double getEauTempsVidage() {
-		return RobotChenilles.temps_vidage;
+		return 8;
+	}
+
+	@Override
+	protected double getEauLitreVidage() {
+		return 100;
 	}
 
 	public double getVitesseMilieu(NatureTerrain t) {
@@ -37,4 +41,5 @@ public class RobotChenilles extends Robot {
 			return (carte.getTailleCases()/1000) / this.vitesse_defaut * 3600;
 		}
 	}
+
 }
