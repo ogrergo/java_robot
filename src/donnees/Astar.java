@@ -46,7 +46,7 @@ public class Astar {
 				}
 
 				closed_set.add(current);
-				for(Case v : carte.caseVoisine(r, current.cell)) {
+				for(Case v : carte.caseVoisineAccessible(r, current.cell)) {
 					Node voisin = map.get(v);
 
 					if(voisin == null) {

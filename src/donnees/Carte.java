@@ -80,7 +80,7 @@ public class Carte {
 		return (r.getVitesseMilieu(arrive.getNature(), this) != 0);
 	}
 	
-	public Collection<Case> caseVoisine(Robot r, Case c) {
+	public Collection<Case> caseVoisineAccessible(Robot r, Case c) {
 		ArrayList<Case> voisins = new ArrayList<Case>();
 		for (Direction d : Direction.values()) {
 			try {
@@ -91,6 +91,18 @@ public class Carte {
 			} catch (InvalidCaseException e) {} 
 		}
 		return voisins;
+	}
+	
+	//Retourne vrai si une des cases voisine de c 
+	public boolean caseVoisineEau(Case c) {
+		for (Direction d : Direction.values()) {
+			try {
+				if (this.getCase(c, d).getNature() == NatureTerrain.EAU)
+					return true;
+				//Si le voisin ne fait pas partie de la carte, on ignore l'erreur
+			} catch (InvalidCaseException e) {} 
+		}
+		return false;
 	}
 	
 	public double tempsDeplacement(Robot r, Case depart, Case arrive) {

@@ -42,12 +42,8 @@ public class RobotPattes extends Robot {
 		return 10;
 	}
 	
-	
 	public boolean canFill(Case c, Carte ca) {
-		for(Case v : ca.caseVoisine(this, c))
-			if(v.getNature() == NatureTerrain.EAU)
-				return true;
-		return false;
+		return ca.caseVoisineEau(c);
 	}
 
 }
