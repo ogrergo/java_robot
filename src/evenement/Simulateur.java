@@ -57,6 +57,7 @@ public class Simulateur {
 			Evenement e = l.peek();
 			try {
 				if(e != null && e.getDate().getDate() < date.getDate()) {
+					System.out.println("Exec");
 					e = l.poll();
 					hash = e.execute(hash);
 				} else {

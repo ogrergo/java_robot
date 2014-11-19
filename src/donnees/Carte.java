@@ -68,8 +68,10 @@ public class Carte {
 	}
 	
 	public double DistanceVolOiseau(Case depart, Case arrive) {
-		
-		return (this.tailleCases * Math.sqrt(((depart.getColonne() - arrive.getColonne()) * (depart.getColonne() - arrive.getColonne())) + ((depart.getLigne() - arrive.getLigne()) * (depart.getLigne() - arrive.getLigne()))));
+		assert(depart != null);
+		assert(arrive != null);
+		return (this.tailleCases * Math.sqrt(((depart.getColonne() - arrive.getColonne()) * (depart.getColonne() - arrive.getColonne())) + 
+				((depart.getLigne() - arrive.getLigne()) * (depart.getLigne() - arrive.getLigne()))));
 	
 	}
 	
@@ -117,7 +119,7 @@ public class Carte {
 		Case res = null;
 		for(Case[] ct : cases) {
 			for(Case ca : ct) {
-				if(ca.getNature() == NatureTerrain.EAU && distanceNbCaseVolOiseau(last_case, ca) > min) {
+				if(ca.getNature() == NatureTerrain.EAU && distanceNbCaseVolOiseau(last_case, ca) < min) {
 					int cal = Astar.getShortestPath(last_case, ca, this, robot).size();
 					if(cal < min) {
 						res = ca;

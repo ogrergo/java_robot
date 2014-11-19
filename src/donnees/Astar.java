@@ -33,8 +33,7 @@ public class Astar {
 				assert(current != null);
 				if(current.cell == goal) {
 					ArrayList<ActionMove> list = new ArrayList<ActionMove>();
-					System.out.println("fin algo");
-
+					
 					while(current != first) {
 						list.add(0,
 								new ActionMove(

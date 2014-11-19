@@ -33,6 +33,7 @@ public abstract class Robot implements WorldElement {
 		last_eau = eau_dispo;
 	}
 
+
 	void setVitesse(double v) {
 		this.vitesse_defaut = v;
 	}
@@ -56,11 +57,7 @@ public abstract class Robot implements WorldElement {
 	protected abstract double getVitesseMilieu(NatureTerrain t, Carte c);
 
 	protected abstract boolean canFill(Case c, Carte ca);
-	
-	protected double getVitesse(){
-			return this.vitesse_defaut;
-	}
-	
+
 	public Case getCase() {
 		return position;
 	}
@@ -72,9 +69,13 @@ public abstract class Robot implements WorldElement {
 		dernierEvent.increment(1);
 
 		for(int i = 0; i < strat.getNbActions(); i++) {
-			System.out.println("Posting");
+			System.out.println("Posting time" + strat.getAction(i).getCout());
 			addActionEvent(strat.getAction(i), s);
 		}
+
+		s.addEvenement(
+				new EvenementStrategieFin(dernierEvent, s, this));
+		dernierEvent.increment(1);
 
 	}
 
@@ -82,14 +83,17 @@ public abstract class Robot implements WorldElement {
 		Strategie res = new Strategie();
 
 		int feu = inc.getLitreEau();
-
+		System.out.println("Feu de " + feu);
 		while(true) {
 			if(last_case != inc.getCase()) {
+				System.out.println("need to go for fire! from  (" + last_case.getLigne() + "; " + last_case.getColonne() + ") to ("+
+						inc.getCase().getLigne() + "; " + inc.getCase().getColonne() + ")");
 				res.addAction(Astar.getShortestPath(last_case, inc.getCase(), data.getCarte(), this));
 				last_case = inc.getCase();
 			}
 
 			while(last_eau > 0) {
+				System.out.println("Verser de l'eau");
 				res.addAction(new ActionVidage((int) getEauTempsVidage(), 1));
 				last_eau -= getEauLitreVidage();
 				feu -= getEauLitreVidage();
@@ -99,6 +103,8 @@ public abstract class Robot implements WorldElement {
 
 			if(!canFill(last_case, data.getCarte())) {
 				Case water = data.getCarte().findNearestWater(last_case, this);
+				if(water == null)
+					return null;
 				List<ActionMove> list = Astar.getShortestPath(last_case, water, data.getCarte(), this);
 
 				if(!canFill(water, data.getCarte()))
@@ -107,13 +113,15 @@ public abstract class Robot implements WorldElement {
 				res.addAction(list);
 				try {
 					last_case = ActionMove.getLastCase(list, last_case, data.getCarte());
+					System.out.println("Aller remplir a la case "+ last_case.getLigne() + "; " + last_case.getColonne() + ")");
+
 				} catch (InvalidCaseException e) {
 					return null;
 				}
 			}
-
+			System.out.println("puis remmlir");
 			res.addAction(new ActionRemplissage((int) (getEauTempsRemplissage() * getEauMax())));
-			last_eau += (getEauTempsRemplissage() * getEauMax());
+			last_eau = getEauMax();
 		}
 	}
 
@@ -202,5 +210,10 @@ public abstract class Robot implements WorldElement {
 	}
 	public State getState() {
 		return state;
+	}
+
+
+	public double getVitesse() {
+		return vitesse_defaut;
 	}
 }
