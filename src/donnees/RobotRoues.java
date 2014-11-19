@@ -40,4 +40,7 @@ public class RobotRoues extends Robot {
 		return 100;
 	}
 
+	public boolean CanFile(Case c) {
+		return false;
+	}
 }

@@ -42,4 +42,7 @@ public class RobotChenilles extends Robot {
 		}
 	}
 
+	public boolean CanFile(Case c) {
+		return false;
+	}
 }
