@@ -48,7 +48,7 @@ public class EvenementAction extends Evenement {
 		action = a;
 		robot = r;
 	}
-
+	
 	/**
 	 * Execute l'action associée au robot
 	 * 
@@ -63,7 +63,6 @@ public class EvenementAction extends Evenement {
 			throws ExecutionException {
 		
 		try {
-			System.out.println("action");
 			robot.doAction(action, simulateur);
 			s.add(robot);
 		} catch (InvalidCaseException e) {

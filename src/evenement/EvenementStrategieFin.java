@@ -17,8 +17,6 @@ public class EvenementStrategieFin extends Evenement {
 	@Override
 	public Set<WorldElement> execute(Set<WorldElement> s)
 			throws ExecutionException {
-
-		System.out.println("fin strat");
 		robot.setStrat(null);
 		simulateur.manage();
 		return s;

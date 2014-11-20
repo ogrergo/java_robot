@@ -13,7 +13,8 @@ public class Main {
 		}
 		SimulationModel model = new SimulationModel();
 		try {
-			model.load(args[0]);
+			model.setFile(args[0]);
+			model.load();
 			new SimulationWindow(model);
 		} catch (FileNotFoundException e) {
 			System.out.println("fichier " + args[0] + " inconnu ou illisible");
