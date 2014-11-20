@@ -165,9 +165,7 @@ public abstract class Robot implements WorldElement {
 	}
 
 	private void move(Direction d, Carte c) throws InvalidCaseException {
-		System.out.println(this.getClass().getName().toString());
-		System.out.println(d.toString());
-		System.out.println(c.getCase(position,d).getLigne());
+System.out.println(c.getCase(position,d).getLigne());
 		if (this.getVitesseMilieu(c.getCase(position, d).getNature(), c)!= 0){
 			position = c.getCase(position, d);
 			System.out.println("Je bouge ");
