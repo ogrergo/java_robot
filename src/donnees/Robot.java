@@ -88,7 +88,7 @@ public abstract class Robot implements WorldElement {
 		for(int i = 0; i < strat.getNbActions(); i++) {
 			addActionEvent(strat.getAction(i), s);
 		}
-
+		dernierEvent.increment(0.1);
 		s.addEvenement(
 				new EvenementStrategieFin(dernierEvent, s, this));
 	}
@@ -108,6 +108,7 @@ public abstract class Robot implements WorldElement {
 		int last_eau = eau_dispo;
 
 		Strategie res = new Strategie();
+		System.out.println("ldebut_eau" + last_eau);
 
 		int feu = inc.getLitreEau();
 		while(true) {
@@ -130,11 +131,12 @@ public abstract class Robot implements WorldElement {
 			while(last_eau > 0) {
 				res.addAction(new ActionVidage(getEauTempsVidage(), 1));
 
-				System.out.println("last_eau" + last_eau + " feu " + feu);
 				last_eau -= getEauLitreVidage();
 				feu -= getEauLitreVidage();
-				if(feu <= 0)
+				if(feu <= 0) {
+					System.out.println("last_eau" + last_eau);
 					return res;
+				}
 				
 			}
 
@@ -158,7 +160,7 @@ public abstract class Robot implements WorldElement {
 			 * On se remplit
 			 */
 			res.addAction(new ActionRemplissage(getEauTempsRemplissage()));
-			last_eau = getEauMax();
+			last_eau = this.getEauMax();
 		}
 	}
 
@@ -202,6 +204,7 @@ public abstract class Robot implements WorldElement {
 	 * @throws InvalidCaseException Si il n'y a pas de d'incendie à cette case.
 	 */
 	private void doActionVidage(Action action, Simulateur s) throws InvalidCaseException {
+		//System.out.println("ALplle");
 		deverserEau(s.getData().getIncendieAtCase(position), ((ActionVidage)action).getNbInterventionElem(), s.getData());
 	}
 
@@ -256,7 +259,7 @@ public abstract class Robot implements WorldElement {
 		if (this.eau_dispo < nbElem * getEauLitreVidage())
 			return;
 
-		System.out.println("eau a mettre : " + incendie.getLitreEau() + " eau dispo " + eau_dispo);
+		//System.out.println("eau a mettre : " + incendie.getLitreEau() + " eau dispo " + eau_dispo);
 		this.eau_dispo -= nbElem * getEauLitreVidage();
 		incendie.eteindre((int) (nbElem * getEauLitreVidage()), data);
 	}
