@@ -30,12 +30,12 @@ public class Carte {
 	private Case[][] cases;
 	
 	/**
-	 * La taille des cases de la carte 
+	 * La taille des cases de la carte en mètre.
 	 */
 	private int tailleCases;
 	
 	/**
-	 * l'ensemble des cases voisines Ã  une case d'eau 
+	 * l'ensemble des cases voisines à une case d'eau 
 	 */
 	private HashSet<Case> plage = new HashSet<Case>();
 	/**
@@ -135,7 +135,7 @@ public class Carte {
 	 * @param colonne
 	 *            la colonne de la case desiree
 	 *
-	 *@throws InvalidCaseException
+	 *@throws InvalidCaseException si la case n'éxiste pas.
 	 *@return la case de coordonnees (ligne, colonne)
 	 */
 	public Case getCase(int ligne, int colonne) throws InvalidCaseException {
