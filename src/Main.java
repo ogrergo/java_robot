@@ -4,7 +4,6 @@ import simulation.SimulationModel;
 import simulation.SimulationWindow;
 import donnees.ExceptionFormatDonnees;
 import evenement.ManagerResolution;
-import evenement.ManagerTestAstar;
 
 public class Main {
 	public static void main(String[] args) {
@@ -16,7 +15,6 @@ public class Main {
 		try {
 			model.setFile(args[0]);
 			model.load();
-			//Changer ici pour tester ManagerAstar
 			new SimulationWindow(model, ManagerResolution.class);
 		} catch (FileNotFoundException e) {
 			System.out.println("fichier " + args[0] + " inconnu ou illisible");
