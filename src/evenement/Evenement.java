@@ -80,10 +80,13 @@ public abstract class Evenement implements Comparable<Evenement>{
 	}
 
 	/**
-	 * Fonction abstraite permettant d'executer l'action
+	 * Fonction abstraite permettant d'executer les fonctions associées à cet Evenement
+	 * 
 	 * @param s
-	 * @return
-	 * @throws ExecutionException
+	 * 			un ensemble de WordlElement 
+	 * 
+	 * @return un ensemble de WorldElement
+	 * @throws ExecutionException : si l'exception InvalidCaseException est levée
 	 */
 	public abstract Set<WorldElement> execute(Set<WorldElement> s) throws ExecutionException;
 }
