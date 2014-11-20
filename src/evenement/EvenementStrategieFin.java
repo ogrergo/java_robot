@@ -20,7 +20,7 @@ public class EvenementStrategieFin extends Evenement {
 			throws ExecutionException {
 
 		System.out.println("fin strat");
-		robot.setState(State.AVAILABLE);
+		robot.setStrat(null);
 		return s;
 	}
 

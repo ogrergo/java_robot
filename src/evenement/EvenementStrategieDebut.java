@@ -3,7 +3,6 @@ package evenement;
 import java.util.Set;
 
 import donnees.Robot;
-import donnees.State;
 import donnees.WorldElement;
 
 public class EvenementStrategieDebut extends Evenement {
@@ -19,7 +18,7 @@ public class EvenementStrategieDebut extends Evenement {
 	public Set<WorldElement> execute(Set<WorldElement> s)
 			throws ExecutionException {
 		System.out.println("Debut strat");
-		robot.setState(State.BUSY);
+		//robot.setState(State.BUSY);
 		return s;
 	}
 

@@ -1,5 +1,8 @@
 package evenement;
 
+import donnees.Incendie;
+import donnees.Robot;
+import donnees.State;
 import strategie.Strategie;
 
 
@@ -23,6 +26,8 @@ public class ManagerTestGenerationScenario extends Manager {
 		simulateur.getData().getRobotbyId(1).doStrategie(str1, simulateur);
 		if(str2 != null)
 		simulateur.getData().getRobotbyId(2).doStrategie(str2, simulateur);
+		
+		
 		
 		//A DEBUGGUER
 		/*
