@@ -11,10 +11,29 @@ import java.util.Set;
 
 import strategie.ActionMove;
 
-
+/**
+ * <b><code>Astar</code> est la classe permettant de trouver le plus court chemin entre deux cases </b>
+ * <p>
+ * 
+ * @author Lucas Bchini, Robin Jean, Louis van Beurden
+ */
 public class Astar {
 
-	
+	/**
+	 * Fonction static qui retourne la liste contenant les ActionMove à effectuer pour aller de la case
+	 * start à la case goal en prenant le plus court chemin (en terme de temps)
+	 * 
+	 * @param start
+	 * 				Case de départ
+	 * @param goal
+	 * 				Case d'arrivée
+	 * @param carte
+	 * 				Carte utilisée
+	 * @param r
+	 * 				Robot pour lequel on veut calculer le plus court chemin
+	 * 
+	 * @return la liste contenant les ActionMove du plus court chemin entre start et goal
+	 */
 	public static List<ActionMove> getShortestPath(Case start, Case goal, Carte carte, Robot r) {
 			Set<Node> closed_set = new HashSet<Node>();
 			Queue<Node> open_set = new PriorityQueue<Node>();
@@ -74,17 +93,32 @@ public class Astar {
 			return null;
 	}
 
-
+	/**
+	 * Classe static implémentant les node utiles dans la fonction getShortestPath
+	 * Cette classe permet de comparer deux noeuds
+	 */
 	private static class Node implements Comparable<Node>{
+		
+		/**
+		 * Case associé au noeud
+		 */
+		private Case cell;
+		private double g_score;
+		private double f_score;
+
+		private Node previous = null;
+		
+		/**
+		 * Constructeur d'un node.
+		 * 
+		 * @param start
+		 *            Case associé au Node
+		 * 
+		 */
 		public Node(Case start) {
 			cell = start;
 		}
 		
-		private Case cell;
-		private double g_score;
-		private double f_score;
-		private Node previous = null;
-
 		@Override
 		public int compareTo(Node o) {
 			return (int) (f_score - o.f_score);

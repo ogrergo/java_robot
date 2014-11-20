@@ -7,6 +7,21 @@ import java.util.HashSet;
 
 import strategie.ActionMove;
 
+/**
+ * <b><code>Carte</code> est la classe représentant la carte</b>
+ * <p>
+ * La carte est caractérisée par :
+ * <ul>
+ * <li>le tableau des cases qu'elle contient</li>
+ * <li>la taille des cases qu'elle contient</li>
+ * <li>l'ensemble des cases voisines à une case d'eau </li>
+ * <li>l'ensemble des cases d'eau </li>
+ * </ul>
+ * </p>
+ * 
+ * @author Lucas Bchini, Robin Jean, Louis van Beurden
+ */
+
 public class Carte {
 	
 	private Case[][] cases;

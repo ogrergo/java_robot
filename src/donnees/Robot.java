@@ -218,7 +218,12 @@ public abstract class Robot implements WorldElement {
 		return state;
 	}
 
-
+	/**
+	 * Retourne la vitesse par défaut d'un robot
+	 * 
+	 * @return vitesse par défaut du robot
+	 * @see Robot#getVitesse()
+	 */
 	public double getVitesse() {
 		return vitesse_defaut;
 	}
