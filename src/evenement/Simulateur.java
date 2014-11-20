@@ -31,11 +31,14 @@ public class Simulateur {
 		this.step_duration = d;
 	}
 
-	public void setManager(Manager manager) throws ExecutionException {
+	public void setManager(Manager manager) {
 		this.manager = manager;
+		manage();
+	}
+	
+	public void manage() {
 		this.manager.manage();
 	}
-
 	public void addEvenement(Evenement e){
 		e.setData(data);
 		l.add(e);

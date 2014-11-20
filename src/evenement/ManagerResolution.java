@@ -6,14 +6,13 @@ import java.util.Set;
 import strategie.Strategie;
 import donnees.Incendie;
 import donnees.Robot;
-import donnees.State;
 
 public class ManagerResolution extends Manager {
 
 	Set<Incendie> managed = new HashSet<Incendie>();
 
 	@Override
-	public void manage() throws ExecutionException {
+	public void manage() {
 		simulateur.setSimulationStepDuration(1);
 
 		for(Incendie inc : simulateur.getData().getIncendies()) {

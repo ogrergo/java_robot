@@ -10,7 +10,7 @@ import strategie.Strategie;
 public class ManagerTestAstar extends Manager {
 
 	@Override
-	public void manage() throws ExecutionException {
+	public void manage() {
 		simulateur.setSimulationStepDuration(60);
 
 		try {

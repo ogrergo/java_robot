@@ -3,7 +3,6 @@ package evenement;
 import java.util.Set;
 
 import donnees.Robot;
-import donnees.State;
 import donnees.WorldElement;
 
 public class EvenementStrategieFin extends Evenement {
@@ -21,6 +20,7 @@ public class EvenementStrategieFin extends Evenement {
 
 		System.out.println("fin strat");
 		robot.setStrat(null);
+		simulateur.manage();
 		return s;
 	}
 

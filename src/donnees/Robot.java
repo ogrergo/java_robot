@@ -23,8 +23,7 @@ public abstract class Robot implements WorldElement {
 	protected double vitesse_defaut;
 	private int eau_dispo;
 
-	private Case last_case;
-	private int last_eau;
+	
 
 	protected boolean seRemplitACoteEau;
 
@@ -35,8 +34,7 @@ public abstract class Robot implements WorldElement {
 	public Robot(Case position) {
 		this.eau_dispo = this.getEauMax();
 		this.position = position;
-		last_case = position;
-		last_eau = eau_dispo;
+		
 		
 	}
 
@@ -88,6 +86,10 @@ public abstract class Robot implements WorldElement {
 	}
 
 	public Strategie getBestStrategie(Incendie inc, DonneesSimulation data) {
+		
+		Case last_case = position;
+		int last_eau = eau_dispo;
+		
 		Strategie res = new Strategie();
 
 		int feu = inc.getLitreEau();

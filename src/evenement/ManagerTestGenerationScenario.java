@@ -1,15 +1,12 @@
 package evenement;
 
-import donnees.Incendie;
-import donnees.Robot;
-import donnees.State;
 import strategie.Strategie;
 
 
 public class ManagerTestGenerationScenario extends Manager {
 
 	@Override
-	public void manage() throws ExecutionException {
+	public void manage() {
 		simulateur.setSimulationStepDuration(1);
 		Strategie str = simulateur.getData().getRobotbyId(3).getBestStrategie(
 				simulateur.getData().getIncendiebyId(3), 
