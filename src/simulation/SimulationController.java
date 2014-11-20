@@ -1,14 +1,14 @@
 package simulation;
 
+import ihm.Simulable;
+
 import java.io.FileNotFoundException;
 import java.util.Set;
 
 import donnees.ExceptionFormatDonnees;
 import donnees.WorldElement;
-import evenement.ExecutionException;
 import evenement.Manager;
 import evenement.Simulateur;
-import ihm.Simulable;
 
 public class SimulationController implements Simulable {
 
@@ -50,7 +50,7 @@ public class SimulationController implements Simulable {
 			}
 			manager.setSimulateur(simulateur);
 			simulateur.setManager(manager);
-		} catch (FileNotFoundException | ExceptionFormatDonnees | ExecutionException e) {
+		} catch (FileNotFoundException | ExceptionFormatDonnees e) {
 			e.printStackTrace();
 		}
 		window.updateAll();

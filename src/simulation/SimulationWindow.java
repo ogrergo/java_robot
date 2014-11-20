@@ -24,7 +24,7 @@ import donnees.RobotDrone;
 import donnees.RobotPattes;
 import donnees.RobotRoues;
 import donnees.WorldElement;
-import evenement.ManagerTestGenerationScenario;
+import evenement.ManagerResolution;
 
 public class SimulationWindow {
 	private SimulationModel data;
@@ -41,7 +41,7 @@ public class SimulationWindow {
 
 	private void initDisplay() {
 		initTiles();
-		controller = new SimulationController(data, this, ManagerTestGenerationScenario.class);
+		controller = new SimulationController(data, this, ManagerResolution.class);
 		ihm = new IGSimulateur(data.getData().getCarte().getNbLignes(), data.getData().getCarte().getNbColonnes(), controller);
 		controller.restart();
 	}

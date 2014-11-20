@@ -10,7 +10,6 @@ import strategie.Strategie;
 import strategie.TypeAction;
 import evenement.Date;
 import evenement.EvenementAction;
-import evenement.EvenementStrategieDebut;
 import evenement.EvenementStrategieFin;
 import evenement.Simulateur;
 
@@ -23,21 +22,19 @@ public abstract class Robot implements WorldElement {
 	protected double vitesse_defaut;
 	private int eau_dispo;
 
-	private Case last_case;
-	private int last_eau;
+	
 
 	protected boolean seRemplitACoteEau;
 
 	private Date dernierEvent = new Date(0);
-	private State state;
+	private Strategie strat;
 
 
 	public Robot(Case position) {
 		this.eau_dispo = this.getEauMax();
 		this.position = position;
-		last_case = position;
-		last_eau = eau_dispo;
-		this.state = State.AVAILABLE;
+		
+		
 	}
 
 	public void setVitesse(double v) {
@@ -70,22 +67,21 @@ public abstract class Robot implements WorldElement {
 
 
 	public void doStrategie(Strategie strat, Simulateur s) {
-		s.addEvenement(
-				new EvenementStrategieDebut(dernierEvent, s, this));
-		//dernierEvent.increment(1);
-
+		setStrat(strat);
+		
 		for(int i = 0; i < strat.getNbActions(); i++) {
-			System.out.println("Posting time" + strat.getAction(i).getCout());
 			addActionEvent(strat.getAction(i), s);
 		}
 
 		s.addEvenement(
 				new EvenementStrategieFin(dernierEvent, s, this));
-		//dernierEvent.increment(1);
-
 	}
 
 	public Strategie getBestStrategie(Incendie inc, DonneesSimulation data) {
+		
+		Case last_case = position;
+		int last_eau = eau_dispo;
+		
 		Strategie res = new Strategie();
 
 		int feu = inc.getLitreEau();
@@ -128,7 +124,7 @@ public abstract class Robot implements WorldElement {
 			}
 			
 			System.out.println("--puis remplir");
-			res.addAction(new ActionRemplissage((int) (getEauTempsRemplissage() * getEauMax())));
+			res.addAction(new ActionRemplissage(getEauTempsRemplissage()));
 			last_eau = getEauMax();
 		}
 	}
@@ -211,11 +207,11 @@ public abstract class Robot implements WorldElement {
 		return true;
 	}
 
-	public void setState(State s) {
-		this.state = s;
+	public void setStrat(Strategie s) {
+		this.strat = s;
 	}
-	public State getState() {
-		return state;
+	public boolean isAvailable() {
+		return strat == null;
 	}
 
 	/**

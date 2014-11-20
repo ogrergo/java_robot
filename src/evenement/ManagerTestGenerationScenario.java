@@ -6,7 +6,7 @@ import strategie.Strategie;
 public class ManagerTestGenerationScenario extends Manager {
 
 	@Override
-	public void manage() throws ExecutionException {
+	public void manage() {
 		simulateur.setSimulationStepDuration(1);
 		Strategie str = simulateur.getData().getRobotbyId(3).getBestStrategie(
 				simulateur.getData().getIncendiebyId(3), 
@@ -23,6 +23,8 @@ public class ManagerTestGenerationScenario extends Manager {
 		simulateur.getData().getRobotbyId(1).doStrategie(str1, simulateur);
 		if(str2 != null)
 		simulateur.getData().getRobotbyId(2).doStrategie(str2, simulateur);
+		
+		
 		
 		//A DEBUGGUER
 		/*

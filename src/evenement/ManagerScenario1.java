@@ -10,7 +10,7 @@ import donnees.Direction;
 public class ManagerScenario1 extends Manager {
 	
 	@Override
-	public void manage() throws ExecutionException {
+	public void manage() {
 		simulateur.setSimulationStepDuration(60);
 		Strategie str = new Strategie();
 		str.addAction(new ActionMove(10, Direction.NORD));
