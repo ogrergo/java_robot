@@ -11,8 +11,6 @@ public class ManagerTestAstar extends Manager {
 
 	@Override
 	public void manage() {
-		simulateur.setSimulationStepDuration(60);
-
 		try {
 			Strategie strat = new Strategie();
 

@@ -3,7 +3,8 @@ import java.io.FileNotFoundException;
 import simulation.SimulationModel;
 import simulation.SimulationWindow;
 import donnees.ExceptionFormatDonnees;
-
+import evenement.ManagerResolution;
+import evenement.ManagerTestAstar;
 
 public class Main {
 	public static void main(String[] args) {
@@ -15,7 +16,8 @@ public class Main {
 		try {
 			model.setFile(args[0]);
 			model.load();
-			new SimulationWindow(model);
+			//Changer ici pour tester ManagerAstar
+			new SimulationWindow(model, ManagerResolution.class);
 		} catch (FileNotFoundException e) {
 			System.out.println("fichier " + args[0] + " inconnu ou illisible");
 		} catch (ExceptionFormatDonnees e) {

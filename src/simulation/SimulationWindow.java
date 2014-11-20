@@ -25,6 +25,7 @@ import donnees.RobotDrone;
 import donnees.RobotPattes;
 import donnees.RobotRoues;
 import donnees.WorldElement;
+import evenement.Manager;
 import evenement.ManagerResolution;
 
 public class SimulationWindow {
@@ -35,14 +36,14 @@ public class SimulationWindow {
 	private Tile[][] tiles;
 	private HashMap<WorldElement,Tile> hash_elem;
 
-	public SimulationWindow(SimulationModel model) {
+	public SimulationWindow(SimulationModel model, Class<? extends Manager> m) {
 		data = model;
-		initDisplay();
+		initDisplay(m);
 	}
 
-	private void initDisplay() {
+	private void initDisplay(Class<? extends Manager> m) {
 		initTiles();
-		controller = new SimulationController(data, this, ManagerResolution.class);
+		controller = new SimulationController(data, this, m);
 		ihm = new IGSimulateur(data.getData().getCarte().getNbLignes(), data.getData().getCarte().getNbColonnes(), controller);
 		controller.restart();
 	}

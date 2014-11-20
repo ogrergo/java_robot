@@ -10,7 +10,7 @@ import donnees.WorldElement;
 
 public class Simulateur {
 
-	private double step_duration;
+	private double step_duration = 1;
 	private Date date = new Date(0d);
 	private Queue<Evenement> l = new PriorityQueue<Evenement>();
 	private DonneesSimulation data;
@@ -73,7 +73,7 @@ public class Simulateur {
 	}
 
 	/**
-	 * On enlève les références cycliques.
+	 * On enlï¿½ve les rï¿½fï¿½rences cycliques.
 	 */
 	public void clear() {
 		hash.clear();

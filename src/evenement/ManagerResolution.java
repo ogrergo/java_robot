@@ -7,16 +7,33 @@ import strategie.Strategie;
 import donnees.Incendie;
 import donnees.Robot;
 
+/**
+ * <b><code>ManagerResolution</code> est la classe permettant d'éteindre tous les incendies
+ * Cette classe hérite de Manager</b>
+ * <p>
+ * Un ManagerResolution est caractérisé par :
+ * <ul>
+ * <li>un ensemble d'incendies deja géré</li>
+ * </ul>
+ * </p>
+ *  
+ * @author Lucas Bchini, Robin Jean, Louis van Beurden
+ */
 public class ManagerResolution extends Manager {
 
+	/**
+	 * Ensemble d'incendies qui ont deja été gérés
+	 */
 	Set<Incendie> managed = new HashSet<Incendie>();
 
+	/**
+	 * Fonction qui permet d'éteindre tous les incendies de la carte en associant à chacun d'eux un robot 
+	 */
 	@Override
 	public void manage() {
-		simulateur.setSimulationStepDuration(1);
-
-		
+		//Pour tous les incendies de notre simulation
 		for(Incendie inc : simulateur.getData().getIncendies()) {
+			
 			if(managed.contains(inc))
 				continue;
 
