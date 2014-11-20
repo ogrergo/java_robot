@@ -10,7 +10,6 @@ import strategie.Strategie;
 import strategie.TypeAction;
 import evenement.Date;
 import evenement.EvenementAction;
-import evenement.EvenementStrategieDebut;
 import evenement.EvenementStrategieFin;
 import evenement.Simulateur;
 
@@ -69,20 +68,13 @@ public abstract class Robot implements WorldElement {
 
 	public void doStrategie(Strategie strat, Simulateur s) {
 		setStrat(strat);
-		System.out.println("strat cout" + strat.getCout());
-		s.addEvenement(
-				new EvenementStrategieDebut(dernierEvent, s, this));
-		//dernierEvent.increment(1);
-
+		
 		for(int i = 0; i < strat.getNbActions(); i++) {
-			//System.out.println("Posting time" + strat.getAction(i).getCout());
 			addActionEvent(strat.getAction(i), s);
 		}
 
 		s.addEvenement(
 				new EvenementStrategieFin(dernierEvent, s, this));
-		//dernierEvent.increment(1);
-
 	}
 
 	public Strategie getBestStrategie(Incendie inc, DonneesSimulation data) {
