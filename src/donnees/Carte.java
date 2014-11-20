@@ -114,18 +114,6 @@ public class Carte {
 		return Math.abs(dep.getColonne() - arr.getColonne()) + Math.abs(dep.getLigne() - arr.getLigne()); 
 	}
 
-	/*public ArrayList<Case> getAllWaterInRadius(Case dep, int radius) {
-		ArrayList<Case> l = new ArrayList<Case>();
-		for(Case[] ct : cases) {
-			for(Case c : ct) {
-				if(distanceNbCaseVolOiseau(dep,c) <= radius) {
-					l.add(c);
-				}
-			}
-		}
-		return l;
-	}*/
-
 	public Case findNearestWater(Case last_case, Robot robot) {
 		int min = Integer.MAX_VALUE;
 		Case res = null;

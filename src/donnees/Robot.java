@@ -108,8 +108,8 @@ public abstract class Robot implements WorldElement {
 				List<ActionMove> list = Astar.getShortestPath(last_case, water, data.getCarte(), this);
 				if(!canFill(water, data.getCarte()))
 					list.remove(list.size() - 1);
-				if (list == null) 
-				res.addAction(list);
+				if (list != null) 
+					res.addAction(list);
 				try {
 					last_case = ActionMove.getLastCase(list, last_case, data.getCarte());
 					System.out.println("Aller remplir a la case ("+ last_case.getLigne() + "," + last_case.getColonne() + ")");
@@ -165,7 +165,9 @@ public abstract class Robot implements WorldElement {
 	}
 
 	private void move(Direction d, Carte c) throws InvalidCaseException {
-		System.out.println(position.getLigne() + " " + position.getColonne() + " " + d.toString());
+		System.out.println(this.getClass().getName().toString());
+		System.out.println(d.toString());
+		System.out.println(c.getCase(position,d).getLigne());
 		if (this.getVitesseMilieu(c.getCase(position, d).getNature(), c)!= 0){
 			position = c.getCase(position, d);
 			System.out.println("Je bouge ");
