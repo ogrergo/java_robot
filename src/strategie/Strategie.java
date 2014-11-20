@@ -15,7 +15,7 @@ public class Strategie {
 		actions.addAll(a);
 	}
 	
-	public int getCout() {
+	public double getCout() {
 		int res = 0;
 		for(Action a : actions) {
 			res += a.getCout();

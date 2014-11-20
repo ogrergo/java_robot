@@ -71,7 +71,7 @@ public abstract class Robot implements WorldElement {
 
 	public void doStrategie(Strategie strat, Simulateur s) {
 		setStrat(strat);
-		System.out.println("");
+		System.out.println("strat cout" + strat.getCout());
 		s.addEvenement(
 				new EvenementStrategieDebut(dernierEvent, s, this));
 		//dernierEvent.increment(1);
