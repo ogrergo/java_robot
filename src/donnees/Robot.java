@@ -33,8 +33,8 @@ public abstract class Robot implements WorldElement {
 		this.position = position;
 		last_case = position;
 		last_eau = eau_dispo;
+		this.state = State.AVAILABLE;
 	}
-
 
 	void setVitesse(double v) {
 		this.vitesse_defaut = v;
@@ -69,7 +69,7 @@ public abstract class Robot implements WorldElement {
 		s.addEvenement(
 				new EvenementStrategieDebut(dernierEvent, s, this));
 		dernierEvent.increment(1);
-
+		
 		for(int i = 0; i < strat.getNbActions(); i++) {
 			System.out.println("Posting time" + strat.getAction(i).getCout());
 			addActionEvent(strat.getAction(i), s);
@@ -110,9 +110,8 @@ public abstract class Robot implements WorldElement {
 				List<ActionMove> list = Astar.getShortestPath(last_case, water, data.getCarte(), this, seRemplitACoteEau);
 				if(!canFill(water, data.getCarte()))
 					list.remove(list.size() - 1);
-				if (list == null) System.out.print("rrrrrrrrrrrr");
+				if (list == null) 
 				res.addAction(list);
-				System.out.print("OOOOOOOO");
 				try {
 					last_case = ActionMove.getLastCase(list, last_case, data.getCarte());
 					System.out.println("Aller remplir a la case "+ last_case.getLigne() + "; " + last_case.getColonne() + ")");

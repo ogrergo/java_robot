@@ -1,5 +1,10 @@
 package evenement;
 
+import java.util.Iterator;
+
+import donnees.Incendie;
+import donnees.Robot;
+import donnees.State;
 import strategie.Strategie;
 
 
@@ -20,6 +25,22 @@ public class ManagerTestGenerationScenario extends Manager {
 		simulateur.getData().getRobotbyId(0).doStrategie(str, simulateur);
 		simulateur.getData().getRobotbyId(1).doStrategie(str1, simulateur);
 		simulateur.getData().getRobotbyId(2).doStrategie(str2, simulateur);
+		
+		//A DEBUGGUER
+		/*
+		Strategie str;
+		for(Incendie incendie : simulateur.getData().getIncendies()) {
+			Iterator<Robot> itr = simulateur.getData().getRobots().iterator();
+			boolean continu = true;
+			while (itr.hasNext() && continu) {
+				Robot robotcourant = itr.next();
+				if (robotcourant.getState() == State.AVAILABLE 
+						&& (str = robotcourant.getBestStrategie(incendie,simulateur.getData())) != null) {
+					continu = false;
+					robotcourant.doStrategie(str, simulateur);
+				}
+			}
+		}*/
 	}
 
 }
