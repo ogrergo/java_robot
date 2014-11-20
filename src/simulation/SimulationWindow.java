@@ -6,6 +6,7 @@ import ihm.MapIndexOutOfBoundsException;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -187,12 +188,14 @@ public class SimulationWindow {
 				}
 				
 				if(e instanceof Robot) {
+					
 					Image img = getRobotImage((Robot) e);
-					arg4.drawImage(img, arg0, arg1, null);
+					arg4.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+					arg4.drawImage(img,arg0,arg1,  arg2 - arg0, arg3 - arg1, null);
 				} else {
-					for(int i = 0; i < arg2; i += back.getHeight(null))
-						for(int j = 0; j < arg3; j+=back.getWidth(null))
-							arg4.drawImage(incendie_img, arg0 + i, arg1 + j, null);
+					for(int i = arg0; i < arg2; i += back.getHeight(null))
+						for(int j = arg1; j < arg3; j+=back.getWidth(null))
+							arg4.drawImage(incendie_img, i, j, null);
 				}
 			}
 			for(WorldElement e : toremove)

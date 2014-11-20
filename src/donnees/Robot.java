@@ -108,7 +108,6 @@ public abstract class Robot implements WorldElement {
 		int last_eau = eau_dispo;
 
 		Strategie res = new Strategie();
-		System.out.println("ldebut_eau" + last_eau);
 
 		int feu = inc.getLitreEau();
 		while(true) {
@@ -134,7 +133,6 @@ public abstract class Robot implements WorldElement {
 				last_eau -= getEauLitreVidage();
 				feu -= getEauLitreVidage();
 				if(feu <= 0) {
-					System.out.println("last_eau" + last_eau);
 					return res;
 				}
 				
@@ -204,7 +202,6 @@ public abstract class Robot implements WorldElement {
 	 * @throws InvalidCaseException Si il n'y a pas de d'incendie à cette case.
 	 */
 	private void doActionVidage(Action action, Simulateur s) throws InvalidCaseException {
-		//System.out.println("ALplle");
 		deverserEau(s.getData().getIncendieAtCase(position), ((ActionVidage)action).getNbInterventionElem(), s.getData());
 	}
 
