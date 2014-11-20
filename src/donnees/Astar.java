@@ -15,7 +15,7 @@ import strategie.ActionMove;
 public class Astar {
 
 	
-	public static List<ActionMove> getShortestPath(Case start, Case goal, Carte carte, Robot r, boolean voisinEau) {
+	public static List<ActionMove> getShortestPath(Case start, Case goal, Carte carte, Robot r) {
 			Set<Node> closed_set = new HashSet<Node>();
 			Queue<Node> open_set = new PriorityQueue<Node>();
 			Map<Case, Node> map = new HashMap<Case, Node>();
@@ -31,7 +31,7 @@ public class Astar {
 			while(!open_set.isEmpty()) {
 				current = open_set.remove();
 				assert(current != null);
-				if((!voisinEau && current.cell == goal) || voisinEau && carte.caseVoisineEau(current.cell)) {
+				if(current.cell == goal) {
 					ArrayList<ActionMove> list = new ArrayList<ActionMove>();
 					
 					while(current != first) {

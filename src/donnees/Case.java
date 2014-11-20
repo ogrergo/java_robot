@@ -25,4 +25,9 @@ public class Case{
 	public NatureTerrain getNature() {
 		return nature;
 	}
+	
+	@Override
+	public String toString() {
+		return "(" + ligne + ", " + colonne + ")";
+	}
 }

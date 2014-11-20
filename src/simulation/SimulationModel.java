@@ -17,6 +17,7 @@ public class SimulationModel {
 	
 	public void reload() throws FileNotFoundException, ExceptionFormatDonnees {
 		data = LecteurDonnees.lire(path);
+		data.getCarte().init();
 	}
 	
 	public DonneesSimulation getData() {

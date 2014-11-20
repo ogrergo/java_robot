@@ -1,19 +1,40 @@
 package donnees;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+
+import strategie.ActionMove;
 
 public class Carte {
 	
 	private Case[][] cases;
 	private int tailleCases;
+	private HashSet<Case> plage = new HashSet<Case>();
+	private HashSet<Case> water = new HashSet<Case>();
 	
 	public Carte(int ligne, int colonne, int taillecase) {
 		cases = new Case[ligne][colonne];
 		this.tailleCases = taillecase;
 	}
 	
+	public void init() {
+		initPlageEtWater();
+	}
 	
+	private void initPlageEtWater() {
+		for(Case[] ct : cases) {
+			for(Case c : ct) {
+				if(c.getNature() == NatureTerrain.EAU) {
+					water.add(c);
+					for(Case p : getVoisin(c))
+						if(p.getNature() != NatureTerrain.EAU)
+							plage.add(p);
+				}
+			}
+		}
+	}
 	
 	public void setCase(int ligne, int colonne, Case c) {
 		cases[ligne][colonne] = c;
@@ -77,24 +98,30 @@ public class Carte {
 	
 	public boolean estCaseAccessible(Robot r, Case arrive) {
 		//Une case est accessible par un robot si sa vitesse n'est pas = 0
-		return (r.getVitesseMilieu(arrive.getNature(), this) != 0);
+		return (r.getTempsDeplacementMilieu(arrive.getNature(), this) != Double.MAX_VALUE);
+	}
+	
+	public Collection<Case> getVoisin(Case c) {
+		ArrayList<Case> res = new ArrayList<Case>(4);
+		for (Direction d : Direction.values()) {
+			try {
+				res.add(this.getCase(c, d));
+			} catch (InvalidCaseException e) {}
+		}
+		return res;
 	}
 	
 	public Collection<Case> caseVoisineAccessible(Robot r, Case c) {
-		ArrayList<Case> voisins = new ArrayList<Case>();
-		for (Direction d : Direction.values()) {
-			try {
-				Case unVoisin = this.getCase(c, d);
-				if (this.estCaseAccessible(r, unVoisin))
-					voisins.add(unVoisin);
-				//Si le voisin ne fait pas partie de la carte, on ignore l'erreur
-			} catch (InvalidCaseException e) {} 
+		ArrayList<Case> res = new ArrayList<Case>(4);
+		for (Case d : getVoisin(c)) {
+			if (this.estCaseAccessible(r, d))
+				res.add(d);
 		}
-		return voisins;
+		return res;
 	}
 	
 	//Retourne vrai si une des cases voisine de c 
-	public boolean caseVoisineEau(Case c) {
+	public boolean isPlage(Case c) {
 		for (Direction d : Direction.values()) {
 			try {
 				if (this.getCase(c, d).getNature() == NatureTerrain.EAU)
@@ -106,39 +133,39 @@ public class Carte {
 	}
 	
 	public double tempsDeplacement(Robot r, Case depart, Case arrive) {
-		return (r.getVitesseMilieu(depart.getNature(), this) +
-				r.getVitesseMilieu(arrive.getNature(), this)) / 2;
+		return (r.getTempsDeplacementMilieu(depart.getNature(), this) +
+				r.getTempsDeplacementMilieu(arrive.getNature(), this)) / 2;
 	}
 	
 	public int distanceNbCaseVolOiseau(Case dep, Case arr) {
 		return Math.abs(dep.getColonne() - arr.getColonne()) + Math.abs(dep.getLigne() - arr.getLigne()); 
 	}
 
-	/*public ArrayList<Case> getAllWaterInRadius(Case dep, int radius) {
-		ArrayList<Case> l = new ArrayList<Case>();
-		for(Case[] ct : cases) {
-			for(Case c : ct) {
-				if(distanceNbCaseVolOiseau(dep,c) <= radius) {
-					l.add(c);
-				}
-			}
-		}
-		return l;
-	}*/
+	public Case findNearestWater(Case last_case, Robot robot) {
 
-	public Case findNearestWater(Case last_case, Robot robot, boolean voisinEau) {
+		Collection<Case> target;
+		if(robot.seRemplieSurEau())
+			target = water;
+		else
+			target = plage;
+		
+		
 		int min = Integer.MAX_VALUE;
 		Case res = null;
-		for(Case[] ct : cases) {
-			for(Case ca : ct) {
-				if(ca.getNature() == NatureTerrain.EAU && distanceNbCaseVolOiseau(last_case, ca) < min) {
-					int cal = Astar.getShortestPath(last_case, ca, this, robot, voisinEau).size();
-					if(cal < min) {
-						res = ca;
-					}
+		for(Case c : target) {
+			if(distanceNbCaseVolOiseau(last_case, c) < min) {
+				List<ActionMove> l = Astar.getShortestPath(last_case, c, this, robot);
+				if(l == null)
+					continue;
+				
+				if(l.size() < min) {
+					res = c;
+					min = l.size();
 				}
 			}
 		}
+		
+		System.out.println("+++ ** +++ Nearest case to fill from " + last_case + " is " + res);
 		return res;
 	}
 	

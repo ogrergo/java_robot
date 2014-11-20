@@ -16,6 +16,10 @@ import evenement.Simulateur;
 
 public abstract class Robot implements WorldElement {
 	protected Case position;
+	
+	/**
+	 * En m/min
+	 */
 	protected double vitesse_defaut;
 	private int eau_dispo;
 
@@ -23,7 +27,7 @@ public abstract class Robot implements WorldElement {
 	private int last_eau;
 
 	protected boolean seRemplitACoteEau;
-	
+
 	private Date dernierEvent = new Date(0);
 	private State state;
 
@@ -36,8 +40,8 @@ public abstract class Robot implements WorldElement {
 		this.state = State.AVAILABLE;
 	}
 
-	void setVitesse(double v) {
-		this.vitesse_defaut = v;
+	public void setVitesse(double v) {
+		this.vitesse_defaut = Date.toMpMin(v);
 	}
 
 	public Date getDernierEvent() {
@@ -47,16 +51,16 @@ public abstract class Robot implements WorldElement {
 	public void setDernierEvent(long dernier) {
 		this.dernierEvent.increment(dernier);
 	}
+	
+	public abstract double getEauTempsRemplissage();
 
 	protected abstract int getEauMax();
-
-	protected abstract double getEauTempsRemplissage();
 
 	protected abstract double getEauTempsVidage();
 
 	protected abstract double getEauLitreVidage();
-	
-	protected abstract double getVitesseMilieu(NatureTerrain t, Carte c);
+
+	protected abstract double getTempsDeplacementMilieu(NatureTerrain t, Carte c);
 
 	protected abstract boolean canFill(Case c, Carte ca);
 
@@ -68,8 +72,8 @@ public abstract class Robot implements WorldElement {
 	public void doStrategie(Strategie strat, Simulateur s) {
 		s.addEvenement(
 				new EvenementStrategieDebut(dernierEvent, s, this));
-		dernierEvent.increment(1);
-		
+		//dernierEvent.increment(1);
+
 		for(int i = 0; i < strat.getNbActions(); i++) {
 			System.out.println("Posting time" + strat.getAction(i).getCout());
 			addActionEvent(strat.getAction(i), s);
@@ -77,7 +81,7 @@ public abstract class Robot implements WorldElement {
 
 		s.addEvenement(
 				new EvenementStrategieFin(dernierEvent, s, this));
-		dernierEvent.increment(1);
+		//dernierEvent.increment(1);
 
 	}
 
@@ -85,42 +89,45 @@ public abstract class Robot implements WorldElement {
 		Strategie res = new Strategie();
 
 		int feu = inc.getLitreEau();
-		System.out.println("Feu de " + feu);
+		System.out.println("++++Feu de " + feu + " strategie");
 		while(true) {
 			if(last_case != inc.getCase()) {
-				System.out.println("need to go for fire! from  (" + last_case.getLigne() + "; " + last_case.getColonne() + ") to ("+
-						inc.getCase().getLigne() + "; " + inc.getCase().getColonne() + ")");
-				res.addAction(Astar.getShortestPath(last_case, inc.getCase(), data.getCarte(), this, false));
+				System.out.println("--move from " + last_case + " to " + inc.getCase());
+				List<ActionMove> l_m = Astar.getShortestPath(last_case, inc.getCase(), data.getCarte(), this);
+				
+				if(l_m == null)
+					return null;
+				
+				res.addAction(l_m);
 				last_case = inc.getCase();
 			}
 
 			while(last_eau > 0) {
-				System.out.println("Verser de l'eau");
-				res.addAction(new ActionVidage((int) getEauTempsVidage(), 1));
+				System.out.println("--Verser de l'eau fire:" + feu);
+				res.addAction(new ActionVidage(getEauTempsVidage(), 1));
 				last_eau -= getEauLitreVidage();
 				feu -= getEauLitreVidage();
 				if(feu <= 0)
 					return res;
 			}
+
+
 			if(!canFill(last_case, data.getCarte())) {
-				Case water = data.getCarte().findNearestWater(last_case, this, seRemplitACoteEau);
-				System.out.print("Case water : lig " + water.getLigne() + " col " + water.getColonne());
+				Case water = data.getCarte().findNearestWater(last_case, this);
+				System.out.print("--Case water : " + water);
 				if(water == null)
 					return null;
-				List<ActionMove> list = Astar.getShortestPath(last_case, water, data.getCarte(), this, seRemplitACoteEau);
-				if(!canFill(water, data.getCarte()))
-					list.remove(list.size() - 1);
-				if (list == null) 
-				res.addAction(list);
-				try {
-					last_case = ActionMove.getLastCase(list, last_case, data.getCarte());
-					System.out.println("Aller remplir a la case "+ last_case.getLigne() + "; " + last_case.getColonne() + ")");
 
-				} catch (InvalidCaseException e) {
+				List<ActionMove> list = Astar.getShortestPath(last_case, water, data.getCarte(), this);
+				if (list == null)
 					return null;
-				}
+				
+				res.addAction(list);
+				System.out.println("--move from " + last_case + " to " + water);
+				last_case = water;
 			}
-			System.out.println("puis remmlir");
+			
+			System.out.println("--puis remplir");
 			res.addAction(new ActionRemplissage((int) (getEauTempsRemplissage() * getEauMax())));
 			last_eau = getEauMax();
 		}
@@ -128,14 +135,14 @@ public abstract class Robot implements WorldElement {
 
 
 	private void addActionEvent(Action action, Simulateur s) {
-		dernierEvent.increment((long) action.getCout());
+		dernierEvent.increment(action.getCout());
 		s.addEvenement(
 				new EvenementAction(
 						dernierEvent, 
 						s, 
 						action, 
 						this));
-		dernierEvent.increment(1);
+		//dernierEvent.increment(1);
 	}
 
 	public void doAction(Action action, Simulateur s) throws InvalidCaseException {
@@ -162,7 +169,7 @@ public abstract class Robot implements WorldElement {
 	}
 
 	private void move(Direction d, Carte c) throws InvalidCaseException {
-		if (this.getVitesseMilieu(c.getCase(position, d).getNature(), c)!= 0)
+		if (c.estCaseAccessible(this, c.getCase(getCase(), d)))
 			position = c.getCase(position, d);
 		else
 			throw new InvalidCaseException("Ce robot ne peut pas se rendre sur cette surface");
@@ -215,4 +222,6 @@ public abstract class Robot implements WorldElement {
 	public double getVitesse() {
 		return vitesse_defaut;
 	}
+
+	public abstract boolean seRemplieSurEau();
 }

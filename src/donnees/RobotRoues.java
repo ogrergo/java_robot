@@ -1,13 +1,14 @@
 package donnees;
 
+import evenement.Date;
+
 public class RobotRoues extends Robot {
 
 	private static final int eau_max = 5000;
-	private static final double temps_remplissage = 0.12; //En seconde par litre
 		
 	public RobotRoues(Case c) {
 		super(c);
-		this.vitesse_defaut = 80;
+		this.vitesse_defaut = Date.toMpMin(80);
 		this.seRemplitACoteEau = true;
 	}
 
@@ -17,22 +18,17 @@ public class RobotRoues extends Robot {
 	}
 
 	@Override
-	public double getEauTempsRemplissage() {
-		return RobotRoues.temps_remplissage;
-	}
-
-	@Override
 	public double getEauTempsVidage() {
-		return 5;
+		return 5/60.;
 	}
 
-	public double getVitesseMilieu(NatureTerrain t, Carte carte) {
+	public double getTempsDeplacementMilieu(NatureTerrain t, Carte carte) {
 		switch(t) {
 		case TERRAIN_LIBRE:
 		case HABITAT:
-			return (carte.getTailleCases()/1000) / (this.vitesse_defaut / 3600);
+			return  ((double)carte.getTailleCases()) / this.vitesse_defaut;
 		default:
-			return 0;
+			return Double.MAX_VALUE;
 		}
 	}
 
@@ -42,6 +38,16 @@ public class RobotRoues extends Robot {
 	}
 
 	public boolean canFill(Case c, Carte ca) {
-		return ca.caseVoisineEau(c);
+		return ca.isPlage(c);
+	}
+
+	@Override
+	public boolean seRemplieSurEau() {
+		return false;
+	}
+
+	@Override
+	public double getEauTempsRemplissage() {
+		return 10;
 	}
 }

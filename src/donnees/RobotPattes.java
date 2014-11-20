@@ -1,13 +1,14 @@
 package donnees;
 
+import evenement.Date;
+
 public class RobotPattes extends Robot {
 
 	private static final int eau_max = Integer.MAX_VALUE;
-	private static final double temps_remplissage = 0; //En seconde
 	
 	public RobotPattes(Case c) {
 		super(c);
-		this.vitesse_defaut = 30;
+		this.vitesse_defaut = Date.toMpMin(30);
 	}
 
 	@Override
@@ -15,25 +16,24 @@ public class RobotPattes extends Robot {
 		return RobotPattes.eau_max;
 	}
 
-	//GENERER UNE ERREUR ICI CAR ON NE PEUT PAS APPELER CETTE FONCTION SUR CE TYPE DE ROBOT
 	@Override
-	public double getEauTempsRemplissage() {
-		return RobotPattes.temps_remplissage;
+	public void setVitesse(double v) {
+		return;
 	}
-
+	
 	@Override
 	public double getEauTempsVidage() {
-		return 1;
+		return 1.0/60.;
 	}
 
-	public double getVitesseMilieu(NatureTerrain t, Carte carte) {
+	public double getTempsDeplacementMilieu(NatureTerrain t, Carte carte) {
 		switch(t) {
 		case EAU:
-			return 0;
+			return Double.MAX_VALUE;
 		case ROCHE:
-			return (carte.getTailleCases()/1000) / (this.vitesse_defaut / (3*3600));
+			return  ((double)carte.getTailleCases() * 3) / this.vitesse_defaut;
 		default:
-			return (carte.getTailleCases()/1000) / (this.vitesse_defaut/ 3600);
+			return  ((double)carte.getTailleCases()) / this.vitesse_defaut;
 		}
 	}
 
@@ -43,7 +43,17 @@ public class RobotPattes extends Robot {
 	}
 	
 	public boolean canFill(Case c, Carte ca) {
-		return ca.caseVoisineEau(c);
+		return ca.isPlage(c);
+	}
+
+	@Override
+	public boolean seRemplieSurEau() {
+		return false;
+	}
+
+	@Override
+	public double getEauTempsRemplissage() {
+		return 0;
 	}
 
 }

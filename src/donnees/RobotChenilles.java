@@ -1,13 +1,14 @@
 package donnees;
 
+import evenement.Date;
+
 public class RobotChenilles extends Robot {
 
 	private static final int eau_max = 2000;
-	private static final double temps_remplissage = 0.15; //En seconde par litre
 	
 	public RobotChenilles(Case c) {
 		super(c);
-		this.vitesse_defaut = 60;
+		this.vitesse_defaut = Date.toMpMin(60);
 		this.seRemplitACoteEau = true;
 	}
 
@@ -15,15 +16,17 @@ public class RobotChenilles extends Robot {
 	public int getEauMax() {
 		return RobotChenilles.eau_max;
 	}
-
-	@Override
-	public double getEauTempsRemplissage() {
-		return RobotChenilles.temps_remplissage;
-	}
-
+	
 	@Override
 	public double getEauTempsVidage() {
-		return 8;
+		return 8/60.;
+	}
+	
+	public void setVitesse(double v) {
+		if(v > 80)
+			v = 80;
+		
+		this.vitesse_defaut = Date.toMpMin(v);
 	}
 
 	@Override
@@ -31,20 +34,29 @@ public class RobotChenilles extends Robot {
 		return 100;
 	}
 
-	public double getVitesseMilieu(NatureTerrain t, Carte carte) {
+	public double getTempsDeplacementMilieu(NatureTerrain t, Carte carte) {
 		switch(t) {
 		case EAU:
 		case ROCHE:
-			return 0;
+			return Double.MAX_VALUE;
 		case FORET:
-			return (carte.getTailleCases()/1000) / (this.vitesse_defaut/(2*3600));
+			return ((double)carte.getTailleCases() * 2) / this.vitesse_defaut;
 		default:
-			return (carte.getTailleCases()/1000) / (this.vitesse_defaut / 3600);
+			return (double)carte.getTailleCases() / this.vitesse_defaut;
 		}
 	}
 	
-	
 	public boolean canFill(Case c, Carte ca) {
-		return ca.caseVoisineEau(c);
+		return ca.isPlage(c);
+	}
+
+	@Override
+	public boolean seRemplieSurEau() {
+		return false;
+	}
+
+	@Override
+	public double getEauTempsRemplissage() {
+		return 5;
 	}
 }

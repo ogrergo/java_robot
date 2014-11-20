@@ -1,9 +1,9 @@
 package evenement;
 
 public class Date implements Comparable<Date>{
-	private long date;
+	private double date;
 	
-	public Date(long timestamp) {
+	public Date(double timestamp) {
 		this.date = timestamp;
 	}
 	
@@ -11,15 +11,19 @@ public class Date implements Comparable<Date>{
 		date = d.date;
 	}
 
-	public long getDate() {
+	public double getDate() {
 		return date;
 	}
 
 	public int compareTo(Date d) {
-		return (int) (date - d.date);
+		return (date - d.date > 0 ? 1 : -1);
 	}
 
-	public void increment(long inc) {
-		date += inc;
+	public void increment(double step_duration) {
+		date += step_duration;
+	}
+	
+	public static double toMpMin(double vitesse) {
+		return vitesse * 1000. / 60.;
 	}
 }

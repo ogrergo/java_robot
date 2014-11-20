@@ -10,8 +10,8 @@ import donnees.WorldElement;
 
 public class Simulateur {
 
-	private long step_duration;
-	private Date date = new Date(0l);
+	private double step_duration;
+	private Date date = new Date(0d);
 	private Queue<Evenement> l = new PriorityQueue<Evenement>();
 	private DonneesSimulation data;
 	private Set<WorldElement> hash = new HashSet<WorldElement>();
@@ -27,8 +27,8 @@ public class Simulateur {
 		return data;
 	}
 	
-	public void setSimulationStepDuration(long stepduration) {
-		this.step_duration = stepduration;
+	public void setSimulationStepDuration(double d) {
+		this.step_duration = d;
 	}
 
 	public void setManager(Manager manager) throws ExecutionException {
@@ -48,16 +48,16 @@ public class Simulateur {
 	public boolean isSimulationOver() {
 		return l.isEmpty();
 	}
-
+	
 	public Set<WorldElement> step() {
 		date.increment(step_duration);
 		hash.clear();
-		//System.out.println("Date " + (int)date.getDate());
+		System.out.println("Date " + date.getDate());
 		while(true) {
 			Evenement e = l.peek();
 			try {
 				if(e != null && e.getDate().getDate() < date.getDate()) {
-					System.out.println("Exec");
+					System.out.println("Exec lsize" + l.size() + " temps ecoulé " + date.getDate());
 					e = l.poll();
 					hash = e.execute(hash);
 				} else {
