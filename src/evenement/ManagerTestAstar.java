@@ -20,8 +20,7 @@ public class ManagerTestAstar extends Manager {
 					simulateur.getData().getRobotbyId(1).getCase(), 
 					simulateur.getData().getCarte().getCase(0, 0), 
 					simulateur.getData().getCarte(),
-					simulateur.getData().getRobotbyId(1),
-					false);
+					simulateur.getData().getRobotbyId(1));
 			strat.addAction(l);
 			simulateur.getData().getRobotbyId(1).doStrategie(strat, simulateur);
 		} catch (InvalidCaseException e) {

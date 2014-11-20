@@ -18,7 +18,6 @@ public abstract class Robot implements WorldElement {
 	protected Case position;
 	protected double vitesse_defaut;
 	private int eau_dispo;
-
 	private Case last_case;
 	private int last_eau;
 
@@ -35,7 +34,9 @@ public abstract class Robot implements WorldElement {
 		last_eau = eau_dispo;
 		this.state = State.AVAILABLE;
 	}
-
+	
+	public abstract RobotType getType();
+	
 	void setVitesse(double v) {
 		this.vitesse_defaut = v;
 	}
@@ -66,17 +67,16 @@ public abstract class Robot implements WorldElement {
 
 
 	public void doStrategie(Strategie strat, Simulateur s) {
-		s.addEvenement(
-				new EvenementStrategieDebut(dernierEvent, s, this));
+		s.addEvenement(new EvenementStrategieDebut(dernierEvent, s, this));
 		dernierEvent.increment(1);
 		
 		for(int i = 0; i < strat.getNbActions(); i++) {
-			System.out.println("Posting time" + strat.getAction(i).getCout());
+			//System.out.println("Posting time" + strat.getAction(i).getCout());
+			//System.out.println("eau_restante : " + this.last_eau);
 			addActionEvent(strat.getAction(i), s);
 		}
 
-		s.addEvenement(
-				new EvenementStrategieFin(dernierEvent, s, this));
+		s.addEvenement(new EvenementStrategieFin(dernierEvent, s, this));
 		dernierEvent.increment(1);
 
 	}
@@ -86,16 +86,17 @@ public abstract class Robot implements WorldElement {
 
 		int feu = inc.getLitreEau();
 		System.out.println("Feu de " + feu);
+		System.out.println("last_case : (" + last_case.getLigne() + " , " + last_case.getColonne() + ")");
 		while(true) {
-			if(last_case != inc.getCase()) {
-				System.out.println("need to go for fire! from  (" + last_case.getLigne() + "; " + last_case.getColonne() + ") to ("+
-						inc.getCase().getLigne() + "; " + inc.getCase().getColonne() + ")");
-				res.addAction(Astar.getShortestPath(last_case, inc.getCase(), data.getCarte(), this, false));
+			if(last_case != inc.getCase() && last_eau != 0) {
+				System.out.println("Need to go for fire! from  (" + last_case.getLigne() + "," + last_case.getColonne() + ") to ("+
+						inc.getCase().getLigne() + "," + inc.getCase().getColonne() + ")");
+				res.addAction(Astar.getShortestPath(last_case, inc.getCase(), data.getCarte(), this));
 				last_case = inc.getCase();
 			}
 
 			while(last_eau > 0) {
-				System.out.println("Verser de l'eau");
+				//System.out.println("Verser de l'eau");
 				res.addAction(new ActionVidage((int) getEauTempsVidage(), 1));
 				last_eau -= getEauLitreVidage();
 				feu -= getEauLitreVidage();
@@ -103,24 +104,21 @@ public abstract class Robot implements WorldElement {
 					return res;
 			}
 			if(!canFill(last_case, data.getCarte())) {
-				Case water = data.getCarte().findNearestWater(last_case, this, seRemplitACoteEau);
-				System.out.print("Case water : lig " + water.getLigne() + " col " + water.getColonne());
-				if(water == null)
-					return null;
-				List<ActionMove> list = Astar.getShortestPath(last_case, water, data.getCarte(), this, seRemplitACoteEau);
+				Case water = data.getCarte().findNearestWater(last_case, this);
+				List<ActionMove> list = Astar.getShortestPath(last_case, water, data.getCarte(), this);
 				if(!canFill(water, data.getCarte()))
 					list.remove(list.size() - 1);
 				if (list == null) 
 				res.addAction(list);
 				try {
 					last_case = ActionMove.getLastCase(list, last_case, data.getCarte());
-					System.out.println("Aller remplir a la case "+ last_case.getLigne() + "; " + last_case.getColonne() + ")");
+					System.out.println("Aller remplir a la case ("+ last_case.getLigne() + "," + last_case.getColonne() + ")");
 
 				} catch (InvalidCaseException e) {
 					return null;
 				}
 			}
-			System.out.println("puis remmlir");
+			System.out.println("puis remplir");
 			res.addAction(new ActionRemplissage((int) (getEauTempsRemplissage() * getEauMax())));
 			last_eau = getEauMax();
 		}
@@ -148,7 +146,10 @@ public abstract class Robot implements WorldElement {
 		}
 	}
 	private void doActionVidage(Action action, Simulateur s) throws InvalidCaseException {
-		System.out.print("Avant res" + eau_dispo + " ");
+		System.out.println("Avant res " + eau_dispo + " ");
+		System.out.println(" Robot : " + this.getType());
+		
+		System.out.println("nbElem : " + ((ActionVidage)action).getNbInterventionElem());
 		deverserEau(s.getData().getIncendieAtCase(position), ((ActionVidage)action).getNbInterventionElem(), s.getData());
 		System.out.println(" apres : " + eau_dispo);
 	}
@@ -158,13 +159,17 @@ public abstract class Robot implements WorldElement {
 	}
 
 	private void doActionMove(Action action, Simulateur s) throws InvalidCaseException {
+		System.out.println("Je dois bouger ");
 		move(((ActionMove)action).getDirection(), s.getData().getCarte());
+		System.out.println("J'ai bougé ");
 	}
 
 	private void move(Direction d, Carte c) throws InvalidCaseException {
-		if (this.getVitesseMilieu(c.getCase(position, d).getNature(), c)!= 0)
+		System.out.println(position.getLigne() + " " + position.getColonne() + " " + d.toString());
+		if (this.getVitesseMilieu(c.getCase(position, d).getNature(), c)!= 0){
 			position = c.getCase(position, d);
-		else
+			System.out.println("Je bouge ");
+		} else
 			throw new InvalidCaseException("Ce robot ne peut pas se rendre sur cette surface");
 	}
 
@@ -174,10 +179,12 @@ public abstract class Robot implements WorldElement {
 
 	//A VERIFIER AVEC SIMULATION 1
 	public void deverserEau(Incendie incendie, int nbElem, DonneesSimulation data) {
+		System.out.println("Hey");
 		if (this.eau_dispo != -1) { //Si le robot n'est pas un robot à pattes
-			if (this.eau_dispo >= nbElem * getEauLitreVidage())
+			if (this.eau_dispo >= nbElem * getEauLitreVidage()){
+				System.out.println("Hey");
 				this.eau_dispo -= nbElem * getEauLitreVidage();
-			else {
+			} else {
 				this.eau_dispo = 0;
 			}
 		}

@@ -44,4 +44,9 @@ public class RobotRoues extends Robot {
 	public boolean canFill(Case c, Carte ca) {
 		return ca.caseVoisineEau(c);
 	}
+
+	@Override
+	public RobotType getType() {
+		return RobotType.ROUES;
+	}
 }

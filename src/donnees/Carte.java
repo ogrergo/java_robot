@@ -126,21 +126,32 @@ public class Carte {
 		return l;
 	}*/
 
-	public Case findNearestWater(Case last_case, Robot robot, boolean voisinEau) {
+	public Case findNearestWater(Case last_case, Robot robot) {
 		int min = Integer.MAX_VALUE;
 		Case res = null;
 		for(Case[] ct : cases) {
 			for(Case ca : ct) {
-				if(ca.getNature() == NatureTerrain.EAU && distanceNbCaseVolOiseau(last_case, ca) < min) {
-					int cal = Astar.getShortestPath(last_case, ca, this, robot, voisinEau).size();
-					if(cal < min) {
-						res = ca;
+				if (!robot.seRemplitACoteEau){
+					if(ca.getNature() == NatureTerrain.EAU && distanceNbCaseVolOiseau(last_case, ca) < min) {
+						int cal = Astar.getShortestPath(last_case, ca, this, robot).size();
+						if(cal < min) {
+							res = ca;
+							min = cal;
+						}
+					}
+				} else if (robot.seRemplitACoteEau) {
+					if (caseVoisineEau(ca) && ca.getNature() != NatureTerrain.EAU && distanceNbCaseVolOiseau(last_case, ca) < min) {
+						int cal = Astar.getShortestPath(last_case, ca, this, robot).size();
+						if(cal < min) {
+							res = ca;
+							min = cal;
+						}
 					}
 				}
 			}
 		}
 		return res;
 	}
-	
-	
+
+
 }

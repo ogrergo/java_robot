@@ -46,4 +46,9 @@ public class RobotPattes extends Robot {
 		return ca.caseVoisineEau(c);
 	}
 
+	@Override
+	public RobotType getType() {
+		return RobotType.PATTES;
+	}
+
 }

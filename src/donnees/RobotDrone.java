@@ -40,4 +40,9 @@ public class RobotDrone extends Robot {
 	public boolean canFill(Case c, Carte ca) {
 		return c.getNature() == NatureTerrain.EAU;
 	}
+
+	@Override
+	public RobotType getType() {
+		return RobotType.DRONE;
+	}
 }
