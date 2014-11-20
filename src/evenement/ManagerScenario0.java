@@ -1,33 +1,49 @@
 package evenement;
 
-import strategie.ActionMove;
-import strategie.ActionRemplissage;
-import strategie.ActionVidage;
-import strategie.Strategie;
-import donnees.Carte;
 import donnees.Direction;
 import donnees.InvalidCaseException;
-import donnees.Robot;
+import strategie.ActionMove;
+import strategie.Strategie;
 
 public class ManagerScenario0 extends Manager {
+	boolean first_time = true;
 	
 	@Override
 	public void manage() {
-		simulateur.setSimulationStepDuration(1);
-		Strategie str = simulateur.getData().getRobotbyId(3).getBestStrategie(
-				simulateur.getData().getIncendiebyId(3), 
-				simulateur.getData());
-		Strategie str1 = simulateur.getData().getRobotbyId(1).getBestStrategie(
-				simulateur.getData().getIncendiebyId(4), 
-				simulateur.getData());
-		Strategie str2 = simulateur.getData().getRobotbyId(2).getBestStrategie(
-				simulateur.getData().getIncendiebyId(5), 
-				simulateur.getData());
-		if(str != null)
-		simulateur.getData().getRobotbyId(3).doStrategie(str, simulateur);
-		if(str1 != null)
-		simulateur.getData().getRobotbyId(1).doStrategie(str1, simulateur);
-		if(str2 != null)
-		simulateur.getData().getRobotbyId(2).doStrategie(str2, simulateur);
+		if(!first_time)
+			return;
+		
+		first_time = false;
+		
+		try {
+			Strategie str = new Strategie();
+			str.addAction(new ActionMove(
+					simulateur.getData().getCarte().tempsDeplacement(
+							simulateur.getData().getRobotbyId(0),
+							simulateur.getData().getRobotbyId(0).getCase(),
+							simulateur.getData().getCarte().getCase(simulateur.getData().getRobotbyId(0).getCase(),Direction.NORD)),
+					Direction.NORD));
+			str.addAction(new ActionMove(
+					simulateur.getData().getCarte().tempsDeplacement(
+							simulateur.getData().getRobotbyId(0),
+							simulateur.getData().getRobotbyId(0).getCase(),
+							simulateur.getData().getCarte().getCase(simulateur.getData().getRobotbyId(0).getCase(),Direction.NORD)),
+					Direction.NORD));
+			str.addAction(new ActionMove(
+					simulateur.getData().getCarte().tempsDeplacement(
+							simulateur.getData().getRobotbyId(0),
+							simulateur.getData().getRobotbyId(0).getCase(),
+							simulateur.getData().getCarte().getCase(simulateur.getData().getRobotbyId(0).getCase(),Direction.NORD)),
+					Direction.NORD));
+			str.addAction(new ActionMove(
+					simulateur.getData().getCarte().tempsDeplacement(
+							simulateur.getData().getRobotbyId(0),
+							simulateur.getData().getRobotbyId(0).getCase(),
+							simulateur.getData().getCarte().getCase(simulateur.getData().getRobotbyId(0).getCase(),Direction.NORD)),
+					Direction.NORD));
+			simulateur.getData().getRobotbyId(0).doStrategie(str, simulateur);
+		} catch (InvalidCaseException e) {
+			e.printStackTrace();
+		}
 	}
 }

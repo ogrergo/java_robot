@@ -26,7 +26,6 @@ import donnees.RobotPattes;
 import donnees.RobotRoues;
 import donnees.WorldElement;
 import evenement.Manager;
-import evenement.ManagerResolution;
 
 public class SimulationWindow {
 	private SimulationModel data;

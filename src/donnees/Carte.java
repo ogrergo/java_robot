@@ -275,7 +275,7 @@ public class Carte {
 
 	/**
 	 * Retourne le nombre de cases appartenant à la diagonale entre les cases départ et arrive
-	 * (fonction utile pour le calcul du plus court chemin)
+	 * (fonction utile pour le calcul de la source d'eau la plus proche)
 	 * 
 	 * @param depart
 	 *            la case de depart
@@ -290,7 +290,8 @@ public class Carte {
 
 	
 	/**
-	 * Trouve la case d'eau la plus proche à partir d'une certaine case pour un certain robot
+	 * Trouve la case d'eau la plus proche à partir d'une certaine case pour un certain robot.
+	 * Cette case est compatible pour le remplissage du robot.
 	 * @param last_case
 	 *            la case à partir de laquelle on part
 	 * @param robot
