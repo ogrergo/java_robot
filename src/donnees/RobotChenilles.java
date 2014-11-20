@@ -2,10 +2,22 @@ package donnees;
 
 import evenement.Date;
 
+/**
+ * <b><code>RobotChenilles</code> est la classe représentant un robot de type Chenille</b>
+ * <p>
+ * Un robot Chenille est caractérisé par les mêmes attributs que les autres robots.
+ * Il ne peut cependant pas aller dans l'eau ni sur des rochers
+ * Il se déplace a une vitese par défault de 60 km/h, qui est divisée par 2 en forêt.
+ * Il a un réservoir de 2000 litres qu'il remplit en 5 minutes.
+ * Il se remplit à côté dune case contenant de leau, et déverse à un débit de 100 litres par 8 secondes.
+ * </p>
+ * @author Lucas Bchini, Robin Jean, Louis van Beurden
+ */
 public class RobotChenilles extends Robot {
 
 	private static final int eau_max = 2000;
 	
+
 	public RobotChenilles(Case c) {
 		super(c);
 		this.vitesse_defaut = Date.toMpMin(60);

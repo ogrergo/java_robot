@@ -1,5 +1,13 @@
 package donnees;
 
+/**
+ * <b><code>RobotFactory</code> est la classe "fabricant" les robots.</b>
+ * <p>
+ * 
+ * RobotFactory crée les robots en fonction de leur type.
+ * 
+ * @author Lucas Bchini, Robin Jean, Louis van Beurden
+ */
 public class RobotFactory {
 	public static Robot createRobot(RobotType type, Case c, Carte carte) {
 		Robot robot = null;
