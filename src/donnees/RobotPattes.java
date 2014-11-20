@@ -2,6 +2,16 @@ package donnees;
 
 import evenement.Date;
 
+/**
+ * <b><code>RobotPattes</code> est la classe représentant un robot de type Pattes</b>
+ * <p>
+ * Un robot Pattes est caractérisé par les mêmes attributs que les autres robots.
+ * Il ne peut pas aller sur l'eau.
+ * Il se déplace à une vitesse par défaut de 30 km/h, qui est réduite à 10 km/h sur du rocher. 
+ * Il n'utilise pas d'eau mais de la poudre, qui est aussi efficace que si il versait 10L d'eau par secondes.
+ * </p>
+ * @author Lucas Bchini, Robin Jean, Louis van Beurden
+ */
 public class RobotPattes extends Robot {
 
 	private static final int eau_max = Integer.MAX_VALUE;
