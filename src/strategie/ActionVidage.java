@@ -7,6 +7,7 @@ public class ActionVidage extends Action {
 	public ActionVidage(int cout, int nbElem) {
 		super(cout);
 		this.nbInterventionElem = nbElem;
+		this.typeAction = TypeAction.ACTIONVIDAGE;
 	}
 	
 	public int getNbInterventionElem() {

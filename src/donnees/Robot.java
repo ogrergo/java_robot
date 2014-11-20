@@ -7,6 +7,7 @@ import strategie.ActionMove;
 import strategie.ActionRemplissage;
 import strategie.ActionVidage;
 import strategie.Strategie;
+import strategie.TypeAction;
 import evenement.Date;
 import evenement.EvenementAction;
 import evenement.EvenementStrategieDebut;
@@ -139,16 +140,14 @@ public abstract class Robot implements WorldElement {
 	}
 
 	public void doAction(Action action, Simulateur s) throws InvalidCaseException {
-		if(action instanceof ActionMove) {
+		if(action.getTypeAction() == TypeAction.ACTIONMOVE) {
 			doActionMove(action, s);
-		} else if(action instanceof ActionRemplissage) {
+		} else if(action.getTypeAction() == TypeAction.ACTIONREMPLISSAGE) {
 			doActionRemplissage(action, s);
 		} else {
 			doActionVidage(action, s);
 		}
-
 	}
-
 	private void doActionVidage(Action action, Simulateur s) throws InvalidCaseException {
 		System.out.print("Avant res" + eau_dispo + " ");
 		deverserEau(s.getData().getIncendieAtCase(position), ((ActionVidage)action).getNbInterventionElem(), s.getData());

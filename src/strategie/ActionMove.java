@@ -13,6 +13,7 @@ public class ActionMove extends Action {
 	public ActionMove(double d, Direction direction) {
 		super(d);
 		this.direction = direction;
+		this.typeAction = TypeAction.ACTIONMOVE;
 	}
 	
 	public Direction getDirection() {
