@@ -35,6 +35,22 @@ public class Astar {
 	 * @return la liste contenant les ActionMove du plus court chemin entre start et goal
 	 */
 	public static List<ActionMove> getShortestPath(Case start, Case goal, Carte carte, Robot r) {
+			
+			/**
+			 * On commence par créer toutes les structures dont on aura besoin :
+			 * closed_set contiendra les valeurs associées à toutes les cases. Il permet de ne pas
+			 * recalculer plusieurs fois la même chose.
+			 * open_set est la queue de priorité qui défini quelle noeud doit être traité ensuite.
+			 * Le noeud de poids le plus faible est traité en premier.
+			 * map contient les cases de la carte et permet de déterminer les voisins d'une case.
+			 * current : noeud courant
+			 * first : permet de savoir quand s'arrêter sans aller chercher dans la carte.
+			 * vitRobot : vitesse du robot
+			 * current.g_score : cout de déplacement depuis start selon le meilleur chemin connu
+			 * current.f_score : cout de déplacement depuis start jusqu'à goal estimé en passant 
+			 * par current 
+			 */
+		
 			Set<Node> closed_set = new HashSet<Node>();
 			Queue<Node> open_set = new PriorityQueue<Node>();
 			Map<Case, Node> map = new HashMap<Case, Node>();
@@ -47,9 +63,11 @@ public class Astar {
 			current.g_score = 0;
 			current.f_score = carte.DistanceVolOiseau(start, goal) * vitRobot;
 			
-			while(!open_set.isEmpty()) {
-				current = open_set.remove();
+			while(!open_set.isEmpty()) { // tant qu'il reste des noeuds dans la file de priorité
+				current = open_set.remove(); // on traite l'élément de priorité la plus faible
 				assert(current != null);
+				
+				// Si on est arrivé, on enregistre le chemin dans un tableau de 'ActionMove'
 				if(current.cell == goal) {
 					ArrayList<ActionMove> list = new ArrayList<ActionMove>();
 					
@@ -63,8 +81,10 @@ public class Astar {
 					}
 					return list;
 				}
-
+				
+				// sinon, on ajoute current aux noeuds parcourus et on le traite.
 				closed_set.add(current);
+				// on parcourt tous les voisins de la case correspondant aux noeuds courants.
 				for(Case v : carte.caseVoisineAccessible(r, current.cell)) {
 					Node voisin = map.get(v);
 
@@ -72,12 +92,14 @@ public class Astar {
 						voisin = new Node(v);
 						map.put(v, voisin);
 					} else {
-						if(closed_set.contains(voisin))
+						// si voisin est déjà contenu dans closed_set, on ne le traite pas
+						if(closed_set.contains(voisin)) 
 							continue;
 					}
-
+					// on calcule le temps qu'il faut pour atteindre la case voisine v
 					double new_g_score = current.g_score + carte.tempsDeplacement(r, current.cell, v);
 					
+					// si g_score est meilleur, on ajoute voisin à la liste et on met à jour ses valeurs.
 					if(!open_set.contains(voisin) || new_g_score < voisin.g_score) {
 						voisin.previous = current;
 						voisin.g_score = new_g_score;
