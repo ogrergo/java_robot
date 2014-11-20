@@ -23,7 +23,6 @@ public class EvenementAction extends Evenement {
 			throws ExecutionException {
 		
 		try {
-			System.out.println("action");
 			robot.doAction(action, simulateur);
 			s.add(robot);
 		} catch (InvalidCaseException e) {

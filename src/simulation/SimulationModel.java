@@ -10,12 +10,11 @@ public class SimulationModel {
 	private DonneesSimulation data;
 	private String path;
 	
-	public void load(String path) throws FileNotFoundException, ExceptionFormatDonnees {
+	public void setFile(String path) {
 		this.path = path;
-		reload();
 	}
 	
-	public void reload() throws FileNotFoundException, ExceptionFormatDonnees {
+	public void load() throws FileNotFoundException, ExceptionFormatDonnees {
 		data = LecteurDonnees.lire(path);
 		data.getCarte().init();
 	}

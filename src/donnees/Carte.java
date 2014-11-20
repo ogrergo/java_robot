@@ -180,7 +180,6 @@ public class Carte {
 			}
 		}
 		
-		System.out.println("+++ ** +++ Nearest case to fill from " + last_case + " is " + res);
 		return res;
 	}
 	

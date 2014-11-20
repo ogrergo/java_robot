@@ -20,6 +20,8 @@ public class SimulationController implements Simulable {
 	private Simulateur simulateur;
 	private Manager manager;
 	
+	private boolean first = true;
+	
 	public SimulationController(SimulationModel data2, SimulationWindow simulationWindow, Class<? extends Manager> m) {
 		manager_class = m;
 		this.data = data2;
@@ -31,29 +33,38 @@ public class SimulationController implements Simulable {
 	public void next() {
 		Set<WorldElement> s = simulateur.step();
 		for (WorldElement c : s) {
-			System.out.println("case to update ("+ c.getCase().getLigne()+ ", " + c.getCase().getColonne()+ ")");
 			window.update(c);
 		}
 	}
 
+	public void reload() throws FileNotFoundException, ExceptionFormatDonnees {
+		data.load();
+	}
+	
 	@Override
 	public void restart() {
-		//probleme si on change le fichier entre les 2 appels
+		
+		
 		try {
-			data.reload();
-			simulateur = new Simulateur(data.getData());
-			try {
-				manager = manager_class.newInstance();
-			} catch (InstantiationException | IllegalAccessException e) {
-				e.printStackTrace();
-				return;
+			if(first)
+				first = false;
+			else
+				reload();
+			
+			if(simulateur != null) {
+				simulateur.clear();
 			}
+			simulateur = new Simulateur(data.getData());
+			
+			manager = manager_class.newInstance();
 			manager.setSimulateur(simulateur);
 			simulateur.setManager(manager);
-		} catch (FileNotFoundException | ExceptionFormatDonnees e) {
+			window.updateAll();
+		} catch (InstantiationException | IllegalAccessException | FileNotFoundException | ExceptionFormatDonnees e) {
 			e.printStackTrace();
+			return;
 		}
-		window.updateAll();
+		
 	}
 	
 	public void setManagerType(Class<? extends Manager> m) {

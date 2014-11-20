@@ -179,7 +179,7 @@ public class SimulationWindow {
 				for(int j = 0; j < arg3; j+=back.getWidth(null))
 					arg4.drawImage(back, arg0 + i, arg1 + j, null);
 			
-			
+
 			for(WorldElement e : elem) {
 				if(!e.isAlive()) {
 					toremove.add(e);

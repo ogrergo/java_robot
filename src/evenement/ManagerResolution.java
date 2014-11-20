@@ -15,6 +15,7 @@ public class ManagerResolution extends Manager {
 	public void manage() {
 		simulateur.setSimulationStepDuration(1);
 
+		
 		for(Incendie inc : simulateur.getData().getIncendies()) {
 			if(managed.contains(inc))
 				continue;
