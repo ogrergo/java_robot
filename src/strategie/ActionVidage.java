@@ -1,10 +1,10 @@
 package strategie;
 
 /**
- * <b><code>ActionVidage</code> est la classe permettant de gÃ©rer les actions de type vidage d'eau sur un incendie.
- * Cette classe hÃ©rite de la classe Action </b>
+ * <b><code>ActionVidage</code> est la classe permettant de gérer les actions de type vidage d'eau sur un incendie.
+ * Cette classe hérite de la classe Action </b>
  * <p>
- * Une ActionVidage est caractÃ©risÃ©e par :
+ * Une ActionVidage est caractérisée par :
  * <ul>
  * <li>un nombre d'intervention unitaire (en litre d'eau)</li>
  * </ul>

@@ -64,7 +64,7 @@ public abstract class Robot implements WorldElement {
 
 	protected abstract int getEauMax();
 
-	protected abstract double getEauTempsVidage();
+	public abstract double getEauTempsVidage();
 
 	protected abstract double getEauLitreVidage();
 
@@ -277,9 +277,9 @@ public abstract class Robot implements WorldElement {
 	}
 
 	/**
-	 * Retourne la vitesse par dÃ©faut d'un robot
+	 * Retourne la vitesse par défaut d'un robot
 	 * 
-	 * @return vitesse par dÃ©faut du robot
+	 * @return vitesse par défaut du robot
 	 * @see Robot#getVitesse()
 	 */
 	public double getVitesse() {

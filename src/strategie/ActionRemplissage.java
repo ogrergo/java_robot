@@ -1,8 +1,8 @@
 package strategie;
 
 /**
- * <b><code>ActionRemplissage</code> est la classe permettant de gÃ©rer les actions de type remplissage du rÃ©servoir.
- * Cette classe hÃ©rite de la classe Action </b>
+ * <b><code>ActionRemplissage</code> est la classe permettant de gérer les actions de type remplissage du réservoir.
+ * Cette classe hérite de la classe Action </b>
  *  
  * @author Lucas Bchini, Robin Jean, Louis van Beurden
  */

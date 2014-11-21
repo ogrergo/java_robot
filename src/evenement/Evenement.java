@@ -7,12 +7,12 @@ import donnees.WorldElement;
 
 /**
  * <b><code>Evenement</code> est la classe abstraite des evenements possibles.
- * Cette classe implÃ©mente l'interface gÃ©nÃ©rique Comparable</b>
+ * Cette classe implémente l'interface générique Comparable</b>
  * <p>
- * Un evenement est caractÃ©risÃ© par :
+ * Un evenement est caractérisé par :
  * <ul>
  * <li>une date</li>
- * <li>les donnÃ©es de la simulation</li>
+ * <li>les données de la simulation</li>
  * <li>le simulateur</li>
  * </ul>
  * </p>
@@ -21,12 +21,12 @@ import donnees.WorldElement;
  */
 public abstract class Evenement implements Comparable<Evenement>{
 	/**
-	 * la date Ã  laquelle Ã  lieu l'evenement
+	 * la date à  laquelle à  lieu l'evenement
 	 */
 	private Date date;
 	
 	/**
-	 * les donnÃ©es de la simulation
+	 * les données de la simulation
 	 */
 	protected DonneesSimulation data;
 	
@@ -39,7 +39,7 @@ public abstract class Evenement implements Comparable<Evenement>{
 	 * Constructeur d'un evenement
 	 * 
 	 * @param date
-	 * 			la date Ã  laquelle Ã  lieu l'evenement
+	 * 			la date à  laquelle à  lieu l'evenement
 	 * @param s
 	 * 			le simulateur
 	 */
@@ -52,7 +52,7 @@ public abstract class Evenement implements Comparable<Evenement>{
 	 * Permet de modifier data
 	 * 
 	 * @param donneesProvider
-	 * 			les donnÃ©es de la simulation
+	 * 			les données de la simulation
 	 */
 	public void setData(DonneesSimulation donneesProvider){
 		this.data = donneesProvider;
@@ -73,20 +73,20 @@ public abstract class Evenement implements Comparable<Evenement>{
 	 * @param e
 	 * 			un evenement
 	 * 
-	 * @return 1 si la date associÃ© Ã  e est plus grand que this.date, faux sinon
+	 * @return 1 si la date associé à  e est plus grand que this.date, faux sinon
 	 */	
 	public int compareTo(Evenement e) {
 		return date.compareTo(e.date);
 	}
 
 	/**
-	 * Fonction abstraite permettant d'executer les fonctions associÃ©es Ã  cet Evenement
+	 * Fonction abstraite permettant d'executer les fonctions associées à  cet Evenement
 	 * 
 	 * @param s
 	 * 			un ensemble de WordlElement 
 	 * 
 	 * @return un ensemble de WorldElement
-	 * @throws ExecutionException : si l'exception InvalidCaseException est levÃ©e
+	 * @throws ExecutionException : si l'exception InvalidCaseException est levée
 	 */
 	public abstract Set<WorldElement> execute(Set<WorldElement> s) throws ExecutionException;
 }

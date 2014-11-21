@@ -3,10 +3,10 @@ package strategie;
 import donnees.Direction;
 
 /**
- * <b><code>ActionMove</code> est la classe permettant de gÃ©rer les actions de type mouvement.
- * Cette classe hÃ©rite de la classe Action </b>
+ * <b><code>ActionMove</code> est la classe permettant de gérer les actions de type mouvement.
+ * Cette classe hérite de la classe Action </b>
  * <p>
- * Une ActionMove est caractÃ©risÃ©e par :
+ * Une ActionMove est caractérisée par :
  * <ul>
  * <li>une direction</li>
  * </ul>

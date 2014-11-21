@@ -3,13 +3,13 @@ package donnees;
 import evenement.Date;
 
 /**
- * <b><code>RobotChenilles</code> est la classe reprÃ©sentant un robot de type Chenille</b>
+ * <b><code>RobotChenilles</code> est la classe représentant un robot de type Chenille</b>
  * <p>
- * Un robot Chenille est caractÃ©risÃ© par les mÃªmes attributs que les autres robots.
+ * Un robot Chenille est caractérisé par les màªmes attributs que les autres robots.
  * Il ne peut cependant pas aller dans l'eau ni sur des rochers
- * Il se dÃ©place a une vitese par dÃ©fault de 60 km/h, qui est divisÃ©e par 2 en forÃªt.
- * Il a un rÃ©servoir de 2000 litres qu'il remplit en 5 minutes.
- * Il se remplit Ã  cÃ´tÃ© dÂ’une case contenant de lÂ’eau, et dÃ©verse Ã  un dÃ©bit de 100 litres par 8 secondes.
+ * Il se déplace a une vitese par défault de 60 km/h, qui est divisée par 2 en foràªt.
+ * Il a un réservoir de 2000 litres qu'il remplit en 5 minutes.
+ * Il se remplit à  cà´té dÂ’une case contenant de lÂ’eau, et déverse à  un débit de 100 litres par 8 secondes.
  * </p>
  * @author Lucas Bchini, Robin Jean, Louis van Beurden
  */

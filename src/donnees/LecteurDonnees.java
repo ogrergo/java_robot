@@ -22,8 +22,8 @@ import java.util.*;
  * Vous pouvez par exemple ajouter une methode qui cree et retourne un objet
  * contenant toutes les donnees lues: 
  *    public static DonneesSimulation creeDonnees(String fichierDonnees);
- * Et faire des mÃ©thode creeCase(), creeRobot(), ... qui liset les donnÃ©es,
- * crÃ©ent les objets adÃ©quats et les ajoutent ds l'instance de DonneesSimulation.
+ * Et faire des méthode creeCase(), creeRobot(), ... qui liset les données,
+ * créent les objets adéquats et les ajoutent ds l'instance de DonneesSimulation.
  * 
  */
 public class LecteurDonnees {

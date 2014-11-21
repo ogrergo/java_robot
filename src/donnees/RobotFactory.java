@@ -4,7 +4,7 @@ package donnees;
  * <b><code>RobotFactory</code> est la classe "fabricant" les robots.</b>
  * <p>
  * 
- * RobotFactory crÃ©e les robots en fonction de leur type.
+ * RobotFactory crée les robots en fonction de leur type.
  * 
  * @author Lucas Bchini, Robin Jean, Louis van Beurden
  */

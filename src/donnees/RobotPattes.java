@@ -3,11 +3,11 @@ package donnees;
 import evenement.Date;
 
 /**
- * <b><code>RobotPattes</code> est la classe reprÃ©sentant un robot de type Pattes</b>
+ * <b><code>RobotPattes</code> est la classe représentant un robot de type Pattes</b>
  * <p>
- * Un robot Pattes est caractÃ©risÃ© par les mÃªmes attributs que les autres robots.
+ * Un robot Pattes est caractérisé par les màªmes attributs que les autres robots.
  * Il ne peut pas aller sur l'eau.
- * Il se dÃ©place Ã  une vitesse par dÃ©faut de 30 km/h, qui est rÃ©duite Ã  10 km/h sur du rocher. 
+ * Il se déplace à  une vitesse par défaut de 30 km/h, qui est réduite à  10 km/h sur du rocher. 
  * Il n'utilise pas d'eau mais de la poudre, qui est aussi efficace que si il versait 10L d'eau par secondes.
  * </p>
  * @author Lucas Bchini, Robin Jean, Louis van Beurden

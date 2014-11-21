@@ -1,9 +1,9 @@
 package donnees;
 
 /**
- * <b><code>Case</code> est la classe reprÃ©sentant une case</b>
+ * <b><code>Case</code> est la classe représentant une case</b>
  * <p>
- * Une case est caractÃ©risÃ©e par :
+ * Une case est caractérisée par :
  * <ul>
  * <li>sa ligne</li>
  * <li>sa colonne</li>

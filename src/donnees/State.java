@@ -1,10 +1,10 @@
 package donnees;
 
 /**
- * <b><code>State</code> est l'Ã©numaration permettant de representer les diffÃ©rents 
- * Ã©tats d'un robot</b>
+ * <b><code>State</code> est l'énumaration permettant de representer les différents 
+ * états d'un robot</b>
  * <p>
- * Les diffÃ©rents Ã©tats sont :
+ * Les différents états sont :
  * <ul>
  * <li>BUSY</li>
  * <li>AVAILABLE</li>

@@ -1,10 +1,10 @@
 package strategie;
 
 /**
- * <b><code>TypeAction</code> est l'Ã©numaration permettant de representer les diffÃ©rents 
+ * <b><code>TypeAction</code> est l'énumaration permettant de representer les différents 
  * type d'actions</b>
  * <p>
- * Les diffÃ©rentes actions sont :
+ * Les différentes actions sont :
  * <ul>
  * <li>ACTIONMOVE</li>
  * <li>ACTIONREMPLISSAGE</li>

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * <b><code>DonneesSimulation</code> est la classe permettant de stocker les donnÃ©es rÃ©lative Ã  la simulation</b>
+ * <b><code>DonneesSimulation</code> est la classe permettant de stocker les données rélative à  la simulation</b>
  * <p>
- * La donnÃ©es relatives Ã  la simulation sont :
+ * La données relatives à  la simulation sont :
  * <ul>
  * <li>la carte</li>
  * <li>les incendies</li>
@@ -19,7 +19,7 @@ import java.util.Collection;
 
 public class DonneesSimulation {
 	/**
-	 * La carte relative Ã  la simulation
+	 * La carte relative à  la simulation
 	 */
 	private Carte carte;
 	/**
@@ -42,7 +42,7 @@ public class DonneesSimulation {
 	}
 	
 	/**
-	 * Ajoute un incendie Ã  la liste des incendies
+	 * Ajoute un incendie à  la liste des incendies
 	 * 
 	 * @param e
 	 *            un incendie
@@ -52,19 +52,19 @@ public class DonneesSimulation {
 	}
 	
 	/**
-	 * Supprime un incendie Ã  la liste des incendies
+	 * Supprime un incendie à  la liste des incendies
 	 * 
 	 * @param e
 	 *            un incendie
 	 *            
-	 * @return vrai si la suppression s'est passÃ© normalement, faux s'il y a eu une erreur
+	 * @return vrai si la suppression s'est passé normalement, faux s'il y a eu une erreur
 	 */
 	public boolean removeIncendie(Incendie e) {
 		return incendies.remove(e);
 	}
 	
 	/**
-	 * Ajoute un robot Ã  la liste des robots
+	 * Ajoute un robot à  la liste des robots
 	 * 
 	 * @param r
 	 *            un robot
@@ -92,7 +92,7 @@ public class DonneesSimulation {
 	}
 
 	/**
-	 * Retourne l'incendie se trouvant sur une case donnÃ©e
+	 * Retourne l'incendie se trouvant sur une case donnée
 	 *
 	 *@param c
 	 *			une case
@@ -105,7 +105,7 @@ public class DonneesSimulation {
 			if(inc.getCase() == c)
 				return inc;
 		}
-		throw new InvalidCaseException("Aucun incendie Ã  la case ("+c.getLigne()+", " + c.getColonne() +").");
+		throw new InvalidCaseException("Aucun incendie à  la case ("+c.getLigne()+", " + c.getColonne() +").");
 	}
 	
 	/**
@@ -118,7 +118,7 @@ public class DonneesSimulation {
 	}
 	
 	/**
-	 * Retourne le robot d'indice id de la liste des robots stockÃ© dans cette classe
+	 * Retourne le robot d'indice id de la liste des robots stocké dans cette classe
 	 * 
 	 * @param id
 	 * 			l'indice dans la liste robots
@@ -130,7 +130,7 @@ public class DonneesSimulation {
 	}
 	
 	/**
-	 * Retourne l'incendie d'indice id de la liste des incendies stockÃ© dans cette classe
+	 * Retourne l'incendie d'indice id de la liste des incendies stocké dans cette classe
 	 * 
 	 * @param id
 	 * 			l'indice dans la liste incendies

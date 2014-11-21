@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <b><code>Strategie</code> est la classe reprÃ©sentant une stratÃ©gie</b>
+ * <b><code>Strategie</code> est la classe représentant une stratégie</b>
  * <p>
- * La stratÃ©gie est caractÃ©risÃ©e par :
+ * La stratégie est caractérisée par :
  * <ul>
- * <li>la liste des actions Ã  effectuer pour Ã©teindre un feu</li>
+ * <li>la liste des actions à  effectuer pour éteindre un feu</li>
  * </ul>
  * </p>
  * 
@@ -16,25 +16,25 @@ import java.util.List;
  */
 public class Strategie {
 	/**
-	 * La liste des actions Ã  rÃ©aliser
+	 * La liste des actions à  réaliser
 	 */
 	private ArrayList<Action> actions = new ArrayList<Action>();
 	
 	/**
-	 * Ajoute une action Ã  la liste des actions de la stratÃ©gie
+	 * Ajoute une action à  la liste des actions de la stratégie
 	 * 
 	 * @param a
-	 * 			l'action Ã  ajouter Ã  la stratÃ©gie
+	 * 			l'action à  ajouter à  la stratégie
 	 */
 	public void addAction(Action a) {
 		actions.add(a);
 	}
 	
 	/**
-	 * Ajoute une liste d'action Ã  la liste des actions de la stratÃ©gie
+	 * Ajoute une liste d'action à  la liste des actions de la stratégie
 	 * 
 	 * @param a
-	 * 			la liste d'action Ã  ajouter
+	 * 			la liste d'action à  ajouter
 	 */
 	public void addAction(List<? extends Action> a) {
 		actions.addAll(a);
@@ -54,21 +54,21 @@ public class Strategie {
 	}
 
 	/**
-	 * Retourne le nombre d'action prÃ©sent dans la liste 
+	 * Retourne le nombre d'action présent dans la liste 
 	 * 
-	 * @return le nombre d'action prÃ©sent dans la liste
+	 * @return le nombre d'action présent dans la liste
 	 */
 	public int getNbActions() {
 		return actions.size();
 	}
 
 	/**
-	 * Retourne l'action correspondant Ã  l'indice donnÃ© dans la liste des actions
+	 * Retourne l'action correspondant à  l'indice donné dans la liste des actions
 	 * 
 	 * @param i
-	 * 			indice correspondant Ã  une action de la liste des actions
+	 * 			indice correspondant à  une action de la liste des actions
 	 * 
-	 * @return l'action correspondant Ã  l'indice i dans la liste des actions
+	 * @return l'action correspondant à  l'indice i dans la liste des actions
 	 */
 	public Action getAction(int i) {
 		return actions.get(i);

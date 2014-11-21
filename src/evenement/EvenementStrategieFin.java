@@ -7,9 +7,9 @@ import donnees.WorldElement;
 
 /**
  * <b><code>EvenementStrategieFin</code> est la classe permettant de terminer une strategie.
- * Cette classe hÃ©rite de Evenement</b>
+ * Cette classe hérite de Evenement</b>
  * <p>
- * Un evenementStrategieFin est caractÃ©risÃ© par :
+ * Un evenementStrategieFin est caractérisé par :
  * <ul>
  * <li>un robot</li>
  * </ul>
@@ -20,7 +20,7 @@ import donnees.WorldElement;
 public class EvenementStrategieFin extends Evenement {
 
 	/**
-	 * Robot concernÃ© par cette Evenement
+	 * Robot concerné par cette Evenement
 	 */
 	private Robot robot;
 	
@@ -28,11 +28,11 @@ public class EvenementStrategieFin extends Evenement {
 	 * Constructeur d'un EvenementStrategieFin
 	 * 
 	 * @param date
-	 * 			date  Ã  laquelle Ã  lieu cet evenement
+	 * 			date  à  laquelle à  lieu cet evenement
 	 * @param s
-	 * 			simulateur associÃ©
+	 * 			simulateur associé
 	 * @param r
-	 * 			robot concernÃ©
+	 * 			robot concerné
 	 */
 	public EvenementStrategieFin(Date date, Simulateur s, Robot r) {
 		super(date, s);
@@ -40,13 +40,13 @@ public class EvenementStrategieFin extends Evenement {
 	}
 
 	/**
-	 * Met Ã  null la strategie associÃ© au robot
+	 * Met à  null la strategie associé au robot
 	 * 
 	 * @param s
 	 * 			un ensemble de WordlElement 
 	 * 
 	 * @return un ensemble de WorldElement
-	 * @throws ExecutionException : si l'exception InvalidCaseException est levÃ©e
+	 * @throws ExecutionException : si l'exception InvalidCaseException est levée
 	 */
 	@Override
 	public Set<WorldElement> execute(Set<WorldElement> s)

@@ -8,13 +8,13 @@ import java.util.HashSet;
 import strategie.ActionMove;
 
 /**
- * <b><code>Carte</code> est la classe repr√©sentant la carte</b>
+ * <b><code>Carte</code> est la classe reprÈsentant la carte</b>
  * <p>
- * La carte est caract√©ris√©e par :
+ * La carte est caractÈrisÈe par :
  * <ul>
  * <li>le tableau des cases qu'elle contient</li>
  * <li>la taille des cases qu'elle contient</li>
- * <li>l'ensemble des cases voisines √† une case d'eau </li>
+ * <li>l'ensemble des cases voisines ‡† une case d'eau </li>
  * <li>l'ensemble des cases d'eau </li>
  * </ul>
  * </p>
@@ -103,15 +103,15 @@ public class Carte {
 	}
 	
 	/**
-	 * Permet de connaitre la direction pour aller de la case c1 √† c2
-	 * (c1 et c2 √©tant voisines)
+	 * Permet de connaitre la direction pour aller de la case c1 ‡† c2
+	 * (c1 et c2 Ètant voisines)
 	 * 
 	 * @param c1
 	 *            une case de la carte
 	 * @param c2
 	 *            une case de la carte voisine de c1
 	 *
-	 *@return la direction pour aller de c1 √† c2
+	 *@return la direction pour aller de c1 ‡† c2
 	 */
 	public Direction getDirection(Case c1, Case c2) {
 		if(c1.getColonne() == c2.getColonne()) {
@@ -171,7 +171,7 @@ public class Carte {
 	}
 	
 	/**
-	 * Retourne la distance de la diagonale entre les cases d√©part et arrive
+	 * Retourne la distance de la diagonale entre les cases dÈpart et arrive
 	 * (fonction utile pour le calcul du plus court chemin)
 	 * 
 	 * @param depart
@@ -179,7 +179,7 @@ public class Carte {
 	 * @param arrive
 	 *            la case d'arrive
 	 *
-	 *@return la distance de la diagonale entre les cases d√©part et arrive
+	 *@return la distance de la diagonale entre les cases dÈpart et arrive
 	 */
 	public double DistanceVolOiseau(Case depart, Case arrive) {
 		return (this.tailleCases * Math.sqrt(((depart.getColonne() - arrive.getColonne()) * (depart.getColonne() - arrive.getColonne())) + 
@@ -195,7 +195,7 @@ public class Carte {
 	 * @param arrive
 	 *            la case d'arrive
 	 *
-	 *@return vrai si le robot r peut se d√©placer sur la case c
+	 *@return vrai si le robot r peut se dÈplacer sur la case c
 	 */
 	public boolean estCaseAccessible(Robot r, Case arrive) {
 		return (r.getTempsDeplacementMilieu(arrive.getNature(), this) != Double.MAX_VALUE);
@@ -262,7 +262,7 @@ public class Carte {
 	 * @param r
 	 *            un robot
 	 * @param depart
-	 *            la case de d√©part
+	 *            la case de dÈpart
 	 * @param arrive
 	 *            la case d'arrive
 	 *
@@ -274,7 +274,7 @@ public class Carte {
 	}
 
 	/**
-	 * Retourne le nombre de cases appartenant √† la diagonale entre les cases d√©part et arrive
+	 * Retourne le nombre de cases appartenant ‡† la diagonale entre les cases dÈpart et arrive
 	 * (fonction utile pour le calcul de la source d'eau la plus proche)
 	 * 
 	 * @param depart
@@ -282,7 +282,7 @@ public class Carte {
 	 * @param arrive
 	 *            la case d'arrive
 	 *
-	 *@return le nombre de cases appartenant √† la diagonale entre les cases d√©part et arrive
+	 *@return le nombre de cases appartenant ‡† la diagonale entre les cases dÈpart et arrive
 	 */
 	public int distanceNbCaseVolOiseau(Case dep, Case arr) {
 		return Math.abs(dep.getColonne() - arr.getColonne()) + Math.abs(dep.getLigne() - arr.getLigne()); 
@@ -290,10 +290,10 @@ public class Carte {
 
 	
 	/**
-	 * Trouve la case d'eau la plus proche √† partir d'une certaine case pour un certain robot.
+	 * Trouve la case d'eau la plus proche ‡† partir d'une certaine case pour un certain robot.
 	 * Cette case est compatible pour le remplissage du robot.
 	 * @param last_case
-	 *            la case √† partir de laquelle on part
+	 *            la case ‡† partir de laquelle on part
 	 * @param robot
 	 *            le robot qui cherche la case d'eau
 	 *
@@ -301,7 +301,7 @@ public class Carte {
 	 */
 	public Case findNearestWater(Case last_case, Robot robot) {
 		Collection<Case> target;
-		//Selon le type de robot, le remplissage ne se fait pas de la meme fa√ßon
+		//Selon le type de robot, le remplissage ne se fait pas de la meme fa‡ßon
 		if(robot.seRemplieSurEau())
 			target = water;
 		else

@@ -8,12 +8,12 @@ import donnees.Incendie;
 import donnees.Robot;
 
 /**
- * <b><code>ManagerResolution</code> est la classe permettant d'Ã©teindre tous les incendies
- * Cette classe hÃ©rite de Manager</b>
+ * <b><code>ManagerResolution</code> est la classe permettant d'éteindre tous les incendies
+ * Cette classe hérite de Manager</b>
  * <p>
- * Un ManagerResolution est caractÃ©risÃ© par :
+ * Un ManagerResolution est caractérisé par :
  * <ul>
- * <li>un ensemble d'incendies deja gÃ©rÃ©</li>
+ * <li>un ensemble d'incendies deja géré</li>
  * </ul>
  * </p>
  *  
@@ -22,12 +22,12 @@ import donnees.Robot;
 public class ManagerResolution extends Manager {
 
 	/**
-	 * Ensemble d'incendies qui ont deja Ã©tÃ© gÃ©rÃ©s
+	 * Ensemble d'incendies qui ont deja été gérés
 	 */
 	Set<Incendie> managed = new HashSet<Incendie>();
 
 	/**
-	 * Fonction qui permet d'Ã©teindre tous les incendies de la carte en associant Ã  chacun d'eux un robot 
+	 * Fonction qui permet d'éteindre tous les incendies de la carte en associant à  chacun d'eux un robot 
 	 */
 	@Override
 	public void manage() {

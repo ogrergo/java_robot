@@ -3,13 +3,13 @@ package donnees;
 import evenement.Date;
 
 /**
- * <b><code>RobotRoues</code> est la classe reprÃ©sentant un robot de type Roues</b>
+ * <b><code>RobotRoues</code> est la classe représentant un robot de type Roues</b>
  * <p>
- * Un robot Roues est caractÃ©risÃ© par les mÃªmes attributs que les autres robots.
+ * Un robot Roues est caractérisé par les màªmes attributs que les autres robots.
  * Il ne peut aller que sur des terrains libres ou sur des habitations.
- * Il se dÃ©place Ã  une vitesse par dÃ©faut de 80 km/h.
- * Il a un rÃ©servoir de 5000 litres qu'il remplit en 10 minutes.
- * Il se remplit Ã  cÃ´tÃ© d'une case contenant de l'eau, et dÃ©verse Ã  un dÃ©bit de 100 litres par 5 secondes.
+ * Il se déplace à  une vitesse par défaut de 80 km/h.
+ * Il a un réservoir de 5000 litres qu'il remplit en 10 minutes.
+ * Il se remplit à  cà´té d'une case contenant de l'eau, et déverse à  un débit de 100 litres par 5 secondes.
  * </p>
  * @author Lucas Bchini, Robin Jean, Louis van Beurden
  */
@@ -34,7 +34,7 @@ public class RobotRoues extends Robot {
 	}
 
 	/**
-	 * Retourne la capacitÃ© du reservoir
+	 * Retourne la capacité du reservoir
 	 */
 	@Override
 	public int getEauMax() {
@@ -42,9 +42,9 @@ public class RobotRoues extends Robot {
 	}
 
 	/**
-	 * Retourne le temps que prend le vidage d'une unitÃ© de vidage (voir getEauLitreVidage)
+	 * Retourne le temps que prend le vidage d'une unité de vidage (voir getEauLitreVidage)
 	 * 
-	 * @return le temps que prend le vidage d'une unitÃ© de vidage (voir getEauLitreVidage)
+	 * @return le temps que prend le vidage d'une unité de vidage (voir getEauLitreVidage)
 	 */
 	@Override
 	public double getEauTempsVidage() {
@@ -52,7 +52,7 @@ public class RobotRoues extends Robot {
 	}
 
 	/**
-	 * Retourne le temps de dÃ©placement en fonction de la nature du terrain
+	 * Retourne le temps de déplacement en fonction de la nature du terrain
 	 * 
 	 * @param t
 	 * 			La nature du terrain
@@ -70,9 +70,9 @@ public class RobotRoues extends Robot {
 	}
 
 	/**
-	 * Retourne la capacitÃ© d'une unitÃ© de vidage
+	 * Retourne la capacité d'une unité de vidage
 	 * 
-	 * @return la capacitÃ© d'une unitÃ© de vidage
+	 * @return la capacité d'une unité de vidage
 	 */
 	@Override
 	protected double getEauLitreVidage() {
@@ -80,7 +80,7 @@ public class RobotRoues extends Robot {
 	}
 
 	/**
-	 * Test si le robot peut se remplir depuis une case donnÃ©e
+	 * Test si le robot peut se remplir depuis une case donnée
 	 * 
 	 * @param c
 	 * 			une case

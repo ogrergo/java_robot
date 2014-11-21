@@ -1,12 +1,12 @@
 package donnees;
 
 /**
- * <b><code>Incendie</code> est la classe reprÃ©sentant un incendie</b>
+ * <b><code>Incendie</code> est la classe représentant un incendie</b>
  * <p>
- * Un incendie est caractÃ©risÃ© par :
+ * Un incendie est caractérisé par :
  * <ul>
  * <li>sa position</li>
- * <li>le nombre de litres d'eau nÃ©cessaires pour l'Ã©teindre</li>
+ * <li>le nombre de litres d'eau nécessaires pour l'éteindre</li>
  * </ul>
  * </p>
  * 
@@ -18,7 +18,7 @@ public class Incendie implements WorldElement {
 	 */
 	private Case position;
 	/**
-	 * Le nombre de litres d'eau nÃ©cessaires pour Ã©teindre l'incendie
+	 * Le nombre de litres d'eau nécessaires pour éteindre l'incendie
 	 */
 	private int litreEau;
 
@@ -28,7 +28,7 @@ public class Incendie implements WorldElement {
 	 * @param pos
 	 *            La case sur la carte
 	 * @param litre
-	 *            Le nombre de litres d'eau nÃ©cessaires pour Ã©teindre l'incendie
+	 *            Le nombre de litres d'eau nécessaires pour éteindre l'incendie
 	 */
 
 	public Incendie(Case pos, int litre) {
@@ -37,21 +37,21 @@ public class Incendie implements WorldElement {
 	}
 		
 	/**
-	 * Retourne le nombre de litres d'eau nÃ©cessaires pour Ã©teindre l'incendie
+	 * Retourne le nombre de litres d'eau nécessaires pour éteindre l'incendie
 	 * 
-	 * @return le nombre de litres d'eau nÃ©cessaires pour Ã©teindre l'incendie
+	 * @return le nombre de litres d'eau nécessaires pour éteindre l'incendie
 	 */
 	public int getLitreEau() {
 		return litreEau;
 	}
 
 	/**
-	 * Verse une certaine quantitÃ© d'eau sur un feu
+	 * Verse une certaine quantité d'eau sur un feu
 	 * 
 	 * @param litreEau
 	 *            un nombre de litre
 	 * @param data
-	 *            les donnÃ©es de la simulation
+	 *            les données de la simulation
 	 *
 	 */
 	public void eteindre(int litreEau, DonneesSimulation data) {
@@ -75,9 +75,9 @@ public class Incendie implements WorldElement {
 	}
 
 	/**
-	 * Test si un incendie necessite toujours de l'eau pour l'Ã©teindre
+	 * Test si un incendie necessite toujours de l'eau pour l'éteindre
 	 * 
-	 * @return vrai si l'incendie necessite toujours de l'eau pour l'Ã©teindre, faux sinon 
+	 * @return vrai si l'incendie necessite toujours de l'eau pour l'éteindre, faux sinon 
 	 */
 	@Override
 	public boolean isAlive() {

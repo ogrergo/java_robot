@@ -15,7 +15,7 @@ public class TestAstar {
 		try {
 			model.setFile(args[0]);
 			model.load();
-			System.out.println("Robot doit se rendre ├а la case (0,0) en utilisant le chemin le plus court");
+			System.out.println("Robot doit se rendre ра la case (0,0) en utilisant le chemin le plus court");
 			new SimulationWindow(model, ManagerTestAstar.class);
 		} catch (FileNotFoundException e) {
 			System.out.println("fichier " + args[0] + " inconnu ou illisible");

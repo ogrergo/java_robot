@@ -8,10 +8,10 @@ import donnees.Robot;
 import donnees.WorldElement;
 
 /**
- * <b><code>EvenementAction</code> est la classe concernant les evenement de type action (dÃ©placement, remplissage et vidage).
- * Cette classe hÃ©rite de Evenement</b>
+ * <b><code>EvenementAction</code> est la classe concernant les evenement de type action (déplacement, remplissage et vidage).
+ * Cette classe hérite de Evenement</b>
  * <p>
- * Un evenementAction est caractÃ©risÃ© par :
+ * Un evenementAction est caractérisé par :
  * <ul>
  * <li>une action</li>
  * <li>un robot</li>
@@ -23,11 +23,11 @@ import donnees.WorldElement;
 public class EvenementAction extends Evenement {
 
 	/**
-	 * Action concernÃ©e par cette Evenement
+	 * Action concernée par cette Evenement
 	 */
 	private Action action;
 	/**
-	 * Robot concernÃ© par cette Evenement
+	 * Robot concerné par cette Evenement
 	 */
 	private Robot robot;
 	
@@ -35,13 +35,13 @@ public class EvenementAction extends Evenement {
 	 * Constructeur d'un EvenementAction
 	 * 
 	 * @param date
-	 * 			date  Ã  laquelle Ã  lieu cet evenement
+	 * 			date  à  laquelle à  lieu cet evenement
 	 * @param s
-	 * 			simulateur associÃ©
+	 * 			simulateur associé
 	 * @param a
-	 * 			action Ã  executer
+	 * 			action à  executer
 	 * @param r
-	 * 			robot concernÃ©
+	 * 			robot concerné
 	 */
 	public EvenementAction(Date date, Simulateur s, Action a, Robot r) {
 		super(date, s);
@@ -50,13 +50,13 @@ public class EvenementAction extends Evenement {
 	}
 	
 	/**
-	 * Execute l'action associÃ©e au robot
+	 * Execute l'action associée au robot
 	 * 
 	 * @param s
 	 * 			un ensemble de WordlElement 
 	 * 
 	 * @return un ensemble de WorldElement
-	 * @throws ExecutionException : si l'exception InvalidCaseException est levÃ©e
+	 * @throws ExecutionException : si l'exception InvalidCaseException est levée
 	 */
 	@Override
 	public Set<WorldElement> execute(Set<WorldElement> s)

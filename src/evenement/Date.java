@@ -1,12 +1,12 @@
 package evenement;
 
 /**
- * <b><code>Date</code> est la classe reprÃ©sentant une date.
- * Cette classe implÃ©mente l'interface gÃ©nÃ©rique Comparable</b>
+ * <b><code>Date</code> est la classe représentant une date.
+ * Cette classe implémente l'interface générique Comparable</b>
  * <p>
- * La stratÃ©gie est caractÃ©risÃ©e par :
+ * La stratégie est caractérisée par :
  * <ul>
- * <li>un nombre rÃ©el</li>
+ * <li>un nombre réel</li>
  * </ul>
  * </p>
  * 
@@ -14,7 +14,7 @@ package evenement;
  */
 public class Date implements Comparable<Date>{
 	/**
-	 * Nombre rÃ©el reprÃ©sentant une date
+	 * Nombre réel représentant une date
 	 */
 	private double date;
 	
@@ -22,7 +22,7 @@ public class Date implements Comparable<Date>{
 	 * Constructeur1 d'une date 
 	 * 
 	 * @param timestamp
-	 * 				un nombre rÃ©el
+	 * 				un nombre réel
 	 */
 	public Date(double timestamp) {
 		this.date = timestamp;
@@ -60,17 +60,17 @@ public class Date implements Comparable<Date>{
 	}
 
 	/**
-	 * IncrÃ©mente la date d'une valeur donnÃ©e
+	 * Incrémente la date d'une valeur donnée
 	 * 
 	 * @param step_duration
-	 * 				valeur de l'incrÃ©mentation
+	 * 				valeur de l'incrémentation
 	 */
 	public void increment(double step_duration) {
 		date += step_duration;
 	}
 	
 	/**
-	 * Fonction static qui convertie en m/min une valeur Ã©tant en km/h
+	 * Fonction static qui convertie en m/min une valeur étant en km/h
 	 * 
 	 * @param vitesse
 	 * 			une vitesse en km/h

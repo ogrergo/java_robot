@@ -3,7 +3,7 @@ package strategie;
 /**
  * <b><code>Action</code> est la classe abstraite des actions possibles</b>
  * <p>
- * Une action est caractÃ©risÃ©e par :
+ * Une action est caractérisée par :
  * <ul>
  * <li>un cout</li>
  * <li>un type d'action (ActionMove, ActionRemplissage, ActionVidage) </li>

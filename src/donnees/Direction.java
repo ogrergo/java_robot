@@ -1,10 +1,10 @@
 package donnees;
 
 /**
- * <b><code>Direction</code> est l'Ã©numaration permettant de representer les diffÃ©rentes 
- * directions possibles pour se dÃ©placer d'une case Ã  l'autre</b>
+ * <b><code>Direction</code> est l'énumaration permettant de representer les différentes 
+ * directions possibles pour se déplacer d'une case à  l'autre</b>
  * <p>
- * Les diffÃ©rentes directions sont :
+ * Les différentes directions sont :
  * <ul>
  * <li>NORD</li>
  * <li>SUD</li>

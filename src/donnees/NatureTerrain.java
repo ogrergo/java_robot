@@ -1,10 +1,10 @@
 package donnees;
 
 /**
- * <b><code>NatureTerrain</code> est l'Ã©numaration permettant de representer les diffÃ©rents 
+ * <b><code>NatureTerrain</code> est l'énumaration permettant de representer les différents 
  * type de terrain des cases</b>
  * <p>
- * Les diffÃ©rents types de terrain sont :
+ * Les différents types de terrain sont :
  * <ul>
  * <li>EAU</li>
  * <li>FORET</li>

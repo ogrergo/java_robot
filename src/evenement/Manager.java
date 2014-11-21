@@ -1,9 +1,9 @@
 package evenement;
 
 /**
- * <b><code>Manager</code> est la classe abstraite permettant de dÃ©terminer les evenements Ã  effectuer</b>
+ * <b><code>Manager</code> est la classe abstraite permettant de déterminer les evenements à  effectuer</b>
  * <p>
- * Un Manager est caractÃ©risÃ© par :
+ * Un Manager est caractérisé par :
  * <ul>
  * <li>un simulateur</li>
  * </ul>
@@ -13,12 +13,12 @@ package evenement;
  */
 public abstract class Manager {
 	/**
-	 * Simulateur associÃ© au manager
+	 * Simulateur associé au manager
 	 */
 	protected Simulateur simulateur;
 	
 	/**
-	 * Permet de modifier le simulateur associÃ© au manager
+	 * Permet de modifier le simulateur associé au manager
 	 * 
 	 * @param s
 	 * 			le simulateur
@@ -28,7 +28,7 @@ public abstract class Manager {
 	}
 	
 	/**
-	 * DÃ©termine tous les evenement Ã  executer
+	 * Détermine tous les evenement à  executer
 	 */
 	public abstract void manage();
 }

@@ -20,15 +20,15 @@ import strategie.ActionMove;
 public class Astar {
 
 	/**
-	 * Fonction static qui retourne la liste contenant les ActionMove Ã  effectuer pour aller de la case
-	 * start Ã  la case goal en prenant le plus court chemin (en terme de temps)
+	 * Fonction static qui retourne la liste contenant les ActionMove à  effectuer pour aller de la case
+	 * start à  la case goal en prenant le plus court chemin (en terme de temps)
 	 * 
 	 * @param start
-	 * 				Case de dÃ©part
+	 * 				Case de départ
 	 * @param goal
-	 * 				Case d'arrivÃ©e
+	 * 				Case d'arrivée
 	 * @param carte
-	 * 				Carte utilisÃ©e
+	 * 				Carte utilisée
 	 * @param r
 	 * 				Robot pour lequel on veut calculer le plus court chemin
 	 * 
@@ -116,13 +116,13 @@ public class Astar {
 	}
 
 	/**
-	 * Classe static implÃ©mentant les node utiles dans la fonction getShortestPath
+	 * Classe static implémentant les node utiles dans la fonction getShortestPath
 	 * Cette classe permet de comparer deux noeuds
 	 */
 	private static class Node implements Comparable<Node>{
 		
 		/**
-		 * Case associÃ© au noeud
+		 * Case associé au noeud
 		 */
 		private Case cell;
 		private double g_score;
@@ -134,7 +134,7 @@ public class Astar {
 		 * Constructeur d'un node.
 		 * 
 		 * @param start
-		 *            Case associÃ© au Node
+		 *            Case associé au Node
 		 * 
 		 */
 		public Node(Case start) {
