@@ -65,4 +65,9 @@ public class RobotDrone extends Robot {
 	public double getEauTempsRemplissage() {
 		return 30;
 	}
+
+	@Override
+	public RobotType getType() {
+		return RobotType.DRONE;
+	}
 }

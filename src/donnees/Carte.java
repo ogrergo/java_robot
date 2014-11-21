@@ -50,7 +50,7 @@ public class Carte {
 	 *            Nombre de lignes de la carte.
 	 * @param colonne
 	 *            Nombre de colonnes de la carte.
-	 * @param _tailleCases
+	 * @param taillecase
 	 *            Taille des cases de la carte.
 	 */
 	public Carte(int ligne, int colonne, int taillecase) {
@@ -277,9 +277,9 @@ public class Carte {
 	 * Retourne le nombre de cases appartenant à  la diagonale entre les cases départ et arrive
 	 * (fonction utile pour le calcul de la source d'eau la plus proche)
 	 * 
-	 * @param depart
+	 * @param dep
 	 *            la case de depart
-	 * @param arrive
+	 * @param arr
 	 *            la case d'arrive
 	 *
 	 *@return le nombre de cases appartenant à  la diagonale entre les cases départ et arrive

@@ -33,7 +33,7 @@ public class ManagerResolution extends Manager {
 	public void manage() {
 		//Pour tous les incendies de notre simulation
 		for(Incendie inc : simulateur.getData().getIncendies()) {
-			
+			//on veut seulement ceux pas traiter
 			if(managed.contains(inc))
 				continue;
 
@@ -42,6 +42,7 @@ public class ManagerResolution extends Manager {
 			double cout = Double.MAX_VALUE;
 			double cout_n;
 			Robot target = null;
+			//on veut le robot qui va eteindre cette incendie le plus rapidemant possible
 			for(Robot r : simulateur.getData().getRobots()) {
 				if(!r.isAvailable())
 					continue;
@@ -60,7 +61,7 @@ public class ManagerResolution extends Manager {
 			
 			if(target == null)
 				continue;
-			
+			//on ajoute l'incendie aux incendie traiter et on execute la strategie.
 			managed.add(inc);
 			target.doStrategie(best, simulateur);
 		}

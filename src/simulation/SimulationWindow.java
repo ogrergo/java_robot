@@ -20,26 +20,52 @@ import donnees.Incendie;
 import donnees.InvalidCaseException;
 import donnees.NatureTerrain;
 import donnees.Robot;
-import donnees.RobotChenilles;
-import donnees.RobotDrone;
-import donnees.RobotPattes;
-import donnees.RobotRoues;
+import donnees.RobotType;
 import donnees.WorldElement;
 import evenement.Manager;
-
+/**
+ * <b><code>SimulationWindow</code> gère l'affichage des données sur l'ihm </b>
+ * <p>
+ * 
+ * @author Lucas Bchini, Robin Jean, Louis van Beurden
+ */
 public class SimulationWindow {
+	/**
+	 * Les données.
+	 */
 	private SimulationModel data;
+	/**
+	 * L'IHM.
+	 */
 	private IGSimulateur ihm;
+	/**
+	 * Le controleur.
+	 */
 	private SimulationController controller;
 
+	/**
+	 * Le tableau de tiles. une tiles represente une case.
+	 */
 	private Tile[][] tiles;
+	/**
+	 * Un tabeau associatif pour retrouvé une tile à partir d'une case.
+	 */
 	private HashMap<WorldElement,Tile> hash_elem;
 
+	/**
+	 * Creer une SimulationWindow à partir d'un model et d'une classe de manager.
+	 * @param model les données.
+	 * @param m la classe du manager.
+	 */
 	public SimulationWindow(SimulationModel model, Class<? extends Manager> m) {
 		data = model;
 		initDisplay(m);
 	}
 
+	/**
+	 * Initialise l'affichage.
+	 * @param m le manager.
+	 */
 	private void initDisplay(Class<? extends Manager> m) {
 		initTiles();
 		controller = new SimulationController(data, this, m);
@@ -47,6 +73,9 @@ public class SimulationWindow {
 		controller.restart();
 	}
 
+	/**
+	 * Creer les Tiles et les initialise.
+	 */
 	private void initTiles() {
 		hash_elem = new HashMap<WorldElement, Tile>();
 		tiles = new Tile[data.getData().getCarte().getNbLignes()][data.getData().getCarte().getNbColonnes()];
@@ -59,6 +88,11 @@ public class SimulationWindow {
 				}
 	}
 	
+	/**
+	 * Redessine la Tile à la coordonnée (i,j)
+	 * @param i la ligne.
+	 * @param j la colonne.
+	 */
 	private void draw(int i, int j) {
 		try {
 			ihm.paintGraphicalElement(j, i, tiles[i][j]);
@@ -67,21 +101,37 @@ public class SimulationWindow {
 		}
 	}
 	
+	/**
+	 * Redessine la Tile.
+	 * @param t la tile.
+	 */
 	private void draw(Tile t) {
 		draw(t.getLigne(), t.getColonne());
 	}
 	
+	/**
+	 * Redessine toute les tiles.
+	 */
 	private void draw() {
 		for(int i = 0; i < data.getData().getCarte().getNbLignes(); i++)
 			for(int j = 0; j < data.getData().getCarte().getNbColonnes() ; j++) {
 				draw(i,j);
 			}
 	}
-
+	
+	/**
+	 * Retourne la tile associé à la case.
+	 * @param c la case
+	 * @return la tile.
+	 */
 	private Tile getTile(Case c) {
 		return tiles[c.getLigne()][c.getColonne()];
 	}
 	
+	/**
+	 * Update le wordelement dans la bonne Tile.
+	 * @param e la bonne tile.
+	 */
 	public void update(WorldElement e) {
 		Tile t = hash_elem.put(e, getTile(e.getCase()));
 		if(t != null) t.removeElem(e);
@@ -89,6 +139,9 @@ public class SimulationWindow {
 		draw(getTile(e.getCase()));
 	}
 	
+	/**
+	 * Update toute les Tile.
+	 */
 	public void updateAll() {
 		hash_elem.clear();
 		
@@ -106,7 +159,13 @@ public class SimulationWindow {
 		
 		draw();
 	}
-
+	
+	/**
+	 * <b><code>Tile</code> gère l'affichage d'une case sur l'ihm </b>
+	 * <p>
+	 * 
+	 * @author Lucas Bchini, Robin Jean, Louis van Beurden
+	 */
 	private static class Tile implements GraphicalElement {
 
 		private static Image[] background = new Image[5];
@@ -134,9 +193,12 @@ public class SimulationWindow {
 		int ligne, colonne;
 		
 		int index_background;
-		
+		/**
+		 * Ensemble des WordElement present sur la tile.
+		 */
 		Set<WorldElement> elem = new HashSet<WorldElement>();
 		Set<WorldElement> toremove =  new HashSet<WorldElement>();
+		
 		public Tile(int i, int j,NatureTerrain terrainLibre) {
 			setBackground(terrainLibre);
 			ligne = i;
@@ -205,16 +267,16 @@ public class SimulationWindow {
 		}
 
 		private static Image getRobotImage(Robot r) {
-			if(r instanceof RobotDrone)
+			if(r.getType() == RobotType.DRONE)
 				return robots_img[0];
 			
-			if(r instanceof RobotChenilles)
+			if(r.getType() == RobotType.CHENILLES)
 				return robots_img[1];
 			
-			if(r instanceof RobotPattes)
+			if(r.getType() == RobotType.PATTES)
 				return robots_img[2];
 			
-			if(r instanceof RobotRoues)
+			if(r.getType() == RobotType.ROUES)
 				return robots_img[3];
 			
 			return null;

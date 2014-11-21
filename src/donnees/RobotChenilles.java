@@ -71,4 +71,9 @@ public class RobotChenilles extends Robot {
 	public double getEauTempsRemplissage() {
 		return 5;
 	}
+
+	@Override
+	public RobotType getType() {
+		return RobotType.CHENILLES;
+	}
 }

@@ -12,7 +12,7 @@ public class ActionRemplissage extends Action {
 	/**
 	 * Constructeur d'une ActionRemplissage
 	 * 
-	 * @param d
+	 * @param cout
 	 *            le cout de cette Action
 	 */
 

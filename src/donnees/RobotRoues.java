@@ -112,4 +112,9 @@ public class RobotRoues extends Robot {
 	public double getEauTempsRemplissage() {
 		return 10;
 	}
+
+	@Override
+	public RobotType getType() {
+		return RobotType.ROUES;
+	}
 }

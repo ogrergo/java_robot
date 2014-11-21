@@ -66,4 +66,9 @@ public class RobotPattes extends Robot {
 		return 0;
 	}
 
+	@Override
+	public RobotType getType() {
+		return RobotType.PATTES;
+	}
+
 }

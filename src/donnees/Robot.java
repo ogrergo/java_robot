@@ -72,6 +72,8 @@ public abstract class Robot implements WorldElement {
 
 	protected abstract boolean canFill(Case c, Carte ca);
 
+	public abstract RobotType getType();
+	
 	public Case getCase() {
 		return position;
 	}
